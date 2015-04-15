@@ -2,8 +2,9 @@
 
 <h4>Git repository setup</h4>
 <ol>
-	<li>In Git Bash, navigate to the solution directory</li>
+	<li>In Git Bash, navigate to any empty directory</li>
 	<li>Type:<br /><code>git clone https://github.com/michalplatek/pocketTanks.git</code></li>
+	<li>Move the downloaded files (<u>including the hidden .git directory!</u>) into the project directory</li>
 </ol>
 
 <h4>Visual Studio 2013 solution setup</h4>
