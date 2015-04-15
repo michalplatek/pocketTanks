@@ -37,3 +37,11 @@
 	<li>#include &lt;Box2D/Box2D.h&gt;</li>
 	<li>#include &lt;boost/geometry.hpp&gt;</li>
 </ul>
+
+<h4>Useful git commands</h4>
+<ul>
+	<li>git status // checks current state of changes and commits</li>
+	<li>git add file.cpp // adds the file to the commit</li>
+	<li>git commit -m "Description of changes" // commit with description</li>
+	<li>git reset HEAD // remove changed files from the commit</li>
+</ul>
