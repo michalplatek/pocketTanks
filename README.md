@@ -1,5 +1,11 @@
 <h2>Pocket Tanks Project</h2>
 
+<h4>Git repository setup</h4>
+<ol>
+	<li>In Git Bash, navigate to the solution directory</li>
+	<li>Type:<br /><code>git clone https://github.com/michalplatek/pocketTanks.git</code></li>
+</ol>
+
 <h4>Visual Studio 2013 solution setup</h4>
 
 <p>Set the solution files as follows:</p>
@@ -27,6 +33,6 @@
 
 <p>After that, the #includes should look like this:</p>
 <ul>
-	<li>#include <Box2D/Box2D.h></li>
-	<li>#include <boost/geometry.hpp></li>
+	<li>#include &lt;Box2D/Box2D.h&gt;</li>
+	<li>#include &lt;boost/geometry.hpp&gt;</li>
 </ul>
