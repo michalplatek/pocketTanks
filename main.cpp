@@ -7,7 +7,6 @@
 #include "Config.h"
 using namespace std;
 
-<<<<<<< HEAD
 int main(int argc, char** argv)
 {
 	Config* config = new Config(argc, argv);
@@ -20,12 +19,6 @@ int main(int argc, char** argv)
 	delete config;
 	delete pocketTanks;
 	delete controller;
-=======
-int main() {
-	cout << "Hello !";
-	cout << "Moje zmiany sa wazniejsze!";
-	cout << "Nie bo moje!";
->>>>>>> origin/master
 	return 0;
 }
 
