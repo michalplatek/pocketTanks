@@ -12,6 +12,7 @@ class Controller
 public:
 	View* view;
 
+	void manageEvent(sf::Event &e, Game* game);
 	void manageKeyEvent(sf::Event &e, Game *game);
 	void play(Game *game);
 
