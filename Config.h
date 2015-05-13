@@ -18,6 +18,16 @@ public:
 	int WINDOW_ANTIALIASING_LEVEL;
 	int WINDOW_MAJOR_VERSION;
 	int WINDOW_MINOR_VERSION;
+	/* box2d object configurations */
+	int BOX2D_POSITION_ITERATIONS;
+	int BOX2D_VELOCITY_ITERATIONS;
+	int BOX2D_TIME_STEP;
+	/* game settings */
+	int NUM_PLAYERS;
+	int TANKS_PER_PLAYER;
+	int NUM_TANKS;
+	float GRAVITY;
+	enum class Status { RUNNING, FINISHED };
 
 	Config(int argc, char** argv);
 	~Config();
