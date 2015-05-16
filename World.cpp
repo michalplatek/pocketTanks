@@ -25,3 +25,13 @@ World::~World()
 {
 	this->DestroyBody(body);
 }
+
+void World::render()
+{
+
+}
+
+void World::renderAtBodyPosition()
+{
+
+}
