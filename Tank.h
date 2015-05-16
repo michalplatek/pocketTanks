@@ -4,7 +4,7 @@
 #include<cmath>
 #include "World.h"
 
-class Tank
+class Tank : public Renderable
 {
 public:
 	//class member variables
@@ -19,5 +19,7 @@ public:
 
 	Tank();
 	~Tank();
+	void render();
+	void renderAtBodyPosition();
 };
 
