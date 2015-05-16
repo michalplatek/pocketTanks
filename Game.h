@@ -1,6 +1,7 @@
 #pragma once
 #include "World.h"
 #include "Tank.h"
+#include "Shell.h"
 #include "Config.h"
 #include <vector>
 
@@ -9,6 +10,7 @@ class Game
 	Config* config;
 	World* world;
 	std::vector<Tank*> tanks;
+	Shell* shell;
 	
 	Config::Status status;
 
