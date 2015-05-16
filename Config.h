@@ -21,7 +21,7 @@ public:
 	/* box2d object configurations */
 	int BOX2D_POSITION_ITERATIONS;
 	int BOX2D_VELOCITY_ITERATIONS;
-	int BOX2D_TIME_STEP;
+	float BOX2D_TIME_STEP;
 	/* game settings */
 	int NUM_PLAYERS;
 	int TANKS_PER_PLAYER;
