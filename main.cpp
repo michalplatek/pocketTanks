@@ -25,4 +25,6 @@ int main(int argc, char** argv)
 	/*
 	* Uwagi:
 	* uzywac metod obiektu b2world do tworzenia obiektow b2Body
+	* czolg: dl. ~7m, wys ~3m
+	* plansza w metrach: ~200m, do ustawienia w Configu
 	*/
