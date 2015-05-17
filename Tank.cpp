@@ -3,6 +3,7 @@
 
 Tank::Tank(World* world)
 {
+	this->world = world;
 	float radius = 1;
 	body = NULL;
 	//set up dynamic body, store in class variable
@@ -24,7 +25,7 @@ Tank::Tank(World* world)
 
 Tank::~Tank()
 {
-	
+	world->DestroyBody(body);
 }
 
 void Tank::render() {
@@ -34,27 +35,27 @@ void Tank::render() {
 	glPointSize(4);
 	glBegin(GL_POINTS);
 	glVertex2f(0.0f, 0.0f);
-	glVertex2f(-0.5f, 0.5f);
-	glVertex2f(0.5f, 0.5f);
+	glVertex2f(-0.2f, 0.2f);
+	glVertex2f(0.2f, 0.2f);
 	glEnd();
 
 	//mouth
 	glBegin(GL_LINES);
-	glVertex2f(-0.5f, -0.5f);
-	glVertex2f(-0.16f, -0.6f);
-	glVertex2f(0.16f, -0.6f);
-	glVertex2f(0.5f, -0.5f);
+	glVertex2f(-0.2f, -0.2f);
+	glVertex2f(-0.05f, -0.1f);
+	glVertex2f(0.05f, -0.1f);
+	glVertex2f(0.2f, -0.2f);
 	glEnd();
 
 	//circle outline
 	glBegin(GL_LINE_LOOP);
 	for (float a = 0; a < 360 * 3.1415f / 180; a += 30 * 3.1415f / 180)
-		glVertex2f(sinf(a), cosf(a));
+		glVertex2f(sinf(a)*0.3f, cosf(a)*0.3f);
 	glEnd();
 
 	b2Vec2 vel = body->GetLinearVelocity();
 	float red = vel.Length() / 20.0f;
-	red = fmin(1, red);
+	red = fmin(1.0f, red);
 	glColor3f(red, 0.5, 0.5);
 }
 
