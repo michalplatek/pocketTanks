@@ -4,6 +4,7 @@
 
 Shell::Shell(World* world)
 {
+	this->world = world;
 }
 
 

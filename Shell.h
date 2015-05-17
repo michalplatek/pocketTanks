@@ -5,6 +5,7 @@
 class Shell : public Renderable
 {
 public:
+	World* world;
 	Shell(World* world);
 	~Shell();
 
