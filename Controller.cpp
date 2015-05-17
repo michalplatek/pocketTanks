@@ -5,6 +5,7 @@
 Controller::Controller(Config* config)
 {
 	view = new View(config);
+	this->config = config;
 }
 
 
@@ -44,6 +45,11 @@ void Controller::manageEvent(sf::Event &e, Game* game)
 	case sf::Event::Closed:
 		game->setStatus(Config::Status::FINISHED);
 		break;
+	case sf::Event::Resized:
+		// asigning new window dimensions to global configuration object
+		config->WINDOW_W = e.size.width;
+		config->WINDOW_H = e.size.height;
+		break;
 	case sf::Event::KeyPressed:
 		manageKeyEvent(e, game);
 	default:
@@ -53,53 +59,37 @@ void Controller::manageEvent(sf::Event &e, Game* game)
 
 void Controller::manageKeyEvent(sf::Event &e, Game *game)
 {
-	/*short actionCode = KEY_OTHER;
-	short player = 8;
-	switch (e.key.code) {
-	case sf::Keyboard::W:
-		actionCode = game->getSnake(PLAYER1)->getKeyAction(KEY_UP);
-		player = PLAYER1;
-		break;
-	case sf::Keyboard::D:
-		actionCode = game->getSnake(PLAYER1)->getKeyAction(KEY_RIGHT);
-		player = PLAYER1;
-		break;
-	case sf::Keyboard::S:
-		actionCode = game->getSnake(PLAYER1)->getKeyAction(KEY_DOWN);
-		player = PLAYER1;
-		break;
-	case sf::Keyboard::A:
-		actionCode = game->getSnake(PLAYER1)->getKeyAction(KEY_LEFT);
-		player = PLAYER1;
-		break;
-	case sf::Keyboard::Up:
-		actionCode = game->getSnake(PLAYER2)->getKeyAction(KEY_UP);
-		player = PLAYER2;
-		break;
-	case sf::Keyboard::Right:
-		actionCode = game->getSnake(PLAYER2)->getKeyAction(KEY_RIGHT);
-		player = PLAYER2;
-		break;
-	case sf::Keyboard::Down:
-		actionCode = game->getSnake(PLAYER2)->getKeyAction(KEY_DOWN);
-		player = PLAYER2;
-		break;
-	case sf::Keyboard::Left:
-		actionCode = game->getSnake(PLAYER2)->getKeyAction(KEY_LEFT);
-		player = PLAYER2;
-		break;
+	if (e.key.code == config->KEY_PLAYER1_UP) {
+		printf("up pressed\n");
 	}
-
-	if (player == PLAYER1) {
-		newDirection1 = actionCode == KEY_UP ? DN : newDirection1;
-		newDirection1 = actionCode == KEY_RIGHT ? DE : newDirection1;
-		newDirection1 = actionCode == KEY_DOWN ? DS : newDirection1;
-		newDirection1 = actionCode == KEY_LEFT ? DW : newDirection1;
+	else if (e.key.code == config->KEY_PLAYER1_DOWN) {
+		printf("down pressed\n");
 	}
-	else if (player == PLAYER2) {
-		newDirection2 = actionCode == KEY_UP ? DN : newDirection2;
-		newDirection2 = actionCode == KEY_RIGHT ? DE : newDirection2;
-		newDirection2 = actionCode == KEY_DOWN ? DS : newDirection2;
-		newDirection2 = actionCode == KEY_LEFT ? DW : newDirection2;
-	}*/
+	else if (e.key.code == config->KEY_PLAYER1_LEFT) {
+		printf("left pressed\n");
+	}
+	else if (e.key.code == config->KEY_PLAYER1_RIGHT) {
+		printf("right pressed\n");
+	}
+	else if (e.key.code == config->KEY_PLAYER1_FIRE) {
+		printf("enter pressed\n");
+	}
+	else if (e.key.code == config->KEY_PLAYER2_UP) {
+		printf("w pressed\n");
+	}
+	else if (e.key.code == config->KEY_PLAYER2_DOWN) {
+		printf("s pressed\n");
+	}
+	else if (e.key.code == config->KEY_PLAYER2_LEFT) {
+		printf("a pressed\n");
+	}
+	else if (e.key.code == config->KEY_PLAYER2_RIGHT) {
+		printf("d pressed\n");
+	}
+	else if (e.key.code == config->KEY_PLAYER2_FIRE) {
+		printf("space pressed\n");
+	}
+	else if (e.key.code == config->KEY_QUIT) {
+		game->setStatus(Config::Status::FINISHED);
+	}
 }
