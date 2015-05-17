@@ -29,7 +29,7 @@ void View::prepare()
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
-	//gluOrtho2D(0.0, 200.0, 0.0, 150.0);
+	gluOrtho2D(-config->WINDOW_W / 2, config->WINDOW_W / 2, config->WINDOW_H / 2, -config->WINDOW_H / 2);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -68,4 +68,11 @@ void View::renderAtBodyPosition(Tank* tank) {
 
 void View::render(Tank* tank) {
 	tank->render();
+}
+
+int View::toPixel(float position)
+{
+	// TODO skalowanie jednostek na piksele - latwe
+	//float ratio = config->WINDOW_W / config->LEVEL_SIZE_IN_METRES;
+	return 0.0f;
 }
