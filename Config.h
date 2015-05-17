@@ -31,6 +31,7 @@ public:
 	int TANKS_PER_PLAYER;
 	int NUM_TANKS;
 	float GRAVITY;
+	float LEVEL_SIZE_IN_METRES;
 	enum class Status { RUNNING, FINISHED };
 
 	/* keyboard controls */
