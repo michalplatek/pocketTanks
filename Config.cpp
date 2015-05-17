@@ -24,6 +24,18 @@ Config::Config(int argc, char** argv)
 	TANKS_PER_PLAYER = 1;
 	NUM_TANKS = NUM_PLAYERS * TANKS_PER_PLAYER;
 	GRAVITY = -1.0f;
+
+	KEY_PLAYER1_UP = sf::Keyboard::Up;
+	KEY_PLAYER1_DOWN = sf::Keyboard::Down;
+	KEY_PLAYER1_LEFT = sf::Keyboard::Left;
+	KEY_PLAYER1_RIGHT = sf::Keyboard::Right;
+	KEY_PLAYER1_FIRE = sf::Keyboard::Return;
+	KEY_PLAYER2_UP = sf::Keyboard::W;
+	KEY_PLAYER2_DOWN = sf::Keyboard::S;
+	KEY_PLAYER2_LEFT = sf::Keyboard::A;
+	KEY_PLAYER2_RIGHT = sf::Keyboard::D;
+	KEY_PLAYER2_FIRE = sf::Keyboard::Space;
+	KEY_QUIT = sf::Keyboard::Escape;
 }
 
 
