@@ -12,7 +12,7 @@ View::View(Config* config)
 
 	window = new sf::RenderWindow(sf::VideoMode(config->WINDOW_W, config->WINDOW_H), config->WINDOW_TITLE, sf::Style::Default, Settings);
 	window->setVerticalSyncEnabled(true);
-	window->setKeyRepeatEnabled(false);
+	window->setKeyRepeatEnabled(true);
 }
 
 View::~View()
@@ -54,6 +54,7 @@ void View::render(Game* game)
 	tank->renderAtBodyPosition();
 	printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);*/
 	//printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+	printf("window: %d x %d\n", config->WINDOW_W, config->WINDOW_H);
 }
 
 void View::render(World* world) 
