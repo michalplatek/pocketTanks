@@ -2,8 +2,9 @@
 
 	// Shrapnel Shell
 
-ShrapnelShell::ShrapnelShell()
+ShrapnelShell::ShrapnelShell(World* world) : Shell(world)
 {
+
 }
 
 

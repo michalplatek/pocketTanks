@@ -6,8 +6,7 @@
 class HEShell : public Shell
 {
 public:
-	HEShell();
-
+	HEShell(World* world);
 	virtual ~HEShell();
 };
 

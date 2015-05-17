@@ -1,10 +1,11 @@
 #pragma once
 #include "Renderable.h"
+#include "World.h"
 
 class Shell : public Renderable
 {
 public:
-	Shell();
+	Shell(World* world);
 	~Shell();
 
 	void render();

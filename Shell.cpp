@@ -1,7 +1,8 @@
 #include "Shell.h"
 #include "Renderable.h"
+#include "World.h"
 
-Shell::Shell()
+Shell::Shell(World* world)
 {
 }
 

@@ -6,7 +6,7 @@
 class APShell : public Shell
 {
 public:
-	APShell();
+	APShell(World* world);
 	virtual ~APShell();
 };
 

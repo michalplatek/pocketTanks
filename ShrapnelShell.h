@@ -6,7 +6,7 @@
 class ShrapnelShell : public Shell
 {
 public:
-	ShrapnelShell();
+	ShrapnelShell(World* world);
 	virtual ~ShrapnelShell();
 };
 

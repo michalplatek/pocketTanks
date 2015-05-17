@@ -2,8 +2,9 @@
 
 // High Explosive Shell
 
-HEShell::HEShell()
+HEShell::HEShell(World* world) : Shell(world)
 {
+
 }
 
 
