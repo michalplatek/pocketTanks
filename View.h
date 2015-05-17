@@ -24,6 +24,7 @@ public:
 	void render(World* world);
 
 	void renderAtBodyPosition(Tank* tank);
+	int toPixel(float position);
 };
 
 #endif
