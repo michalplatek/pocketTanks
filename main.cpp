@@ -24,4 +24,5 @@ int main(int argc, char** argv)
 
 	/*
 	* Uwagi:
+	* uzywac metod obiektu b2world do tworzenia obiektow b2Body
 	*/
