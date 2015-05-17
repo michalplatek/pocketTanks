@@ -10,6 +10,7 @@ public:
 	//class member variables
 	b2Body* body;
 	float radius;
+	World* world;
 
 	Tank(World* world);
 
