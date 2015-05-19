@@ -13,6 +13,7 @@ View::View(Config* config)
 	window = new sf::RenderWindow(sf::VideoMode(config->WINDOW_W, config->WINDOW_H), config->WINDOW_TITLE, sf::Style::Default, Settings);
 	window->setVerticalSyncEnabled(true);
 	window->setKeyRepeatEnabled(true);
+	gluOrtho2D(-500, 500, -500, 500);
 }
 
 View::~View()
@@ -30,7 +31,7 @@ void View::prepare()
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
 	//gluOrtho2D(0.0f, config->WINDOW_W, 0.0f, config->WINDOW_H);
-	gluOrtho2D(-500, 500, -500, 500);
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -40,7 +41,7 @@ void View::renderTest()
 	glColor3f(1.0f, 0.0f, 0.f);
 	glLineWidth(3);
 	glVertex2f(0, 0);
-	glVertex2f(0.9f, 0.9f);
+	glVertex2f(500.0f, 500.0f);
 	glEnd();
 }
 
