@@ -29,7 +29,8 @@ void View::prepare()
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(-config->WINDOW_W / 2, config->WINDOW_W / 2, config->WINDOW_H / 2, -config->WINDOW_H / 2);
+	//gluOrtho2D(0.0f, config->WINDOW_W, 0.0f, config->WINDOW_H);
+	gluOrtho2D(-500, 500, -500, 500);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -59,20 +60,32 @@ void View::render(Game* game)
 
 void View::render(World* world) 
 {
-	world->render();
+	renderAtBodyPosition(world);
 }
 
-void View::renderAtBodyPosition(Tank* tank) {
-	tank->renderAtBodyPosition();
+void View::renderAtBodyPosition(Renderable* renderable) {
+	//get current position from Box2D
+	b2Vec2 position = renderable->getBodyPosition();
+	float angle = renderable->getBodyAngle();
+
+	position.x = positionToPixel(position.x);
+	position.y = positionToPixel(position.y);
+
+	//call normal render at different position/rotation
+	glPushMatrix();
+	glTranslatef(position.x, position.y, 0);
+	glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
+	renderable->render();//normal render at (0,0)
+	glPopMatrix();
+	
 }
 
 void View::render(Tank* tank) {
-	tank->render();
+	renderAtBodyPosition(tank);
 }
 
-int View::toPixel(float position)
+float View::positionToPixel(float position)
 {
-	// TODO skalowanie jednostek na piksele - latwe
-	//float ratio = config->WINDOW_W / config->LEVEL_SIZE_IN_METRES;
-	return 0.0f;
+	float ratio = config->WINDOW_W / config->LEVEL_SIZE_IN_METRES;
+	return position * ratio;
 }
