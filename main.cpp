@@ -9,16 +9,13 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	Config* config = new Config(argc, argv);
-	Controller* controller = new Controller(config);
-	Game* pocketTanks = new Game(config);
+	Config config(argc, argv);
+	Controller controller(&config);
+	Game pocketTanks(&config);
 	
 	// Let's play Pocket Tanks!
-	controller->play(pocketTanks);
-	
-	delete config;
-	delete pocketTanks;
-	delete controller;
+	controller.play(&pocketTanks);
+
 	return 0;
 }
 
