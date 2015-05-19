@@ -2,9 +2,9 @@
 #include "Renderable.h"
 #include "World.h"
 
-Shell::Shell(World* world)
+Shell::Shell(b2World* world)
 {
-	this->world = world;
+	setWorld(world);
 }
 
 
@@ -15,8 +15,4 @@ Shell::~Shell()
 void Shell::render()
 {
 
-}
-
-void Shell::renderAtBodyPosition()
-{
 }
