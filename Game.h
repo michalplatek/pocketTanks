@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GAME_H_
+#define _GAME_H_
+
 #include "World.h"
 #include "Tank.h"
 #include "Shell.h"
@@ -26,3 +28,4 @@ public:
 	Tank* getTank(int i);
 };
 
+#endif
