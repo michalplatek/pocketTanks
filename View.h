@@ -23,8 +23,9 @@ public:
 	void render(Tank* tank);
 	void render(World* world);
 
-	void renderAtBodyPosition(Tank* tank);
-	int toPixel(float position);
+	void renderAtBodyPosition(Renderable* renderable);
+
+	float positionToPixel(float position);
 };
 
 #endif
