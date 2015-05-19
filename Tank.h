@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _TANK_H_
+#define _TANK_H_
+
 #include<Box2D\Box2D.h>
 #include<GL\freeglut.h>
 #include<cmath>
@@ -8,11 +10,9 @@ class Tank : public Renderable
 {
 public:
 	//class member variables
-	b2Body* body;
 	float radius;
-	World* world;
 
-	Tank(World* world);
+	Tank(b2World* world);
 
 	/*b2Vec2 getPosition();
 	b2Vec2 getLinearVelocity();
@@ -21,6 +21,6 @@ public:
 	Tank();
 	~Tank();
 	void render();
-	void renderAtBodyPosition();
 };
 
+#endif
