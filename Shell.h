@@ -1,15 +1,16 @@
-#pragma once
+#ifndef _SHELL_H_
+#define _SHELL_H_
+
 #include "Renderable.h"
 #include "World.h"
 
 class Shell : public Renderable
 {
 public:
-	World* world;
-	Shell(World* world);
+	Shell(b2World* world);
 	~Shell();
 
 	void render();
-	void renderAtBodyPosition();
 };
 
+#endif
