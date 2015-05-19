@@ -8,7 +8,7 @@ Game::Game(Config* config)
 
 	/* creating tanks */
 	for (int i = 0; i < config->NUM_TANKS; i++) {
-		tanks.push_back(new Tank(world));
+		tanks.push_back(new Tank(world->getWorld()));
 	}
 	status = Config::Status::RUNNING;
 }
@@ -25,7 +25,7 @@ Game::~Game()
 
 void Game::step() 
 {
-	world->Step(
+	world->getWorld()->Step(
 		config->BOX2D_TIME_STEP,
 		config->BOX2D_VELOCITY_ITERATIONS,
 		config->BOX2D_POSITION_ITERATIONS
