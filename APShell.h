@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _APSHELL_H_
+#define _APSHELL_H_
+
 #include "Shell.h"
 
 	// Armour Piercing Shell
@@ -6,7 +8,8 @@
 class APShell : public Shell
 {
 public:
-	APShell(World* world);
+	APShell(b2World* world);
 	virtual ~APShell();
 };
 
+#endif

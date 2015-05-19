@@ -2,7 +2,7 @@
 
  // Armour Piercing Shell
 
-APShell::APShell(World* world) : Shell(world)
+APShell::APShell(b2World* world) : Shell(world)
 {
 
 }

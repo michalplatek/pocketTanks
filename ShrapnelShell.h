@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SHRAPNELSHELL_H_
+#define _SHRAPNELSHELL_H_
+
 #include "Shell.h"
 
 	// Shrapnel Shell
@@ -6,7 +8,8 @@
 class ShrapnelShell : public Shell
 {
 public:
-	ShrapnelShell(World* world);
+	ShrapnelShell(b2World* world);
 	virtual ~ShrapnelShell();
 };
 
+#endif
