@@ -1,74 +1,86 @@
 #include "Tank.h"
 #include "Renderable.h"
 
-Tank::Tank(World* world)
+Tank::Tank(b2World* world)
 {
-	this->world = world;
-	float radius = 1;
+	setWorld(world);
+
+	b2Body* body;
 	body = NULL;
+
 	//set up dynamic body, store in class variable
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody;
-	myBodyDef.position.Set(0, 1);
+	myBodyDef.position.Set(50, 50);
 	body = world->CreateBody(&myBodyDef);
 
 	//add circle fixture
-	b2CircleShape circleShape;
-	circleShape.m_p.Set(0, 0);
-	circleShape.m_radius = radius; //use class variable
+	b2Vec2 vertices[4];
+	vertices[0].Set(1.0f, 2.0f);
+	vertices[1].Set(3.0f, 1.0f);
+	vertices[2].Set(-2.0f, -1.0f);
+	vertices[3].Set(-1.5f, 1.0f);
+	int32 verticesCount = 4;
+	b2PolygonShape tankShape;
+	tankShape.Set(vertices, verticesCount);
+
 	b2FixtureDef myFixtureDef;
-	myFixtureDef.shape = &circleShape;
+	myFixtureDef.shape = &tankShape;
 	myFixtureDef.density = 1;
 	body->CreateFixture(&myFixtureDef);
+	setBody(body);
 }
 
 
 Tank::~Tank()
 {
-	world->DestroyBody(body);
+	getWorld()->DestroyBody(getBody());
 }
 
 void Tank::render() {
-	glColor3f(1, 1, 1);//white
+	b2Body* body = getBody();
+	glColor3f(0, 0, 1);//blue
 
-	//nose and eyes
-	glPointSize(4);
-	glBegin(GL_POINTS);
-	glVertex2f(0.0f, 0.0f);
-	glVertex2f(-0.2f, 0.2f);
-	glVertex2f(0.2f, 0.2f);
-	glEnd();
+	/*
+	Use GetVertexCount() and GetVertex() to get the vertices from a polygon shape.
 
-	//mouth
-	glBegin(GL_LINES);
-	glVertex2f(-0.2f, -0.2f);
-	glVertex2f(-0.05f, -0.1f);
-	glVertex2f(0.05f, -0.1f);
-	glVertex2f(0.2f, -0.2f);
+	Note that vertex positions stored in the fixture are in body coordinates 
+	(relative to the body that the fixture is attached to). 
+	To get locations in world coordinates, you would have to multiply by the body transform:
+
+	b2Vec2 worldPos = body->GetWorldPoint( localPos );
+	*/
+
+	b2Fixture* fixture;
+	glBegin(GL_QUADS);
+	//glPointSize(4);
+	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
+	{
+		b2Shape::Type shapeType = fixture->GetType();
+		if (shapeType == b2Shape::e_polygon)
+		{
+			b2PolygonShape* polygonShape = (b2PolygonShape*)fixture->GetShape();
+			int vertexCount = polygonShape->GetVertexCount();
+			b2Vec2 vertex, vertexPositionInWorld;
+			for (int i = 0; i < vertexCount; i++)
+			{
+				vertex = polygonShape->GetVertex(i);
+				vertexPositionInWorld = body->GetWorldPoint(vertex);
+				//glVertex2f(world->positionToPixel(vertexPositionInWorld.x), world->positionToPixel(vertexPositionInWorld.y));
+			}
+		}
+	}
+
 	glEnd();
 
 	//circle outline
-	glBegin(GL_LINE_LOOP);
+	/*glBegin(GL_LINE_LOOP);
 	for (float a = 0; a < 360 * 3.1415f / 180; a += 30 * 3.1415f / 180)
-		glVertex2f(sinf(a)*0.3f, cosf(a)*0.3f);
-	glEnd();
+		glVertex2f(sinf(a)*10.0f, cosf(a)*10.0f);
+	glEnd();*/
 
-	b2Vec2 vel = body->GetLinearVelocity();
+	/*b2Vec2 vel = body->GetLinearVelocity();
 	float red = vel.Length() / 20.0f;
 	red = fmin(1.0f, red);
-	glColor3f(red, 0.5, 0.5);
-}
-
-void Tank::renderAtBodyPosition()
-{
-	//get current position from Box2D
-	b2Vec2 pos = body->GetPosition();
-	float angle = body->GetAngle();
-
-	//call normal render at different position/rotation
-	glPushMatrix();
-	glTranslatef(pos.x, pos.y, 0);
-	glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
-	render();//normal render at (0,0)
-	glPopMatrix();
+	glColor3f(red, 0.5, 0.5);*/
 }
