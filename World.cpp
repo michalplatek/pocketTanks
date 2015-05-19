@@ -2,32 +2,41 @@
 #include "World.h"
 
 
-World::World(Config* config) : b2World(b2Vec2(0.0f, config->GRAVITY))
+World::World(Config* config)
 {
+	b2World* world = new b2World(b2Vec2(0.0f, config->GRAVITY));
+	setWorld(world);
+
+	b2Body* body = NULL;
+
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 4.0f);
-	body = this->CreateBody(&bodyDef);
+	bodyDef.position.Set(100.0f, 50.0f);
+	body = world->CreateBody(&bodyDef);
 
 	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);
+	dynamicBox.SetAsBox(100.0f, 10.0f);
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
+	fixtureDef.density = 0.0f;
 	fixtureDef.friction = 0.3f;
 
 	body->CreateFixture(&fixtureDef);
+	setBody(body);
 }
 
 
 World::~World()
 {
-	this->DestroyBody(body);
+	b2World* world = getWorld();
+	world->DestroyBody(getBody());
+	delete world;
 }
 
 void World::render()
 {
+	b2Body* body = getBody();
 	glColor3f(1, 0, 0);//red
 
 	//nose and eyes
@@ -49,7 +58,7 @@ void World::render()
 	//circle outline
 	glBegin(GL_LINE_LOOP);
 	for (float a = 0; a < 360 * 3.1415f / 180; a += 30 * 3.1415f / 180)
-		glVertex2f(sinf(a), cosf(a));
+		glVertex2f(sinf(a)*10, cosf(a)*10);
 	glEnd();
 
 	b2Vec2 vel = body->GetLinearVelocity();
@@ -58,16 +67,4 @@ void World::render()
 	glColor3f(red, 0.5, 0.5);
 }
 
-void World::renderAtBodyPosition()
-{
-	//get current position from Box2D
-	b2Vec2 pos = body->GetPosition();
-	float angle = body->GetAngle();
 
-	//call normal render at different position/rotation
-	glPushMatrix();
-	glTranslatef(pos.x, pos.y, 0);
-	glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
-	render();//normal render at (0,0)
-	glPopMatrix();
-}
