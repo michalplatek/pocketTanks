@@ -34,19 +34,17 @@ public:
 	float GRAVITY;
 	float LEVEL_SIZE_IN_METRES;
 	enum class Status { RUNNING, FINISHED };
-
-	/* keyboard controls */
-	int KEY_PLAYER1_UP;
-	int KEY_PLAYER1_DOWN;
-	int KEY_PLAYER1_LEFT;
-	int KEY_PLAYER1_RIGHT;
-	int KEY_PLAYER1_FIRE;
-	int KEY_PLAYER2_UP;
-	int KEY_PLAYER2_DOWN;
-	int KEY_PLAYER2_LEFT;
-	int KEY_PLAYER2_RIGHT;
-	int KEY_PLAYER2_FIRE;
+	enum Players { PLAYER_1, PLAYER_2 };
+	
+	int KEY_UP[2];
+	int KEY_DOWN[2];
+	int KEY_LEFT[2];
+	int KEY_RIGHT[2];
+	int KEY_FIRE[2];
 	int KEY_QUIT;
+	float START_POSITION_X[2];
+	float START_POSITION_Y[2];
+	float START_GUN_ANGLE[2];
 
 	Config(int argc, char** argv);
 	~Config();
