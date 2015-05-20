@@ -7,19 +7,19 @@ Game::Game(Config* config)
 	world = new World(config);
 
 	/* creating tanks */
-	for (int i = 0; i < config->NUM_TANKS; i++) {
-		tanks.push_back(new Tank(world->getWorld()));
-	}
+	tanks.push_back(new Tank(world->getWorld(), config, Config::Players::PLAYER_1));
+	tanks.push_back(new Tank(world->getWorld(), config, Config::Players::PLAYER_2));
+
 	status = Config::Status::RUNNING;
 }
 
 
 Game::~Game()
 {
-	delete world;
 	for (int i = 0; i < config->NUM_TANKS; i++) {
 		delete tanks[i];
 	}
+	delete world;
 	tanks.clear();
 }
 
