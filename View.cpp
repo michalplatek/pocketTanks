@@ -13,7 +13,7 @@ View::View(Config* config)
 	window = new sf::RenderWindow(sf::VideoMode(config->WINDOW_W, config->WINDOW_H), config->WINDOW_TITLE, sf::Style::Default, Settings);
 	window->setVerticalSyncEnabled(true);
 	window->setKeyRepeatEnabled(true);
-	gluOrtho2D(-500, 500, -500, 500);
+	gluOrtho2D(0, config->WINDOW_W, 0, config->WINDOW_H);
 }
 
 View::~View()
@@ -56,7 +56,7 @@ void View::render(Game* game)
 	tank->renderAtBodyPosition();
 	printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);*/
 	//printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
-	printf("window: %d x %d\n", config->WINDOW_W, config->WINDOW_H);
+	//printf("window: %d x %d\n", config->WINDOW_W, config->WINDOW_H);
 }
 
 void View::render(World* world) 
@@ -69,13 +69,13 @@ void View::renderAtBodyPosition(Renderable* renderable) {
 	b2Vec2 position = renderable->getBodyPosition();
 	float angle = renderable->getBodyAngle();
 
-	position.x = positionToPixel(position.x);
-	position.y = positionToPixel(position.y);
+	position.x = renderable->positionToPixel(position.x);
+	position.y = renderable->positionToPixel(position.y);
 
 	//call normal render at different position/rotation
 	glPushMatrix();
-	glTranslatef(position.x, position.y, 0);
-	glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
+	//glTranslatef(position.x, position.y, 0);
+	//glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
 	renderable->render();//normal render at (0,0)
 	glPopMatrix();
 	
@@ -83,10 +83,4 @@ void View::renderAtBodyPosition(Renderable* renderable) {
 
 void View::render(Tank* tank) {
 	renderAtBodyPosition(tank);
-}
-
-float View::positionToPixel(float position)
-{
-	float ratio = config->WINDOW_W / config->LEVEL_SIZE_IN_METRES;
-	return position * ratio;
 }
