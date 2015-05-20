@@ -7,7 +7,7 @@
 class Shell : public Renderable
 {
 public:
-	Shell(b2World* world);
+	Shell(b2World* world, Config* config);
 	~Shell();
 
 	void render();
