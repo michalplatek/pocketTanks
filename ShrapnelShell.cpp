@@ -2,7 +2,7 @@
 
 	// Shrapnel Shell
 
-ShrapnelShell::ShrapnelShell(b2World* world) : Shell(world)
+ShrapnelShell::ShrapnelShell(b2World* world, Config* config) : Shell(world, config)
 {
 
 }
