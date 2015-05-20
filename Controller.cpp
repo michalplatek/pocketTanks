@@ -21,14 +21,12 @@ void Controller::play(Game* game)
 
 	while (game->getStatus() == Config::Status::RUNNING)
 	{
+		game->step();
 		view->prepare();
-		game->step();		
-
 		view->render(game);
 
 		/* render test lines */
-		view->renderTest();
-
+		//view->renderTest();
 
 		// manage window events
 		while (window->pollEvent(event))
@@ -59,34 +57,34 @@ void Controller::manageEvent(sf::Event &e, Game* game)
 
 void Controller::manageKeyEvent(sf::Event &e, Game *game)
 {
-	if (e.key.code == config->KEY_PLAYER1_UP) {
+	if (e.key.code == config->KEY_UP[Config::Players::PLAYER_1]) {
 		printf("up pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER1_DOWN) {
+	else if (e.key.code == config->KEY_DOWN[Config::Players::PLAYER_1]) {
 		printf("down pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER1_LEFT) {
+	else if (e.key.code == config->KEY_LEFT[Config::Players::PLAYER_1]) {
 		printf("left pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER1_RIGHT) {
+	else if (e.key.code == config->KEY_RIGHT[Config::Players::PLAYER_1]) {
 		printf("right pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER1_FIRE) {
+	else if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_1]) {
 		printf("enter pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER2_UP) {
+	else if (e.key.code == config->KEY_UP[Config::Players::PLAYER_2]) {
 		printf("w pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER2_DOWN) {
+	else if (e.key.code == config->KEY_DOWN[Config::Players::PLAYER_2]) {
 		printf("s pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER2_LEFT) {
+	else if (e.key.code == config->KEY_LEFT[Config::Players::PLAYER_2]) {
 		printf("a pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER2_RIGHT) {
+	else if (e.key.code == config->KEY_RIGHT[Config::Players::PLAYER_2]) {
 		printf("d pressed\n");
 	}
-	else if (e.key.code == config->KEY_PLAYER2_FIRE) {
+	else if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_2]) {
 		printf("space pressed\n");
 	}
 	else if (e.key.code == config->KEY_QUIT) {
