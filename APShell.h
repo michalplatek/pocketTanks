@@ -8,7 +8,7 @@
 class APShell : public Shell
 {
 public:
-	APShell(b2World* world);
+	APShell(b2World* world, Config* config);
 	virtual ~APShell();
 };
 
