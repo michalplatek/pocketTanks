@@ -23,19 +23,28 @@ Config::Config(int argc, char** argv)
 	NUM_PLAYERS = 2;
 	TANKS_PER_PLAYER = 1;
 	NUM_TANKS = NUM_PLAYERS * TANKS_PER_PLAYER;
-	GRAVITY = -1.0f;
+	GRAVITY = 0.0f;
 	LEVEL_SIZE_IN_METRES = 200.0f;
 
-	KEY_PLAYER1_UP = sf::Keyboard::Up;
-	KEY_PLAYER1_DOWN = sf::Keyboard::Down;
-	KEY_PLAYER1_LEFT = sf::Keyboard::Left;
-	KEY_PLAYER1_RIGHT = sf::Keyboard::Right;
-	KEY_PLAYER1_FIRE = sf::Keyboard::Return;
-	KEY_PLAYER2_UP = sf::Keyboard::W;
-	KEY_PLAYER2_DOWN = sf::Keyboard::S;
-	KEY_PLAYER2_LEFT = sf::Keyboard::A;
-	KEY_PLAYER2_RIGHT = sf::Keyboard::D;
-	KEY_PLAYER2_FIRE = sf::Keyboard::Space;
+	KEY_UP[Players::PLAYER_1] = sf::Keyboard::Up;
+	KEY_DOWN[Players::PLAYER_1] = sf::Keyboard::Down;
+	KEY_LEFT[Players::PLAYER_1] = sf::Keyboard::Left;
+	KEY_RIGHT[Players::PLAYER_1] = sf::Keyboard::Right;
+	KEY_FIRE[Players::PLAYER_1] = sf::Keyboard::Return;
+	KEY_UP[Players::PLAYER_2] = sf::Keyboard::W;
+	KEY_DOWN[Players::PLAYER_2] = sf::Keyboard::S;
+	KEY_LEFT[Players::PLAYER_2] = sf::Keyboard::A;
+	KEY_RIGHT[Players::PLAYER_2] = sf::Keyboard::D;
+	KEY_FIRE[Players::PLAYER_2] = sf::Keyboard::Space;
+
+	START_POSITION_X[Players::PLAYER_1] = 50.0f;
+	START_POSITION_Y[Players::PLAYER_1] = 50.0f;
+	START_GUN_ANGLE[Players::PLAYER_1] = 45.0f;
+
+	START_POSITION_X[Players::PLAYER_2] = 150.0;
+	START_POSITION_Y[Players::PLAYER_2] = 50.0f;
+	START_GUN_ANGLE[Players::PLAYER_2] = -45.0f;
+
 	KEY_QUIT = sf::Keyboard::Escape;
 }
 
