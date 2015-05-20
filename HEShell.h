@@ -8,7 +8,7 @@
 class HEShell : public Shell
 {
 public:
-	HEShell(b2World* world);
+	HEShell(b2World* world, Config* config);
 	virtual ~HEShell();
 };
 
