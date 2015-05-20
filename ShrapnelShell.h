@@ -8,7 +8,7 @@
 class ShrapnelShell : public Shell
 {
 public:
-	ShrapnelShell(b2World* world);
+	ShrapnelShell(b2World* world, Config* config);
 	virtual ~ShrapnelShell();
 };
 
