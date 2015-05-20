@@ -2,7 +2,7 @@
 #include "World.h"
 
 
-World::World(Config* config)
+World::World(Config* config) : Renderable(config)
 {
 	b2World* world = new b2World(b2Vec2(0.0f, config->GRAVITY));
 	setWorld(world);
