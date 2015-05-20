@@ -1,8 +1,9 @@
 #include "Tank.h"
 #include "Renderable.h"
 
-Tank::Tank(b2World* world)
+Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config)
 {
+	this->player = player;
 	setWorld(world);
 
 	b2Body* body;
@@ -11,7 +12,7 @@ Tank::Tank(b2World* world)
 	//set up dynamic body, store in class variable
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody;
-	myBodyDef.position.Set(50, 50);
+	myBodyDef.position.Set(config->START_POSITION_X[player], config->START_POSITION_Y[player]);
 	body = world->CreateBody(&myBodyDef);
 
 	//add circle fixture
@@ -39,7 +40,6 @@ Tank::~Tank()
 
 void Tank::render() {
 	b2Body* body = getBody();
-	glColor3f(0, 0, 1);//blue
 
 	/*
 	Use GetVertexCount() and GetVertex() to get the vertices from a polygon shape.
@@ -52,8 +52,10 @@ void Tank::render() {
 	*/
 
 	b2Fixture* fixture;
-	glBegin(GL_QUADS);
+	
+	//glPointSize(5.0f);
 	//glPointSize(4);
+	glBegin(GL_QUADS);
 	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
 	{
 		b2Shape::Type shapeType = fixture->GetType();
@@ -66,12 +68,29 @@ void Tank::render() {
 			{
 				vertex = polygonShape->GetVertex(i);
 				vertexPositionInWorld = body->GetWorldPoint(vertex);
-				//glVertex2f(world->positionToPixel(vertexPositionInWorld.x), world->positionToPixel(vertexPositionInWorld.y));
+				float posx = positionToPixel(vertexPositionInWorld.x);
+				float posy = positionToPixel(vertexPositionInWorld.y);
+				
+				if (i == 0) printf("%f %f\n", posx, posy);
+
+				/* DZIALAJACE WYSWIETLANIE:
+				glBegin(GL_LINES);
+				glColor3f(0, 0, 1);//blue
+				glLineWidth(3);
+				glVertex2f(500.0f, 500.0f);
+				glVertex2f(positionToPixel(vertexPositionInWorld.x), positionToPixel(vertexPositionInWorld.y));
+				glEnd();*/
+
+				glBegin(GL_POINTS);
+				glColor3f(1, 0, 1);//pink
+				glPointSize(5);
+				glVertex2f(positionToPixel(vertexPositionInWorld.x), positionToPixel(vertexPositionInWorld.y));
+				glEnd();
 			}
 		}
 	}
 
-	glEnd();
+	
 
 	//circle outline
 	/*glBegin(GL_LINE_LOOP);
