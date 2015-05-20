@@ -8,11 +8,12 @@
 
 class Tank : public Renderable
 {
+	Config::Players player;
 public:
 	//class member variables
 	float radius;
 
-	Tank(b2World* world);
+	Tank(b2World* world, Config* config, Config::Players player);
 
 	/*b2Vec2 getPosition();
 	b2Vec2 getLinearVelocity();
