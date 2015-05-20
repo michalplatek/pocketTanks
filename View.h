@@ -25,7 +25,6 @@ public:
 
 	void renderAtBodyPosition(Renderable* renderable);
 
-	float positionToPixel(float position);
 };
 
 #endif
