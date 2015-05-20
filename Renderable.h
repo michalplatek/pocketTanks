@@ -1,14 +1,16 @@
 #ifndef _RENDERABLE_H_
 #define _RENDERABLE_H_
 #include <Box2D/Box2D.h>
+#include "Config.h"
 
 class Renderable
 {
 	b2Body* body;
 	b2World* world;
+	Config* config;
 
 public:
-	Renderable();
+	Renderable(Config* config);
 	virtual ~Renderable();
 	virtual void render() = 0;
 
@@ -20,6 +22,8 @@ public:
 
 	b2Vec2 getBodyPosition();
 	float getBodyAngle();
+
+	float positionToPixel(float position);
 };
 
 #endif
