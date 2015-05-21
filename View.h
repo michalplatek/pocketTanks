@@ -16,6 +16,8 @@ public:
 	
 	sf::RenderWindow* window;
 	sf::RenderWindow* getWindow();
+	void viewportSetup();
+	void viewportReset();
 	void prepare();
 	
 	void renderTest();
