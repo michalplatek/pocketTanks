@@ -2,10 +2,8 @@
 #include <GL\freeglut.h>
 #include <Box2D\Box2D.h>
 
-Controller::Controller(Config* config)
+Controller::Controller(Config* config) : view(config), config(config)
 {
-	view = new View(config);
-	this->config = config;
 }
 
 
@@ -17,13 +15,13 @@ void Controller::play(Game* game)
 {
 	sf::Window *window;
 	sf::Event event;
-	window = view->getWindow();
+	window = view.getWindow();
 
 	while (game->getStatus() == Config::Status::RUNNING)
 	{
 		game->step();
-		view->prepare();
-		view->render(game);
+		view.prepare();
+		view.render(game);
 
 		/* render test lines */
 		//view->renderTest();
@@ -47,6 +45,7 @@ void Controller::manageEvent(sf::Event &e, Game* game)
 		// asigning new window dimensions to global configuration object
 		config->WINDOW_W = e.size.width;
 		config->WINDOW_H = e.size.height;
+		view.viewportSetup();
 		break;
 	case sf::Event::KeyPressed:
 		manageKeyEvent(e, game);
