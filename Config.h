@@ -44,10 +44,13 @@ public:
 	int KEY_QUIT;
 	float START_POSITION_X[2];
 	float START_POSITION_Y[2];
+	float START_ROTATION[2];
 	float START_GUN_ANGLE[2];
 
 	Config(int argc, char** argv);
 	~Config();
+
+	float positionToPixel(float position);
 };
 
 #endif
