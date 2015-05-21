@@ -39,12 +39,10 @@ Config::Config(int argc, char** argv)
 
 	START_POSITION_X[Players::PLAYER_1] = 50.0f;
 	START_POSITION_Y[Players::PLAYER_1] = 50.0f;
-	START_ROTATION[Players::PLAYER_1] = -30.0f;
 	START_GUN_ANGLE[Players::PLAYER_1] = 45.0f;
 
 	START_POSITION_X[Players::PLAYER_2] = 150.0;
 	START_POSITION_Y[Players::PLAYER_2] = 50.0f;
-	START_ROTATION[Players::PLAYER_2] = 30.0f;
 	START_GUN_ANGLE[Players::PLAYER_2] = -45.0f;
 
 	KEY_QUIT = sf::Keyboard::Escape;
@@ -53,10 +51,4 @@ Config::Config(int argc, char** argv)
 
 Config::~Config()
 {
-}
-
-float Config::positionToPixel(float position)
-{
-	float ratio = WINDOW_W / LEVEL_SIZE_IN_METRES;
-	return position * ratio;
 }

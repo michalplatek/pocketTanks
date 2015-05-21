@@ -1,8 +1,9 @@
 #include "Renderable.h"
 
 
-Renderable::Renderable(Config* config) :config(config)
+Renderable::Renderable(Config* config)
 {
+	this->config = config;
 }
 
 
@@ -40,7 +41,8 @@ float Renderable::getBodyAngle()
 	return getBody()->GetAngle();
 }
 
-Config* Renderable::getConfig()
+float Renderable::positionToPixel(float position)
 {
-	return config;
+	float ratio = config->WINDOW_W / config->LEVEL_SIZE_IN_METRES;
+	return position * ratio;
 }

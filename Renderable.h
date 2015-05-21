@@ -23,7 +23,7 @@ public:
 	b2Vec2 getBodyPosition();
 	float getBodyAngle();
 
-	Config* getConfig();
+	float positionToPixel(float position);
 };
 
 #endif

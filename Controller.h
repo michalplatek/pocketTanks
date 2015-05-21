@@ -10,7 +10,7 @@
 class Controller
 {
 public:
-	View view;
+	View* view;
 	Config* config;
 
 	void manageEvent(sf::Event &e, Game* game);
