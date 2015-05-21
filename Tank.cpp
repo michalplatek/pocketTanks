@@ -1,9 +1,8 @@
 #include "Tank.h"
 #include "Renderable.h"
 
-Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config)
+Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config), player(player)
 {
-	this->player = player;
 	setWorld(world);
 
 	b2Body* body;
@@ -13,14 +12,16 @@ Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody;
 	myBodyDef.position.Set(config->START_POSITION_X[player], config->START_POSITION_Y[player]);
+	
 	body = world->CreateBody(&myBodyDef);
+	//getBody()->SetTransform(getBody()->GetPosition(), config->START_ROTATION[player]);
 
 	//add circle fixture
 	b2Vec2 vertices[4];
-	vertices[0].Set(1.0f, 2.0f);
-	vertices[1].Set(3.0f, 1.0f);
-	vertices[2].Set(-2.0f, -1.0f);
-	vertices[3].Set(-1.5f, 1.0f);
+	vertices[0].Set(2.0, 1.5f);
+	vertices[1].Set(3.0f, -1.0f);
+	vertices[2].Set(-3.0f, -1.0f);
+	vertices[3].Set(-2.5f, 1.5f);
 	int32 verticesCount = 4;
 	b2PolygonShape tankShape;
 	tankShape.Set(vertices, verticesCount);
@@ -53,9 +54,6 @@ void Tank::render() {
 
 	b2Fixture* fixture;
 	
-	//glPointSize(5.0f);
-	//glPointSize(4);
-	glBegin(GL_QUADS);
 	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
 	{
 		b2Shape::Type shapeType = fixture->GetType();
@@ -64,29 +62,20 @@ void Tank::render() {
 			b2PolygonShape* polygonShape = (b2PolygonShape*)fixture->GetShape();
 			int vertexCount = polygonShape->GetVertexCount();
 			b2Vec2 vertex, vertexPositionInWorld;
+
+			glColor3f(1, 0, 1);//pink
+			glBegin(GL_QUADS);
 			for (int i = 0; i < vertexCount; i++)
 			{
 				vertex = polygonShape->GetVertex(i);
-				vertexPositionInWorld = body->GetWorldPoint(vertex);
-				float posx = positionToPixel(vertexPositionInWorld.x);
-				float posy = positionToPixel(vertexPositionInWorld.y);
+				float posx = getConfig()->positionToPixel(vertex.x);
+				float posy = getConfig()->positionToPixel(vertex.y);
 				
 				if (i == 0) printf("%f %f\n", posx, posy);
 
-				/* DZIALAJACE WYSWIETLANIE:
-				glBegin(GL_LINES);
-				glColor3f(0, 0, 1);//blue
-				glLineWidth(3);
-				glVertex2f(500.0f, 500.0f);
-				glVertex2f(positionToPixel(vertexPositionInWorld.x), positionToPixel(vertexPositionInWorld.y));
-				glEnd();*/
-
-				glBegin(GL_POINTS);
-				glColor3f(1, 0, 1);//pink
-				glPointSize(5);
-				glVertex2f(positionToPixel(vertexPositionInWorld.x), positionToPixel(vertexPositionInWorld.y));
-				glEnd();
+				glVertex2f(posx, posy);
 			}
+			glEnd();
 		}
 	}
 
