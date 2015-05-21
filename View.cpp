@@ -1,8 +1,7 @@
 #include "View.h"
 
-View::View(Config* config)
+View::View(Config* config) : config(config)
 {
-	this->config = config;
 	sf::ContextSettings Settings;
 	Settings.depthBits = config->WINDOW_DEPTH_BITS;
 	Settings.stencilBits = config->WINDOW_STENCIL_BITS;
@@ -13,7 +12,8 @@ View::View(Config* config)
 	window = new sf::RenderWindow(sf::VideoMode(config->WINDOW_W, config->WINDOW_H), config->WINDOW_TITLE, sf::Style::Default, Settings);
 	window->setVerticalSyncEnabled(true);
 	window->setKeyRepeatEnabled(true);
-	gluOrtho2D(0, config->WINDOW_W, 0, config->WINDOW_H);
+
+	viewportSetup();
 }
 
 View::~View()
@@ -26,12 +26,23 @@ sf::RenderWindow* View::getWindow()
 	return window;
 }
 
+void View::viewportSetup()
+{
+	glViewport(0, 0, config->WINDOW_W, config->WINDOW_H);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	viewportReset();
+}
+
+void View::viewportReset()
+{
+	float ratio = (float)config->WINDOW_H / (float)config->WINDOW_W;
+	gluOrtho2D(0.0f, config->positionToPixel(config->LEVEL_SIZE_IN_METRES), 0.0f, config->positionToPixel(ratio * config->LEVEL_SIZE_IN_METRES));
+}
+
 void View::prepare() 
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glMatrixMode(GL_PROJECTION);
-	//gluOrtho2D(0.0f, config->WINDOW_W, 0.0f, config->WINDOW_H);
-	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -69,13 +80,13 @@ void View::renderAtBodyPosition(Renderable* renderable) {
 	b2Vec2 position = renderable->getBodyPosition();
 	float angle = renderable->getBodyAngle();
 
-	position.x = renderable->positionToPixel(position.x);
-	position.y = renderable->positionToPixel(position.y);
+	position.x = config->positionToPixel(position.x);
+	position.y = config->positionToPixel(position.y);
 
 	//call normal render at different position/rotation
 	glPushMatrix();
-	//glTranslatef(position.x, position.y, 0);
-	//glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
+	glTranslatef(position.x, position.y, 0);
+	glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
 	renderable->render();//normal render at (0,0)
 	glPopMatrix();
 	
