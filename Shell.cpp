@@ -16,6 +16,7 @@ Shell::Shell(b2World* world, Config* config, b2Vec2 position, float angle) : Ren
 	//set up dynamic body, store in class variable
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody;
+	myBodyDef.bullet = true;
 	//start position -> position of barrel
 	myBodyDef.position.Set(positionBarrelX, positionBarrelY);
 
