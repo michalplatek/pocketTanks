@@ -70,6 +70,7 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 	}
 	else if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_1]) {
 		printf("enter pressed\n");
+		game->shoot(Config::Players::PLAYER_1);
 	}
 	else if (e.key.code == config->KEY_UP[Config::Players::PLAYER_2]) {
 		printf("w pressed\n");
@@ -85,6 +86,7 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 	}
 	else if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_2]) {
 		printf("space pressed\n");
+		game->shoot(Config::Players::PLAYER_2);
 	}
 	else if (e.key.code == config->KEY_QUIT) {
 		game->setStatus(Config::Status::FINISHED);
