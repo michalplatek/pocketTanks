@@ -5,6 +5,7 @@ Game::Game(Config* config)
 {
 	this->config = config;
 	world = new World(config);
+	shell = nullptr;
 
 	/* creating tanks */
 	tanks.push_back(new Tank(world->getWorld(), config, Config::Players::PLAYER_1));
@@ -49,6 +50,51 @@ World* Game::getWorld()
 
 Tank* Game::getTank(int i) 
 {
-	/* TODO? sprawdziæ czy i nie jest poza zakresem? Wyj¹tek? */
+	/* TODO? sprawdzic czy i nie jest poza zakresem? Wyjatek? */
 	return tanks[i];
+}
+
+Tank* Game::getTank(Config::Players player)
+{
+	Tank* tankPtr = nullptr;
+	b2Body* tankBody;
+	for (int i = 0; i < config->NUM_PLAYERS; i++)
+	{
+		// TODO? sprawdzic czy UserData ustaione. Jesli nie, to wyjatek?
+		tankPtr = getTank(i);
+		tankBody = tankPtr->getBody();
+		BodyData* bodyData = (BodyData*)tankBody->GetUserData();
+		if (bodyData->owner == player)
+		{
+			return tankPtr;
+		}
+	}
+	return nullptr;
+}
+
+void Game::shoot(Config::Players player)
+{
+	Tank* tank = getTank(player);
+	if (tank != nullptr)
+	{
+		if (shell != nullptr)
+		{
+			delete shell;
+		}
+		switch (tank->getLoadedShellType())
+		{
+		case Config::ShellType::AP:
+			shell = new APShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			break;
+		case Config::ShellType::HE:
+			shell = new HEShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			break;
+		case Config::ShellType::SHRAPNEL:
+			shell = new ShrapnelShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			break;
+		default:
+			shell = new APShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			break;
+		}
+	}
 }
