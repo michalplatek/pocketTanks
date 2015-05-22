@@ -35,9 +35,11 @@ public:
 	float LEVEL_SIZE_IN_METRES;
 	float MAX_HEALTH;
 
-	enum class Objects { WORLD, SHELL, TANK_FRONT, TANK_BACK, TANK_WHEEL, TANK_TURRET, TANK_BARREL };
+	enum class BodyType { WORLD, SHELL, TANK };
+	enum class FixtureType { WORLD, SHELL, TANK_FRONT, TANK_BACK, TANK_WHEEL, TANK_TURRET, TANK_BARREL };
+	enum class ShellType { AP, HE, SHRAPNEL };
 	enum class Status { RUNNING, FINISHED };
-	enum Players { PLAYER_1, PLAYER_2 };
+	enum Players { PLAYER_1, PLAYER_2, NONE };
 	
 	int KEY_UP[2];
 	int KEY_DOWN[2];
