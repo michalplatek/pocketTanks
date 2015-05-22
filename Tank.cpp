@@ -26,9 +26,14 @@ Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(
 	b2PolygonShape tankShape;
 	tankShape.Set(vertices, verticesCount);
 
+	ObjectData* objectData = new ObjectData;
+	objectData->health = config->MAX_HEALTH;
+	objectData->objectType = Config::Objects::TANK_FRONT;
+
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &tankShape;
 	myFixtureDef.density = 1;
+	myFixtureDef.userData = (void*)objectData;
 	body->CreateFixture(&myFixtureDef);
 	setBody(body);
 }
