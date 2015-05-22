@@ -1,17 +1,22 @@
 #include "Tank.h"
 #include "Renderable.h"
 
-Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config), player(player)
+Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config), player(player), loadedShellType(Config::ShellType::AP)
 {
 	setWorld(world);
 
 	b2Body* body;
 	body = NULL;
 
+	BodyData* bodyData = new BodyData;
+	bodyData->bodyType = Config::BodyType::TANK;
+	bodyData->owner = player;
+
 	//set up dynamic body, store in class variable
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody;
 	myBodyDef.position.Set(config->START_POSITION_X[player], config->START_POSITION_Y[player]);
+	myBodyDef.userData = (void*)bodyData;
 	
 	body = world->CreateBody(&myBodyDef);
 	//getBody()->SetTransform(getBody()->GetPosition(), config->START_ROTATION[player]);
@@ -26,14 +31,14 @@ Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(
 	b2PolygonShape tankShape;
 	tankShape.Set(vertices, verticesCount);
 
-	ObjectData* objectData = new ObjectData;
-	objectData->health = config->MAX_HEALTH;
-	objectData->objectType = Config::Objects::TANK_FRONT;
+	FixtureData* userData = new FixtureData;
+	userData->fixtureType = Config::FixtureType::TANK_FRONT;
+	userData->owner = player;
 
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &tankShape;
 	myFixtureDef.density = 1;
-	myFixtureDef.userData = (void*)objectData;
+	myFixtureDef.userData = (void*)userData;
 	body->CreateFixture(&myFixtureDef);
 	setBody(body);
 }
@@ -96,4 +101,24 @@ void Tank::render() {
 	float red = vel.Length() / 20.0f;
 	red = fmin(1.0f, red);
 	glColor3f(red, 0.5, 0.5);*/
+}
+
+Config::ShellType Tank::getLoadedShellType()
+{
+	return loadedShellType;
+}
+
+void Tank::setLoadedShellType(Config::ShellType shellType)
+{
+	loadedShellType = shellType;
+}
+
+b2Vec2 Tank::getBarrelEndPosition()
+{
+	return b2Vec2(55.0f, 55.0f);
+}
+
+float Tank::getBarrelAngle()
+{
+	return 45.0f;
 }
