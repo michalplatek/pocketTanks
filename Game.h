@@ -5,6 +5,10 @@
 #include "Tank.h"
 #include "Shell.h"
 #include "Config.h"
+#include "Shell.h"
+#include "APShell.h"
+#include "HEShell.h"
+#include "ShrapnelShell.h"
 #include <vector>
 
 class Game
@@ -26,6 +30,8 @@ public:
 	void setStatus(Config::Status status);
 	World* getWorld();
 	Tank* getTank(int i);
+	Tank* getTank(Config::Players player);
+	void shoot(Config::Players player);
 };
 
 #endif
