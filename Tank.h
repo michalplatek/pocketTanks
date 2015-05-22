@@ -5,6 +5,7 @@
 #include<GL\freeglut.h>
 #include<cmath>
 #include "World.h"
+#include "ObjectData.h"
 
 class Tank : public Renderable
 {
