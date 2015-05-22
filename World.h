@@ -4,6 +4,7 @@
 #include <Box2D/Box2D.h>
 #include "Config.h"
 #include "Renderable.h"
+#include "ObjectData.h"
 
 class World : public Renderable
 {
