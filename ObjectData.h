@@ -2,11 +2,18 @@
 #define _OBJECTDATA_H_
 #include "Config.h"
 
-typedef struct _ObjectData
+typedef struct _BodyData
 {
-	Config::Objects objectType;
-	float health;
+	Config::BodyType bodyType;
+	Config::Players owner;
 
-} ObjectData;
+} BodyData;
+
+typedef struct _FixtureData
+{
+	Config::FixtureType fixtureType;
+	Config::Players owner;
+
+} FixtureData;
 
 #endif
