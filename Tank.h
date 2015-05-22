@@ -10,6 +10,7 @@
 class Tank : public Renderable
 {
 	Config::Players player;
+	Config::ShellType loadedShellType;
 public:
 	//class member variables
 	float radius;
@@ -23,6 +24,10 @@ public:
 	Tank();
 	~Tank();
 	void render();
+	Config::ShellType getLoadedShellType();
+	void setLoadedShellType(Config::ShellType shellType);
+	b2Vec2 getBarrelEndPosition();
+	float getBarrelAngle();
 };
 
 #endif
