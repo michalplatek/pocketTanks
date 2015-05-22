@@ -23,10 +23,15 @@ World::World(Config* config) : Renderable(config)
 	b2PolygonShape worldShape;
 	worldShape.Set(vertices, verticesCount);
 
+	ObjectData* objectData = new ObjectData;
+	objectData->health = config->MAX_HEALTH;
+	objectData->objectType = Config::Objects::WORLD;
+
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &worldShape;
 	fixtureDef.density = 0.0f;
 	fixtureDef.friction = 0.3f;
+	fixtureDef.userData = (void*)objectData;
 
 	body->CreateFixture(&fixtureDef);
 	setBody(body);
