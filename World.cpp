@@ -9,9 +9,14 @@ World::World(Config* config) : Renderable(config)
 
 	b2Body* body = NULL;
 
+	BodyData* bodyData = new BodyData;
+	bodyData->bodyType = Config::BodyType::WORLD;
+	bodyData->owner = Config::Players::NONE;
+
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(100.0f, 10.0f);
+	bodyDef.userData = (void*)bodyData;
 	body = world->CreateBody(&bodyDef);
 
 	b2Vec2 vertices[4];
@@ -23,15 +28,15 @@ World::World(Config* config) : Renderable(config)
 	b2PolygonShape worldShape;
 	worldShape.Set(vertices, verticesCount);
 
-	ObjectData* objectData = new ObjectData;
-	objectData->health = config->MAX_HEALTH;
-	objectData->objectType = Config::Objects::WORLD;
+	FixtureData* userData = new FixtureData;
+	userData->fixtureType = Config::FixtureType::WORLD;
+	userData->owner = Config::Players::NONE;
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &worldShape;
 	fixtureDef.density = 0.0f;
 	fixtureDef.friction = 0.3f;
-	fixtureDef.userData = (void*)objectData;
+	fixtureDef.userData = (void*)userData;
 
 	body->CreateFixture(&fixtureDef);
 	setBody(body);
