@@ -33,6 +33,9 @@ public:
 	int NUM_TANKS;
 	float GRAVITY;
 	float LEVEL_SIZE_IN_METRES;
+	float MAX_HEALTH;
+
+	enum class Objects { WORLD, SHELL, TANK_FRONT, TANK_BACK, TANK_WHEEL, TANK_TURRET, TANK_BARREL };
 	enum class Status { RUNNING, FINISHED };
 	enum Players { PLAYER_1, PLAYER_2 };
 	
