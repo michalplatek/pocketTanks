@@ -7,10 +7,10 @@
 class Shell : public Renderable
 {
 public:
-	Shell(b2World* world, Config* config, b2Vec2 position, float angle);
+	Shell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle);
 	virtual ~Shell();
 
-	void render();
+	virtual void render() = 0;
 };
 
 #endif
