@@ -10,8 +10,10 @@ class HEShell : public Shell
 public:
 	float radius;
 
-	HEShell(b2World* world, Config* config, b2Vec2 position, float angle);
+	HEShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle);
 	~HEShell();
+
+	void render();
 };
 
 #endif
