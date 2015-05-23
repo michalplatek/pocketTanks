@@ -24,6 +24,7 @@ public:
 	void render(Game* game);
 	void render(Tank* tank);
 	void render(World* world);
+	void render(Shell* shell);
 
 	void renderAtBodyPosition(Renderable* renderable);
 
