@@ -19,9 +19,8 @@ Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(
 	myBodyDef.userData = (void*)bodyData;
 	
 	body = world->CreateBody(&myBodyDef);
-	//getBody()->SetTransform(getBody()->GetPosition(), config->START_ROTATION[player]);
 
-	//add circle fixture
+	//add polygon fixture
 	b2Vec2 vertices[4];
 	vertices[0].Set(2.0, 1.5f);
 	vertices[1].Set(3.0f, -1.0f);
@@ -51,17 +50,6 @@ Tank::~Tank()
 
 void Tank::render() {
 	b2Body* body = getBody();
-
-	/*
-	Use GetVertexCount() and GetVertex() to get the vertices from a polygon shape.
-
-	Note that vertex positions stored in the fixture are in body coordinates 
-	(relative to the body that the fixture is attached to). 
-	To get locations in world coordinates, you would have to multiply by the body transform:
-
-	b2Vec2 worldPos = body->GetWorldPoint( localPos );
-	*/
-
 	b2Fixture* fixture;
 	
 	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
@@ -81,26 +69,13 @@ void Tank::render() {
 				float posx = getConfig()->positionToPixel(vertex.x);
 				float posy = getConfig()->positionToPixel(vertex.y);
 				
-				if (i == 0) printf("%f %f\n", posx, posy);
+				//if (i == 0) printf("%f %f\n", posx, posy);
 
 				glVertex2f(posx, posy);
 			}
 			glEnd();
 		}
 	}
-
-	
-
-	//circle outline
-	/*glBegin(GL_LINE_LOOP);
-	for (float a = 0; a < 360 * 3.1415f / 180; a += 30 * 3.1415f / 180)
-		glVertex2f(sinf(a)*10.0f, cosf(a)*10.0f);
-	glEnd();*/
-
-	/*b2Vec2 vel = body->GetLinearVelocity();
-	float red = vel.Length() / 20.0f;
-	red = fmin(1.0f, red);
-	glColor3f(red, 0.5, 0.5);*/
 }
 
 Config::ShellType Tank::getLoadedShellType()
@@ -115,7 +90,11 @@ void Tank::setLoadedShellType(Config::ShellType shellType)
 
 b2Vec2 Tank::getBarrelEndPosition()
 {
-	return b2Vec2(55.0f, 55.0f);
+	b2Vec2 tankPosition = getBodyPosition();
+	BodyData* userData = (BodyData*)getBody()->GetUserData();
+	Config::Players player = userData->owner;
+	float factor = player == Config::Players::PLAYER_1 ? 1.0f : -1.0f;
+	return b2Vec2(tankPosition.x + factor * 3.0f, tankPosition.y + 3.0f);
 }
 
 float Tank::getBarrelAngle()
