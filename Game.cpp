@@ -72,6 +72,11 @@ Tank* Game::getTank(Config::Players player)
 	return nullptr;
 }
 
+Shell* Game::getShell()
+{
+	return shell;
+}
+
 void Game::shoot(Config::Players player)
 {
 	Tank* tank = getTank(player);
@@ -80,20 +85,21 @@ void Game::shoot(Config::Players player)
 		if (shell != nullptr)
 		{
 			delete shell;
+			shell = nullptr;
 		}
 		switch (tank->getLoadedShellType())
 		{
 		case Config::ShellType::AP:
-			shell = new APShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shell = new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
 			break;
 		case Config::ShellType::HE:
-			shell = new HEShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shell = new HEShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
 			break;
 		case Config::ShellType::SHRAPNEL:
-			shell = new ShrapnelShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shell = new ShrapnelShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
 			break;
 		default:
-			shell = new APShell(world->getWorld(), config, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shell = new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
 			break;
 		}
 	}
