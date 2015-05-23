@@ -83,7 +83,7 @@ void World::render()
 				float posx = getConfig()->positionToPixel(vertex.x);
 				float posy = getConfig()->positionToPixel(vertex.y);
 
-				if (i == 0) printf("%f %f\n", posx, posy);
+				//if (i == 0) printf("%f %f\n", posx, posy);
 
 				glVertex2f(posx, posy);
 
