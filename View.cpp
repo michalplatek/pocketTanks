@@ -62,6 +62,11 @@ void View::render(Game* game)
 	for (int i = 0; i < config->NUM_TANKS; i++) {
 		render(game->getTank(i));
 	}
+	if (game->getShell() != nullptr)
+	{
+		render(game->getShell());
+	}
+	
 	/*b2Vec2 position = tank->m_body->GetPosition();
 	float32 angle = tank->m_body->GetAngle();
 	tank->renderAtBodyPosition();
@@ -92,6 +97,12 @@ void View::renderAtBodyPosition(Renderable* renderable) {
 	
 }
 
-void View::render(Tank* tank) {
+void View::render(Tank* tank)
+{
 	renderAtBodyPosition(tank);
+}
+
+void View::render(Shell* shell)
+{
+	renderAtBodyPosition(shell);
 }
