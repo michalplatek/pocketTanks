@@ -2,6 +2,9 @@
 #define _CONFIG_H_
 
 #include<SFML/Window.hpp>
+/* unit conversion */
+#define DEGTORAD 0.0174532925199432957f
+#define RADTODEG 57.295779513082320876f
 
 class Config
 {
@@ -35,18 +38,22 @@ public:
 	float LEVEL_SIZE_IN_METRES;
 	float MAX_HEALTH;
 
+	/* enums */
 	enum class BodyType { WORLD, SHELL, TANK };
 	enum class FixtureType { WORLD, SHELL, TANK_FRONT, TANK_BACK, TANK_WHEEL, TANK_TURRET, TANK_BARREL };
 	enum class ShellType { AP, HE, SHRAPNEL };
 	enum class Status { RUNNING, FINISHED };
 	enum Players { PLAYER_1, PLAYER_2, NONE };
 	
+	/* keyboard configuration */
 	int KEY_UP[2];
 	int KEY_DOWN[2];
 	int KEY_LEFT[2];
 	int KEY_RIGHT[2];
 	int KEY_FIRE[2];
 	int KEY_QUIT;
+
+	/* initial positions and angles */
 	float START_POSITION_X[2];
 	float START_POSITION_Y[2];
 	float START_ROTATION[2];
