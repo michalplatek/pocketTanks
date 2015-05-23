@@ -31,6 +31,7 @@ public:
 	World* getWorld();
 	Tank* getTank(int i);
 	Tank* getTank(Config::Players player);
+	Shell* getShell();
 	void shoot(Config::Players player);
 };
 
