@@ -2,14 +2,17 @@
 #define _APSHELL_H_
 
 #include "Shell.h"
+#include <GL/freeglut.h>
 
 	// Armour Piercing Shell
 
 class APShell : public Shell
 {
 public:
-	APShell(b2World* world, Config* config, b2Vec2 position, float angle);
+	APShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle);
 	~APShell();
+
+	void render();
 };
 
 #endif
