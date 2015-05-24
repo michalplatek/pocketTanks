@@ -1,6 +1,6 @@
-#include<GL/freeglut.h>
+#include <GL/freeglut.h>
 #include "World.h"
-
+using namespace boost::geometry;
 
 World::World(Config* config) : Renderable(config)
 {
@@ -8,7 +8,8 @@ World::World(Config* config) : Renderable(config)
 	setWorld(world);
 
 	b2Body* body = NULL;
-
+	ring_t ring;
+	
 	BodyData* bodyData = new BodyData;
 	bodyData->bodyType = Config::BodyType::WORLD;
 	bodyData->owner = Config::Players::NONE;
