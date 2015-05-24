@@ -4,6 +4,7 @@
 #include<Box2D\Box2D.h>
 #include<GL\freeglut.h>
 #include<cmath>
+#include<vector>
 #include "World.h"
 #include "ObjectData.h"
 
@@ -11,6 +12,8 @@ class Tank : public Renderable
 {
 	Config::Players player;
 	Config::ShellType loadedShellType;
+	std::vector<b2Body*> wheels;
+	std::vector<b2Joint*> joints;
 public:
 	//class member variables
 	float radius;
