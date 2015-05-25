@@ -20,15 +20,29 @@ Shell::Shell(b2World* world, Config* config, Config::Players player, b2Vec2 posi
 	myBodyDef.bullet = true;
 	//start position -> position of barrel
 	myBodyDef.position.Set(position.x, position.y);
+	myBodyDef.angle = angle;
 	myBodyDef.userData = (void*)bodyData;
 
 	body = world->CreateBody(&myBodyDef);
-	body->SetTransform(b2Vec2(position.x, position.y), angle);
-	body->ApplyLinearImpulse(b2Vec2(-20.0f, 20.0f), b2Vec2(0.0f, 0.0f), true);
+
+	float vectorX = cos(angle * DEGTORAD);
+	float vectorY = sin(angle * DEGTORAD);
+	printf("cos(%f)= %f, sin(%f)= %f\n", angle, vectorX, angle, vectorY);
+	//body->SetTransform(b2Vec2(position.x, position.y), angle);
+	body->ApplyLinearImpulse(b2Vec2(-vectorX * 30.0f, vectorY * 30.0f), b2Vec2(0.0f, 0.0f), true);
 
 	setBody(body);
 }
 
+bool Shell::collision()
+{
+	b2Body* body = getBody();
+	for (b2ContactEdge* edge = body->GetContactList(); edge; edge = edge->next)
+	{
+		//edge->contact->
+
+	}
+}
 
 Shell::~Shell()
 {
