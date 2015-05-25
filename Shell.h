@@ -10,6 +10,8 @@ public:
 	Shell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle);
 	virtual ~Shell();
 
+	b2Body* explosion;
+	bool collision();
 	virtual void render() = 0;
 };
 
