@@ -30,6 +30,13 @@ public:
 	int BOX2D_VELOCITY_ITERATIONS;
 	float BOX2D_TIME_STEP;
 
+	/* enums */
+	enum class BodyType { WORLD, SHELL, TANK };
+	enum class FixtureType { WORLD, SHELL, TANK_FRONT, TANK_BACK, TANK_WHEEL, TANK_TURRET, TANK_BARREL };
+	enum class ShellType { AP, HE, SHRAPNEL };
+	enum class Status { RUNNING, FINISHED };
+	enum Players { PLAYER_1, PLAYER_2, NONE };
+
 	/* game settings */
 	int NUM_PLAYERS;
 	int TANKS_PER_PLAYER;
@@ -37,13 +44,7 @@ public:
 	float GRAVITY;
 	float LEVEL_SIZE_IN_METRES;
 	float MAX_HEALTH;
-
-	/* enums */
-	enum class BodyType { WORLD, SHELL, TANK };
-	enum class FixtureType { WORLD, SHELL, TANK_FRONT, TANK_BACK, TANK_WHEEL, TANK_TURRET, TANK_BARREL };
-	enum class ShellType { AP, HE, SHRAPNEL };
-	enum class Status { RUNNING, FINISHED };
-	enum Players { PLAYER_1, PLAYER_2, NONE };
+	Config::Players startingPlayer;
 	
 	/* keyboard configuration */
 	int KEY_UP[2];
