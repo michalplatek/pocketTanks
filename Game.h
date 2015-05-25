@@ -17,6 +17,7 @@ class Game
 	World* world;
 	std::vector<Tank*> tanks;
 	Shell* shell;
+	int turnCounter;
 	
 	Config::Status status;
 
