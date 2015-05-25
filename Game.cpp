@@ -1,17 +1,12 @@
 #include "Game.h"
 
 
-Game::Game(Config* config)
+Game::Game(Config* config) : turnCounter(1), config(config), shell(nullptr), status(Config::Status::RUNNING)
 {
-	this->config = config;
 	world = new World(config);
-	shell = nullptr;
-
 	/* creating tanks */
 	tanks.push_back(new Tank(world->getWorld(), config, Config::Players::PLAYER_1));
 	tanks.push_back(new Tank(world->getWorld(), config, Config::Players::PLAYER_2));
-
-	status = Config::Status::RUNNING;
 }
 
 
@@ -31,6 +26,10 @@ void Game::step()
 		config->BOX2D_VELOCITY_ITERATIONS,
 		config->BOX2D_POSITION_ITERATIONS
 	);
+	if (shell->collision())
+	{
+
+	}
 }
 
 Config::Status Game::getStatus() 
