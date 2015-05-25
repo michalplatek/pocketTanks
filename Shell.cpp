@@ -40,8 +40,12 @@ bool Shell::collision()
 	for (b2ContactEdge* edge = body->GetContactList(); edge; edge = edge->next)
 	{
 		//edge->contact->
-
+		if (edge->contact->IsTouching())
+		{
+			return true;
+		}
 	}
+	return false;
 }
 
 Shell::~Shell()
@@ -49,3 +53,7 @@ Shell::~Shell()
 	getWorld()->DestroyBody(getBody());
 }
 
+void Shell::explode()
+{
+	
+}
