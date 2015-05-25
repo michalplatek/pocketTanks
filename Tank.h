@@ -7,6 +7,7 @@
 #include<vector>
 #include "World.h"
 #include "ObjectData.h"
+#include <cstdlib>
 
 class Tank : public Renderable
 {
