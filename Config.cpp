@@ -25,6 +25,7 @@ Config::Config(int argc, char** argv)
 	NUM_TANKS = NUM_PLAYERS * TANKS_PER_PLAYER;
 	GRAVITY = -9.8f;
 	LEVEL_SIZE_IN_METRES = 200.0f;
+	startingPlayer = Config::Players::PLAYER_1;
 
 	KEY_UP[Players::PLAYER_1] = sf::Keyboard::Up;
 	KEY_DOWN[Players::PLAYER_1] = sf::Keyboard::Down;
