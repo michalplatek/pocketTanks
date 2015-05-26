@@ -13,6 +13,7 @@ public:
 	~APShell();
 
 	void render();
+	void explode();
 };
 
 #endif

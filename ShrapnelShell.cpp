@@ -92,3 +92,8 @@ void ShrapnelShell::render()
 		}
 	}
 }
+
+void ShrapnelShell::explode()
+{
+
+}

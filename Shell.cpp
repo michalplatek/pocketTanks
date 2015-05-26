@@ -52,8 +52,3 @@ Shell::~Shell()
 {
 	getWorld()->DestroyBody(getBody());
 }
-
-void Shell::explode()
-{
-	
-}

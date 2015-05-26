@@ -59,3 +59,8 @@ void APShell::render()
 		}
 	}
 }
+
+void APShell::explode()
+{
+
+}

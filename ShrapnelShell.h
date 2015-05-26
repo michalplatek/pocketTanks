@@ -11,7 +11,8 @@ public:
 	ShrapnelShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle);
 	~ShrapnelShell();
 
-	virtual void render();
+	void render();
+	void explode();
 };
 
 #endif

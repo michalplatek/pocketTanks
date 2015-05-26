@@ -45,12 +45,17 @@ void HEShell::render()
 			glColor3f(0.9f, 0.9f, 0.9f);//light gray
 			glBegin(GL_LINE_LOOP);
 			for (int i = 0; i < 360; i+=30){
-				double angle = i*DEGTORAD;
-				double x = getConfig()->positionToPixel(cos(angle)*radius);
-				double y = getConfig()->positionToPixel(sin(angle)*radius);
-				glVertex2d(x, y);
+				float angle = i*DEGTORAD;
+				float x = getConfig()->positionToPixel(cos(angle)*radius);
+				float y = getConfig()->positionToPixel(sin(angle)*radius);
+				glVertex2f(x, y);
 			}
 			glEnd();
 		}
 	}
+}
+
+void HEShell::explode()
+{
+
 }
