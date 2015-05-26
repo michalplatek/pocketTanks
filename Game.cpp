@@ -63,6 +63,10 @@ bool Game::isTurnOf(Config::Players player)
 	{
 		return config->startingPlayer == Config::Players::PLAYER_1;
 	}
+	else
+	{
+		return !(config->startingPlayer == Config::Players::PLAYER_1);
+	}
 }
 
 World* Game::getWorld() 
