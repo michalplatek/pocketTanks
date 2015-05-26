@@ -1,5 +1,6 @@
 #include "HEShell.h"
 #include <math.h>
+#include <GL\freeglut.h>
 
 // High Explosive Shell
 
@@ -52,10 +53,10 @@ void HEShell::render()
 
 			glColor3f(0.9f, 0.9f, 0.9f);//light gray
 			glBegin(GL_LINE_LOOP);
-			for (int i = 0; i <= 360; i++){
+			for (int i = 0; i < 12; i+=30){
 				double angle = 2 * 3.14 * i / 360;
-				double x = cos(angle)*radius;
-				double y = sin(angle)*radius;
+				double x = getConfig()->positionToPixel(cos(angle)*radius);
+				double y = getConfig()->positionToPixel(sin(angle)*radius);
 				glVertex2d(x, y);
 			}
 			glEnd();

@@ -1,7 +1,7 @@
 #include "Tank.h"
 #include "Renderable.h"
 
-Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config), player(player), loadedShellType(Config::ShellType::AP)
+Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config), player(player), loadedShellType(Config::ShellType::HE)
 {
 	setWorld(world);
 
