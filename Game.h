@@ -27,12 +27,16 @@ public:
 	// perform an iteration of the world
 	void step();
 	Config::Status getStatus();
-
 	void setStatus(Config::Status status);
+	int getTurn();
+	void nextTurn();
+	bool isTurnOf(Config::Players player);
 	World* getWorld();
 	Tank* getTank(int i);
 	Tank* getTank(Config::Players player);
 	Shell* getShell();
+	bool shellExists();
+	void removeShell();
 	void shoot(Config::Players player);
 };
 

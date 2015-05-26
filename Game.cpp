@@ -26,9 +26,14 @@ void Game::step()
 		config->BOX2D_VELOCITY_ITERATIONS,
 		config->BOX2D_POSITION_ITERATIONS
 	);
-	if (shell->collision())
+	if (shellExists())
 	{
-
+		if (shell->collision())
+		{
+			printf("collision detected!\n");
+			shell->explode();
+			removeShell();
+		}
 	}
 }
 
@@ -40,6 +45,28 @@ Config::Status Game::getStatus()
 void Game::setStatus(Config::Status status) 
 {
 	this->status = status;
+}
+
+int Game::getTurn()
+{
+	return turnCounter;
+}
+
+void Game::nextTurn()
+{
+	turnCounter++;
+}
+
+bool Game::isTurnOf(Config::Players player)
+{
+	if (turnCounter % 2 == 1)
+	{
+		return config->startingPlayer == Config::Players::PLAYER_1;
+	}
+	else
+	{
+		return !(config->startingPlayer == Config::Players::PLAYER_1);
+	}
 }
 
 World* Game::getWorld() 
@@ -76,15 +103,25 @@ Shell* Game::getShell()
 	return shell;
 }
 
+bool Game::shellExists()
+{
+	return !(shell == nullptr);
+}
+
+void Game::removeShell()
+{
+	delete shell;
+	shell = nullptr;
+}
+
 void Game::shoot(Config::Players player)
 {
 	Tank* tank = getTank(player);
 	if (tank != nullptr)
 	{
-		if (shell != nullptr)
+		if (shellExists())
 		{
-			delete shell;
-			shell = nullptr;
+			removeShell();
 		}
 		switch (tank->getLoadedShellType())
 		{
