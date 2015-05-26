@@ -52,6 +52,9 @@ public:
 	int KEY_LEFT[2];
 	int KEY_RIGHT[2];
 	int KEY_FIRE[2];
+	int KEY_HE[2];
+	int KEY_SH[2];
+	int KEY_AP[2];
 	int KEY_QUIT;
 
 	/* initial positions and angles */

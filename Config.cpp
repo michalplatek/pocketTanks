@@ -32,11 +32,18 @@ Config::Config(int argc, char** argv)
 	KEY_LEFT[Players::PLAYER_1] = sf::Keyboard::Left;
 	KEY_RIGHT[Players::PLAYER_1] = sf::Keyboard::Right;
 	KEY_FIRE[Players::PLAYER_1] = sf::Keyboard::Return;
+	KEY_AP[Players::PLAYER_1] = sf::Keyboard::Num1;
+	KEY_HE[Players::PLAYER_1] = sf::Keyboard::Num2;
+	KEY_SH[Players::PLAYER_1] = sf::Keyboard::Num3;
 	KEY_UP[Players::PLAYER_2] = sf::Keyboard::W;
 	KEY_DOWN[Players::PLAYER_2] = sf::Keyboard::S;
 	KEY_LEFT[Players::PLAYER_2] = sf::Keyboard::A;
 	KEY_RIGHT[Players::PLAYER_2] = sf::Keyboard::D;
 	KEY_FIRE[Players::PLAYER_2] = sf::Keyboard::Space;
+	KEY_AP[Players::PLAYER_2] = sf::Keyboard::Numpad1;
+	KEY_HE[Players::PLAYER_2] = sf::Keyboard::Numpad2;
+	KEY_SH[Players::PLAYER_2] = sf::Keyboard::Numpad3;
+
 
 	START_POSITION_X[Players::PLAYER_1] = 50.0f;
 	START_POSITION_Y[Players::PLAYER_1] = 50.0f;
