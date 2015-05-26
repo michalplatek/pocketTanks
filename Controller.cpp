@@ -73,15 +73,15 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 		game->shoot(Config::Players::PLAYER_1);
 	}
 	else if (e.key.code == config->KEY_AP[Config::Players::PLAYER_1]) {
-		printf("num1 pressed\n");
+		printf("num8 pressed\n");
 		game->getTank(Config::Players::PLAYER_1)->setLoadedShellType(Config::ShellType::AP);
 	}
 	else if (e.key.code == config->KEY_HE[Config::Players::PLAYER_1]) {
-		printf("num2 pressed\n");
+		printf("num9 pressed\n");
 		game->getTank(Config::Players::PLAYER_1)->setLoadedShellType(Config::ShellType::HE);
 	}
 	else if (e.key.code == config->KEY_SH[Config::Players::PLAYER_1]) {
-		printf("num3 pressed\n");
+		printf("num0 pressed\n");
 		game->getTank(Config::Players::PLAYER_1)->setLoadedShellType(Config::ShellType::SHRAPNEL);
 	}
 	else if (e.key.code == config->KEY_UP[Config::Players::PLAYER_2]) {
@@ -99,6 +99,18 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 	else if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_2]) {
 		printf("space pressed\n");
 		game->shoot(Config::Players::PLAYER_2);
+	}
+	else if (e.key.code == config->KEY_AP[Config::Players::PLAYER_2]) {
+		printf("num1 pressed\n");
+		game->getTank(Config::Players::PLAYER_2)->setLoadedShellType(Config::ShellType::AP);
+	}
+	else if (e.key.code == config->KEY_HE[Config::Players::PLAYER_2]) {
+		printf("num2 pressed\n");
+		game->getTank(Config::Players::PLAYER_2)->setLoadedShellType(Config::ShellType::HE);
+	}
+	else if (e.key.code == config->KEY_SH[Config::Players::PLAYER_2]) {
+		printf("num3 pressed\n");
+		game->getTank(Config::Players::PLAYER_2)->setLoadedShellType(Config::ShellType::SHRAPNEL);
 	}
 	else if (e.key.code == config->KEY_QUIT) {
 		game->setStatus(Config::Status::FINISHED);

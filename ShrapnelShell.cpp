@@ -57,7 +57,29 @@ void ShrapnelShell::render()
 			b2Vec2 vertex, vertexPositionInWorld;
 
 			glColor3f(0.0f, 0.5f, 0.8f);
-			glBegin(GL_QUADS);
+			glBegin(GL_POLYGON);
+			for (int i = 0; i < vertexCount; i++)
+			{
+				vertex = polygonShape->GetVertex(i);
+				float posx = getConfig()->positionToPixel(vertex.x);
+				float posy = getConfig()->positionToPixel(vertex.y);
+
+				glVertex2f(posx, posy);
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON);
+			for (int i = 0; i < vertexCount; i++)
+			{
+				vertex = polygonShape->GetVertex(i);
+				float posx = getConfig()->positionToPixel(vertex.x);
+				float posy = getConfig()->positionToPixel(vertex.y);
+
+				glVertex2f(posx, posy);
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON);
 			for (int i = 0; i < vertexCount; i++)
 			{
 				vertex = polygonShape->GetVertex(i);

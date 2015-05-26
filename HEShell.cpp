@@ -10,7 +10,7 @@ HEShell::HEShell(b2World* world, Config* config, Config::Players player, b2Vec2 
 
 	b2CircleShape HEShellShape;
 	HEShellShape.m_p.Set(0.0f,0.0f);
-	HEShellShape.m_radius = 1.0f;
+	HEShellShape.m_radius = 0.3f;
 
 	FixtureData* userData = new FixtureData;
 	userData->fixtureType = Config::FixtureType::SHELL;
@@ -40,7 +40,7 @@ void HEShell::render()
 		if (shapeType == b2Shape::e_circle)
 		{
 			b2CircleShape* circleShape = (b2CircleShape*)fixture->GetShape();
-			int radius = circleShape->m_radius;
+			float radius = circleShape->m_radius;
 
 			glColor3f(0.9f, 0.9f, 0.9f);//light gray
 			glBegin(GL_LINE_LOOP);
@@ -50,25 +50,6 @@ void HEShell::render()
 				double y = getConfig()->positionToPixel(sin(angle)*radius);
 				glVertex2d(x, y);
 			}
-
-			//b2Shape::Type shapeType = fixture->GetType();
-			//if (shapeType == b2Shape::e_polygon)
-			//{
-			//	b2PolygonShape* polygonShape = (b2PolygonShape*)fixture->GetShape();
-			//	int vertexCount = polygonShape->GetVertexCount();
-			//	b2Vec2 vertex, vertexPositionInWorld;
-
-			//	glColor3f(1.0f, 0.0f, 0.0f);//light gray
-			//	glBegin(GL_QUADS);
-			//	for (int i = 0; i < vertexCount; i++)
-			//	{
-			//		vertex = polygonShape->GetVertex(i);
-			//		float posx = getConfig()->positionToPixel(vertex.x);
-			//		float posy = getConfig()->positionToPixel(vertex.y);
-
-			//		glVertex2f(posx, posy);
-			//	}
-
 			glEnd();
 		}
 	}
