@@ -2,6 +2,7 @@
 #define _HESHELL_H_
 
 #include "Shell.h"
+#include "GL\freeglut.h"
 
 	// High Explosive Shell
 

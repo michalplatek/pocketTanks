@@ -39,9 +39,11 @@ bool Shell::collision()
 	b2Body* body = getBody();
 	for (b2ContactEdge* edge = body->GetContactList(); edge; edge = edge->next)
 	{
-		//edge->contact->
-
+		if (edge->contact->IsTouching()){
+			return true;
+		}
 	}
+	return false;
 }
 
 Shell::~Shell()
