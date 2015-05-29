@@ -12,7 +12,6 @@ public:
 	~ShrapnelShell();
 
 	void render();
-	void explode();
 };
 
 #endif
