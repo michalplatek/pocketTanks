@@ -2,16 +2,17 @@
 
  // Armour Piercing Shell
 
-APShell::APShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle) : Shell(world, config, player, position, angle)
+APShell::APShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle)
+	: Shell(world, config, player, Config::ShellType::AP, position, angle)
 {
 	b2Body* body = getBody();
 
 	//add polygon fixture
 	b2Vec2 vertices[4];
-	vertices[0].Set(0.1f, 0.4f);
-	vertices[1].Set(0.1f, -0.4f);
-	vertices[2].Set(-0.1f, -0.4f);
-	vertices[3].Set(-0.1f, 0.4f);
+	vertices[0].Set(0.2f, 0.4f);
+	vertices[1].Set(0.2f, -0.4f);
+	vertices[2].Set(-0.2f, -0.4f);
+	vertices[3].Set(-0.2f, 0.4f);
 	int32 verticesCount = 4;
 	b2PolygonShape APShellShape;
 	APShellShape.Set(vertices, verticesCount);
@@ -22,7 +23,7 @@ APShell::APShell(b2World* world, Config* config, Config::Players player, b2Vec2 
 
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &APShellShape;
-	myFixtureDef.density = 1.0f;
+	myFixtureDef.density = 5.0;
 	myFixtureDef.userData = (void*)userData;
 	body->CreateFixture(&myFixtureDef);
 }
@@ -58,9 +59,4 @@ void APShell::render()
 			glEnd();
 		}
 	}
-}
-
-void APShell::explode()
-{
-
 }
