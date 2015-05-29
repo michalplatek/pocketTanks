@@ -4,7 +4,8 @@
 
 // High Explosive Shell
 
-HEShell::HEShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle) : Shell(world, config, player, position, angle)
+HEShell::HEShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle)
+	: Shell(world, config, player, Config::ShellType::HE, position, angle)
 {
 	b2Body* body = getBody();
 
@@ -18,7 +19,7 @@ HEShell::HEShell(b2World* world, Config* config, Config::Players player, b2Vec2 
 
 	b2FixtureDef myFixtureDef;
 	myFixtureDef.shape = &HEShellShape;
-	myFixtureDef.density = 1.0f;
+	myFixtureDef.density = 5.0f;
 	myFixtureDef.userData = (void*)userData;
 	body->CreateFixture(&myFixtureDef);
 
@@ -53,9 +54,4 @@ void HEShell::render()
 			glEnd();
 		}
 	}
-}
-
-void HEShell::explode()
-{
-
 }
