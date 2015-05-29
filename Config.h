@@ -33,8 +33,8 @@ public:
 	/* enums */
 	enum class BodyType { WORLD, SHELL, TANK };
 	enum class FixtureType { WORLD, SHELL, TANK_FRONT, TANK_BACK, TANK_WHEEL, TANK_TURRET, TANK_BARREL };
-	enum class ShellType { AP, HE, SHRAPNEL };
-	enum class Status { RUNNING, FINISHED };
+	enum class Status { RUNNING, FINISHED, PAUSED };
+	enum ShellType { AP, HE, SHRAPNEL };
 	enum Players { PLAYER_1, PLAYER_2, NONE };
 
 	/* game settings */
@@ -44,7 +44,13 @@ public:
 	float GRAVITY;
 	float LEVEL_SIZE_IN_METRES;
 	float MAX_HEALTH;
+	int EXPLOSION_TIMEOUT;
 	Config::Players startingPlayer;
+
+	float EXPLOSION_RADIUS[3];
+	float PARTICLE_RANGE[3];
+	float SHELL_VELOCITY;
+	float PARTICLE_VELOCITY;
 	
 	/* keyboard configuration */
 	int KEY_UP[2];
