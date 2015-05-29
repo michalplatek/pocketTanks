@@ -21,10 +21,10 @@ World::World(Config* config) : Renderable(config)
 	body = world->CreateBody(&bodyDef);
 
 	b2Vec2 vertices[4];
-	vertices[0].Set(-100.0, 5.0f);
-	vertices[1].Set(100.0, 5.0f);
-	vertices[2].Set(100.0, -5.0f);
-	vertices[3].Set(-100.0, -5.0f);
+	vertices[0].Set(-500.0, 5.0f);
+	vertices[1].Set(500.0, 5.0f);
+	vertices[2].Set(500.0, -5.0f);
+	vertices[3].Set(-500.0, -5.0f);
 	int32 verticesCount = 4;
 	b2PolygonShape worldShape;
 	worldShape.Set(vertices, verticesCount);
