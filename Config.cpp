@@ -25,7 +25,17 @@ Config::Config(int argc, char** argv)
 	NUM_TANKS = NUM_PLAYERS * TANKS_PER_PLAYER;
 	GRAVITY = -9.8f;
 	LEVEL_SIZE_IN_METRES = 200.0f;
+	EXPLOSION_TIMEOUT = 40; // moze nie okazac sie przydatne
 	startingPlayer = Config::Players::PLAYER_1;
+
+	EXPLOSION_RADIUS[ShellType::AP] = 1.0f;
+	EXPLOSION_RADIUS[ShellType::HE] = 3.0f;
+	EXPLOSION_RADIUS[ShellType::SHRAPNEL] = 1.0f;
+	PARTICLE_RANGE[ShellType::AP] = 3.0f;
+	PARTICLE_RANGE[ShellType::HE] = 6.0f;
+	PARTICLE_RANGE[ShellType::SHRAPNEL] = 2.0f;
+	PARTICLE_VELOCITY = 100.0f;
+	SHELL_VELOCITY = 30.0f;
 
 	KEY_UP[Players::PLAYER_1] = sf::Keyboard::Up;
 	KEY_DOWN[Players::PLAYER_1] = sf::Keyboard::Down;
