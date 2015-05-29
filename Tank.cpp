@@ -99,5 +99,9 @@ b2Vec2 Tank::getBarrelEndPosition()
 
 float Tank::getBarrelAngle()
 {
-	return 45.0f;
+	b2Vec2 tankPosition = getBodyPosition();
+	BodyData* userData = (BodyData*)getBody()->GetUserData();
+	Config::Players player = userData->owner;
+	float angle = player == Config::Players::PLAYER_1 ? 135.0f : 45.0f;
+	return angle;
 }
