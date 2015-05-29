@@ -15,7 +15,6 @@ public:
 	~HEShell();
 
 	void render();
-	void explode();
 };
 
 #endif
