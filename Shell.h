@@ -6,13 +6,15 @@
 
 class Shell : public Renderable
 {
+	Config::ShellType shellType;
 public:
-	Shell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle);
+	Shell(b2World* world, Config* config, Config::Players player, Config::ShellType shellType, b2Vec2 position, float angle);
 	virtual ~Shell();
 
 	b2Body* explosion;
 	bool collision();
-	virtual void explode() = 0;
+	void explode();
+
 	virtual void render() = 0;
 };
 
