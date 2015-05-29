@@ -62,17 +62,14 @@ void View::render(Game* game)
 	for (int i = 0; i < config->NUM_TANKS; i++) {
 		render(game->getTank(i));
 	}
-	if (game->getShell() != nullptr)
+	int shells = game->numberOfShells();
+	if (shells > 0)
 	{
-		render(game->getShell());
+		for (int i = 0; i < shells; i++)
+		{
+			render(game->getShell(i));
+		}
 	}
-	
-	/*b2Vec2 position = tank->m_body->GetPosition();
-	float32 angle = tank->m_body->GetAngle();
-	tank->renderAtBodyPosition();
-	printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);*/
-	//printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
-	//printf("window: %d x %d\n", config->WINDOW_W, config->WINDOW_H);
 }
 
 void View::render(World* world) 
