@@ -16,7 +16,7 @@ class Game
 	Config* config;
 	World* world;
 	std::vector<Tank*> tanks;
-	Shell* shell;
+	std::vector<Shell*> shells;
 	int turnCounter;
 	
 	Config::Status status;
@@ -26,18 +26,27 @@ public:
 	~Game();
 	// perform an iteration of the world
 	void step();
+	
+	World* getWorld();
+
+	/* status and turn */
 	Config::Status getStatus();
 	void setStatus(Config::Status status);
 	int getTurn();
 	void nextTurn();
 	bool isTurnOf(Config::Players player);
-	World* getWorld();
+	
+	/* tanks */
 	Tank* getTank(int i);
 	Tank* getTank(Config::Players player);
-	Shell* getShell();
-	bool shellExists();
-	void removeShell();
+	
+	/* shells and shots */
+	Shell* getShell(int i);
+	int numberOfShells();
+	void removeShells();
+	void removeShell(int i);
 	void shoot(Config::Players player);
+	void resolveCollisions();
 };
 
 #endif
