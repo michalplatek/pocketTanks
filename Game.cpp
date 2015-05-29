@@ -1,7 +1,7 @@
 #include "Game.h"
 
 
-Game::Game(Config* config) : turnCounter(1), config(config), shell(nullptr), status(Config::Status::RUNNING)
+Game::Game(Config* config) : turnCounter(1), config(config), status(Config::Status::RUNNING)
 {
 	world = new World(config);
 	/* creating tanks */
@@ -12,11 +12,15 @@ Game::Game(Config* config) : turnCounter(1), config(config), shell(nullptr), sta
 
 Game::~Game()
 {
-	for (int i = 0; i < config->NUM_TANKS; i++) {
+	for (unsigned int i = 0; i < tanks.size(); i++) {
 		delete tanks[i];
+	}
+	for (unsigned int i = 0; i < shells.size(); i++) {
+		delete shells[i];
 	}
 	delete world;
 	tanks.clear();
+	shells.clear();
 }
 
 void Game::step() 
@@ -26,13 +30,20 @@ void Game::step()
 		config->BOX2D_VELOCITY_ITERATIONS,
 		config->BOX2D_POSITION_ITERATIONS
 	);
-	if (shellExists())
+	if (numberOfShells())
 	{
-		if (shell->collision())
+		resolveCollisions();
+	}
+}
+
+void Game::resolveCollisions()
+{
+	for (unsigned int i = 0; i < shells.size(); i++)
+	{
+		if (shells[i]->collision())
 		{
-			printf("collision detected!\n");
-			shell->explode();
-			removeShell();
+			shells[i]->explode();
+			nextTurn();
 		}
 	}
 }
@@ -98,20 +109,27 @@ Tank* Game::getTank(Config::Players player)
 	return nullptr;
 }
 
-Shell* Game::getShell()
+Shell* Game::getShell(int i)
 {
-	return shell;
+	return shells[i];
 }
 
-bool Game::shellExists()
+int Game::numberOfShells()
 {
-	return !(shell == nullptr);
+	return shells.size();
 }
 
-void Game::removeShell()
+void Game::removeShell(int i)
 {
-	delete shell;
-	shell = nullptr;
+	shells.erase(shells.begin() + i);
+}
+
+void Game::removeShells()
+{
+	while (shells.size() > 0)
+	{
+		removeShell(0);
+	}
 }
 
 void Game::shoot(Config::Players player)
@@ -119,23 +137,23 @@ void Game::shoot(Config::Players player)
 	Tank* tank = getTank(player);
 	if (tank != nullptr)
 	{
-		if (shellExists())
+		if (numberOfShells() > 0)
 		{
-			removeShell();
+			removeShells();
 		}
 		switch (tank->getLoadedShellType())
 		{
 		case Config::ShellType::AP:
-			shell = new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shells.push_back(new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
 			break;
 		case Config::ShellType::HE:
-			shell = new HEShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shells.push_back(new HEShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
 			break;
 		case Config::ShellType::SHRAPNEL:
-			shell = new ShrapnelShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shells.push_back(new ShrapnelShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
 			break;
 		default:
-			shell = new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle());
+			shells.push_back(new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
 			break;
 		}
 	}
