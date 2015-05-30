@@ -48,6 +48,7 @@ World::~World()
 {
 	b2World* world = getWorld();
 	world->DestroyBody(getBody());
+	//delete contactListener;
 	delete world;
 }
 

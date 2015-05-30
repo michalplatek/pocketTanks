@@ -15,6 +15,7 @@ class Game
 {
 	Config* config;
 	World* world;
+	b2ContactListener* contactListener;
 	std::vector<Tank*> tanks;
 	std::vector<Shell*> shells;
 	int turnCounter;

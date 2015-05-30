@@ -7,6 +7,9 @@ Game::Game(Config* config) : turnCounter(1), config(config), status(Config::Stat
 	/* creating tanks */
 	tanks.push_back(new Tank(world->getWorld(), config, Config::Players::PLAYER_1));
 	tanks.push_back(new Tank(world->getWorld(), config, Config::Players::PLAYER_2));
+	//contactListener = new b2ContactListener();
+	//world->getWorld()->SetContactListener(contactListener);
+
 }
 
 
@@ -43,6 +46,7 @@ void Game::resolveCollisions()
 		if (shells[i]->collision())
 		{
 			shells[i]->explode();
+			//removeShell(i);
 			nextTurn();
 		}
 	}
@@ -121,6 +125,7 @@ int Game::numberOfShells()
 
 void Game::removeShell(int i)
 {
+	delete shells[i];
 	shells.erase(shells.begin() + i);
 }
 

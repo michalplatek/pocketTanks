@@ -61,12 +61,15 @@ Shell::~Shell()
 
 void Shell::explode()
 {
-	explosion = nullptr;
+	b2Body* explosion = nullptr;
 	//set up dynamic body, store in class variable
 	b2BodyDef myBodyDef;
-	myBodyDef.type = b2_dynamicBody;
+	myBodyDef.type = b2_staticBody;
 	// last known position of the shell
 	myBodyDef.position = getBody()->GetPosition();
+
+	getWorld()->DestroyBody(getBody());
+
 	explosion = getWorld()->CreateBody(&myBodyDef);
 
 	b2CircleShape explosionShape;
@@ -79,6 +82,5 @@ void Shell::explode()
 	myFixtureDef.isSensor = true;
 	explosion->CreateFixture(&myFixtureDef);
 
-	getWorld()->DestroyBody(getBody());
-	setBody(nullptr);
+	setBody(explosion);
 }

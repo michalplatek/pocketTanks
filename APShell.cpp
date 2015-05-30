@@ -58,5 +58,20 @@ void APShell::render()
 			}
 			glEnd();
 		}
+		else if (shapeType == b2Shape::e_circle)
+		{
+			b2CircleShape* circleShape = (b2CircleShape*)fixture->GetShape();
+			float radius = circleShape->m_radius;
+
+			glColor3f(0.9f, 0.9f, 0.9f);//light gray
+			glBegin(GL_LINE_LOOP);
+			for (int i = 0; i < 360; i += 30){
+				float angle = i*DEGTORAD;
+				float x = getConfig()->positionToPixel(cos(angle)*radius);
+				float y = getConfig()->positionToPixel(sin(angle)*radius);
+				glVertex2f(x, y);
+			}
+			glEnd();
+		}
 	}
 }
