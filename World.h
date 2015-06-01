@@ -21,6 +21,7 @@ public:
 	World(Config* config);
 	~World();
 
+	std::unique_ptr<b2ChainShape> makeChain(b2Vec2* points, int count, bool closed);
 	void render();
 };
 
