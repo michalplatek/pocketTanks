@@ -1,7 +1,12 @@
 #include "Tank.h"
 #include "Renderable.h"
 
-Tank::Tank(b2World* world, Config* config, Config::Players player) : Renderable(config), player(player), loadedShellType(Config::ShellType::HE)
+Tank::Tank(b2World* world, Config* config, Config::Players player): 
+	Renderable(config),
+	player(player), 
+	loadedShellType(Config::ShellType::HE), 
+	movementHorizontal(Config::Direction::NONE),
+	movementVertical(Config::Direction::NONE)
 {
 	setWorld(world);
 
@@ -105,3 +110,14 @@ float Tank::getBarrelAngle()
 	float angle = player == Config::Players::PLAYER_1 ? 135.0f : 45.0f;
 	return angle;
 }
+
+void Tank::setHorizontalDirection(Config::Direction direction)
+{
+	movementHorizontal = direction == Config::Direction::LEFT || direction == Config::Direction::RIGHT ? direction : Config::Direction::NONE;
+}
+
+void Tank::setVerticalDirection(Config::Direction direction)
+{
+	movementVertical = direction == Config::Direction::UP || direction == Config::Direction::DOWN ? direction : Config::Direction::NONE;
+}
+
