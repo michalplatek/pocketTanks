@@ -36,6 +36,7 @@ public:
 	enum class Status { RUNNING, FINISHED, PAUSED };
 	enum ShellType { AP, HE, SHRAPNEL };
 	enum Players { PLAYER_1, PLAYER_2, NONE };
+	enum class Direction { NONE, UP, RIGHT, DOWN, LEFT};
 
 	/* game settings */
 	int NUM_PLAYERS;
