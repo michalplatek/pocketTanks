@@ -109,7 +109,6 @@ void World::render()
 		}
 		else if (shapeType == b2Shape::e_chain)
 		{
-			printf("a chain\n");
 			b2ChainShape* chainShape = (b2ChainShape*)fixture->GetShape();
 			int edgeCount = chainShape->GetChildCount();
 			b2Vec2 vertex, vertexPositionInWorld;
