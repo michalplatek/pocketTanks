@@ -13,6 +13,8 @@ class Tank : public Renderable
 {
 	Config::Players player;
 	Config::ShellType loadedShellType;
+	Config::Direction movementHorizontal;
+	Config::Direction movementVertical;
 	std::vector<b2Body*> wheels;
 	std::vector<b2Joint*> joints;
 public:
@@ -32,6 +34,8 @@ public:
 	void setLoadedShellType(Config::ShellType shellType);
 	b2Vec2 getBarrelEndPosition();
 	float getBarrelAngle();
+	void setHorizontalDirection(Config::Direction direction);
+	void setVerticalDirection(Config::Direction direction);
 };
 
 #endif
