@@ -26,6 +26,7 @@ Config::Config(int argc, char** argv)
 	GRAVITY = -9.8f;
 	LEVEL_SIZE_IN_METRES = 200.0f;
 	EXPLOSION_TIMEOUT = 40; // moze nie okazac sie przydatne
+	SIMPLIFY_GEOMETRY = false;
 	startingPlayer = Config::Players::PLAYER_1;
 
 	EXPLOSION_RADIUS[ShellType::AP] = 1.0f;
