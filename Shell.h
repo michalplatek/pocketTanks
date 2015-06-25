@@ -13,6 +13,8 @@ public:
 
 	b2Body* explosion;
 	bool collision();
+	bool shouldBounce();
+	void bounce();
 	void explode();
 
 	virtual void render() = 0;
