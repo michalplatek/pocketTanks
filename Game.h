@@ -38,6 +38,7 @@ public:
 	int getTurn();
 	void nextTurn();
 	bool isTurnOf(Config::Players player);
+	Config::Players currentPlayer();
 	
 	/* tanks */
 	Tank* getTank(int i);

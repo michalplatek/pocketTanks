@@ -1,6 +1,7 @@
 #include "Controller.h"
 #include <GL\freeglut.h>
 #include <Box2D\Box2D.h>
+#include "Gui.h"
 
 Controller::Controller(Config* config) : view(config), config(config)
 {
@@ -15,6 +16,7 @@ void Controller::play(Game* game)
 {
 	sf::Window *window;
 	sf::Event event;
+	Gui* gui = new Gui(config);
 	window = view.getWindow();
 
 	while (game->getStatus() != Config::Status::FINISHED)
@@ -30,6 +32,9 @@ void Controller::play(Game* game)
 		game->step();
 		view.prepare();
 		view.render(game);
+		gui->setTank(game->getTank(game->currentPlayer()));
+		view.render(gui);
+
 
 		window->display();
 	}

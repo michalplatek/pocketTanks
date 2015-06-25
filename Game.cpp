@@ -95,6 +95,11 @@ bool Game::isTurnOf(Config::Players player)
 	}
 }
 
+Config::Players Game::currentPlayer(){
+	return isTurnOf(Config::Players::PLAYER_1) ? Config::Players::PLAYER_1 : Config::Players::PLAYER_2;
+
+}
+
 World* Game::getWorld() 
 {
 	return world;

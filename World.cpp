@@ -22,10 +22,10 @@ World::World(Config* config) : Renderable(config)
 
 	// Add a destructible polygon
 	std::vector<b2Vec2> vertices = {
-		b2Vec2{ -500.0f, 5.0f },
-		b2Vec2{ 500.0f, 5.0f },
-		b2Vec2{ 500.0f, -5.0f },
-		b2Vec2{ -500.0f, -5.0f } 
+		b2Vec2{ -500.0f, 25.0f },
+		b2Vec2{ 500.0f, 25.0f },
+		b2Vec2{ 500.0f, 10.0f },
+		b2Vec2{ -500.0f, 10.0f } 
 	};
 
 	auto worldShape = makeChain(vertices.data(), vertices.size(), true);

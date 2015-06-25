@@ -77,6 +77,10 @@ void View::render(World* world)
 	renderAtBodyPosition(world);
 }
 
+void View::render(Gui* gui){
+	gui->render();
+}
+
 void View::renderAtBodyPosition(Renderable* renderable) {
 	//get current position from Box2D
 	b2Vec2 position = renderable->getBodyPosition();

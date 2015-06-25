@@ -6,6 +6,7 @@
 #include <GL/freeglut.h>
 #include "Config.h"
 #include "Game.h"
+#include "Gui.h"
 
 class View
 {
@@ -25,6 +26,7 @@ public:
 	void render(Tank* tank);
 	void render(World* world);
 	void render(Shell* shell);
+	void render(Gui* gui);
 
 	void renderAtBodyPosition(Renderable* renderable);
 
