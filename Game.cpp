@@ -21,9 +21,13 @@ Game::~Game()
 	for (unsigned int i = 0; i < shells.size(); i++) {
 		delete shells[i];
 	}
+	for (unsigned int i = 0; i < particles.size(); i++) {
+		delete particles[i];
+	}
 	delete world;
 	tanks.clear();
 	shells.clear();
+	particles.clear();
 }
 
 void Game::step() 
@@ -45,7 +49,14 @@ void Game::resolveCollisions()
 	{
 		if (shells[i]->collision())
 		{
-			shells[i]->explode();
+			if (shells[i]->shouldBounce())
+			{
+				shells[i]->bounce();
+			}
+			else
+			{
+				shells[i]->explode();
+			}
 			//removeShell(i);
 			nextTurn();
 		}
