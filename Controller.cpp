@@ -14,10 +14,10 @@ Controller::~Controller()
 
 void Controller::play(Game* game)
 {
-	sf::Window *window;
+	sf::RenderWindow *window;
 	sf::Event event;
-	Gui* gui = new Gui(config);
 	window = view.getWindow();
+	Gui* gui = new Gui(config, window);
 
 	while (game->getStatus() != Config::Status::FINISHED)
 	{

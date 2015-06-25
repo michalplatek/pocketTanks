@@ -4,15 +4,17 @@
 #include "Config.h"
 #include "Renderable.h"
 #include "Tank.h"
-
+//#include <SFML\Window.hpp>
+#include<SFML/Graphics/RenderWindow.hpp>
 
 class Gui : public Renderable
 {
 private:
 	Config* config;
 	Tank* tank;
+	sf::RenderWindow* window;
 public:
-	Gui(Config* config);
+	Gui(Config* config, sf::RenderWindow *window);
 	~Gui();
 
 	void setTank(Tank* tank);

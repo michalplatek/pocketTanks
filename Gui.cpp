@@ -1,7 +1,10 @@
 #include <GL/freeglut.h>
 #include "Gui.h"
 
-Gui::Gui(Config* config) : Renderable(config)
+#include<SFML/Graphics/Text.hpp>
+
+
+Gui::Gui(Config* config, sf::RenderWindow *window) : Renderable(config), window(window)
 {
 }
 
@@ -14,6 +17,21 @@ void Gui::setTank(Tank* tank){
 }
 void Gui::render()
 {
+
+	sf::Font myCharacter;
+	myCharacter.loadFromFile("arial.ttf");
+	sf::Text text;
+	
+	text.setFont(myCharacter); 
+	text.setString("Hello world");
+	text.setCharacterSize(24); // in pixels, not points!
+	text.setColor(sf::Color::Red);
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+	window->draw(text);
+
+	
+
 			glColor3f(1.0f, 1.0f, 0.5f);
 			glBegin(GL_QUADS);
 			
