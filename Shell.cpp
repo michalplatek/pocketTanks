@@ -84,3 +84,13 @@ void Shell::explode()
 
 	setBody(explosion);
 }
+
+bool Shell::shouldBounce()
+{
+	return false;
+}
+
+void Shell::bounce()
+{
+
+}
