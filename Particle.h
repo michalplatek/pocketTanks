@@ -5,7 +5,7 @@
 
 class Particle : public Renderable
 {
-
+	bool visible;
 public:
 	Particle(Config* config);
 	~Particle();
