@@ -9,6 +9,7 @@
 #include "APShell.h"
 #include "HEShell.h"
 #include "ShrapnelShell.h"
+#include "Particle.h"
 #include <vector>
 
 class Game
@@ -18,6 +19,7 @@ class Game
 	b2ContactListener* contactListener;
 	std::vector<Tank*> tanks;
 	std::vector<Shell*> shells;
+	std::vector<Particle*> particles;
 	int turnCounter;
 	
 	Config::Status status;
