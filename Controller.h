@@ -2,7 +2,7 @@
 #define _CONTROLLER_H_
 
 #include <SFML\Graphics.hpp>
-#include <SFML\Window.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "View.h"
 #include "Game.h"
 #include "Config.h"

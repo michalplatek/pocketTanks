@@ -15,8 +15,8 @@ public:
 	View(Config* config);
 	~View();
 	
-	sf::RenderWindow* window;
-	sf::RenderWindow* getWindow();
+	sf::Window* window;
+	sf::Window* getWindow();
 	void viewportSetup();
 	void viewportReset();
 	void prepare();

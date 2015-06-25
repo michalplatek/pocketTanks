@@ -14,7 +14,7 @@ Controller::~Controller()
 
 void Controller::play(Game* game)
 {
-	sf::RenderWindow *window;
+	sf::Window *window;
 	sf::Event event;
 	window = view.getWindow();
 	Gui* gui = new Gui(config, window);

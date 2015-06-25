@@ -12,9 +12,9 @@ class Gui : public Renderable
 private:
 	Config* config;
 	Tank* tank;
-	sf::RenderWindow* window;
+	sf::Window* window;
 public:
-	Gui(Config* config, sf::RenderWindow *window);
+	Gui(Config* config, sf::Window *window);
 	~Gui();
 
 	void setTank(Tank* tank);
