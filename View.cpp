@@ -1,4 +1,6 @@
 #include "View.h"
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 View::View(Config* config) : config(config)
 {
@@ -12,6 +14,16 @@ View::View(Config* config) : config(config)
 	window = new sf::Window(sf::VideoMode(config->WINDOW_W, config->WINDOW_H), config->WINDOW_TITLE, sf::Style::Default, Settings);
 	window->setVerticalSyncEnabled(true);
 	window->setKeyRepeatEnabled(true);
+
+	FT_Library ft;
+
+	if (FT_Init_FreeType(&ft)) {
+		printf("Could not init freetype library\n");
+	}
+	else
+	{	
+		printf("Freetype library loaded\n");
+	}
 
 	viewportSetup();
 }
