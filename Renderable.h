@@ -5,6 +5,8 @@
 
 class Renderable
 {
+protected:
+
 	b2Body* body;
 	b2World* world;
 	Config* config;
