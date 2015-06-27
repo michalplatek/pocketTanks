@@ -6,12 +6,12 @@
 #include <sstream>
 #include <iostream>
 
-class Shader{
-
+class Shader
+{
 public:
 	GLuint Program;
 	// Constructor generates the shader on the fly
-	Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr)
+	Shader(const GLchar* vertexPath, const GLchar* fragmentPath, const GLchar* geometryPath = nullptr)
 	{
 		// 1. Retrieve the vertex/fragment source code from filePath
 		std::string vertexCode;
@@ -44,14 +44,14 @@ public:
 		}
 		catch (std::exception e)
 		{
-			printf("ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ\n");
+			printf("ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ");
 		}
-		const char* vShaderCode = vertexCode.c_str();
-		const char * fShaderCode = fragmentCode.c_str();
+		const GLchar* vShaderCode = vertexCode.c_str();
+		const GLchar * fShaderCode = fragmentCode.c_str();
 		// 2. Compile shaders
 		GLuint vertex, fragment;
 		GLint success;
-		char infoLog[512];
+		GLchar infoLog[512];
 		// Vertex Shader
 		vertex = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertex, 1, &vShaderCode, NULL);
@@ -66,7 +66,7 @@ public:
 		GLuint geometry;
 		if (geometryPath != nullptr)
 		{
-			const char * gShaderCode = geometryCode.c_str();
+			const GLchar * gShaderCode = geometryCode.c_str();
 			geometry = glCreateShader(GL_GEOMETRY_SHADER);
 			glShaderSource(geometry, 1, &gShaderCode, NULL);
 			glCompileShader(geometry);
@@ -94,14 +94,14 @@ private:
 	void checkCompileErrors(GLuint shader, std::string type)
 	{
 		GLint success;
-		char infoLog[1024];
+		GLchar infoLog[1024];
 		if (type != "PROGRAM")
 		{
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-				printf("| ERROR::::SHADER-COMPILATION-ERROR of type \n");
+				printf("| ERROR::::SHADER-COMPILATION-ERROR of type: %s", type); 
 			}
 		}
 		else
@@ -110,7 +110,7 @@ private:
 			if (!success)
 			{
 				glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-				printf("| ERROR::::PROGRAM-LINKING-ERROR of type \n");
+				printf("| ERROR::::PROGRAM-LINKING-ERROR of type: %s", type);
 			}
 		}
 	}

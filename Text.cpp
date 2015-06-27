@@ -63,8 +63,9 @@ void Text::renderText(Shader &shader, std::string text, GLfloat x, GLfloat y, GL
 }
 
 
-void Text::configureText()
+void Text::configureText(Config *config)
 {
+	Text *text = new Text(config);
 	// Initialize GLEW to setup the OpenGL Function pointers
 	glewExperimental = GL_TRUE;
 	glewInit();
@@ -154,5 +155,18 @@ void Text::configureText()
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+	// Game loop
+	while (1)
+	{
+		// Clear the colorbuffer
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		
+		/*text->renderText(shader, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+		text->renderText(shader, "(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));*/
+		text->renderText(shader, "This is sample text", getConfig()->positionToPixel(10.0f), getConfig()->positionToPixel(10.0f), getConfig()->positionToPixel(1.0f), glm::vec3(0.5, 0.8f, 0.2f));
+		text->renderText(shader, "(C) LearnOpenGL.com", getConfig()->positionToPixel(20.0f), getConfig()->positionToPixel(20.0f), getConfig()->positionToPixel(0.5f), glm::vec3(0.3, 0.7f, 0.9f));
+	}
 }
 

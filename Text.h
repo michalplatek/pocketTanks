@@ -23,7 +23,7 @@ public:
 	~Text();
 	void render();
 	void renderText(Shader &shader, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
-	void configureText();
+	void configureText(Config *config);
 };
 
 #endif
