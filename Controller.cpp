@@ -1,5 +1,7 @@
 #include "Controller.h"
-
+#include <GL\freeglut.h>
+#include <Box2D\Box2D.h>
+#include "Gui.h"
 
 Controller::Controller(Config* config) : view(config), config(config)
 {

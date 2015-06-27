@@ -1,5 +1,7 @@
 #include "Shell.h"
-
+#include "Renderable.h"
+#include "World.h"
+#include "Tank.h"
 
 Shell::Shell(b2World* world, Config* config, Config::Players player, Config::ShellType shellType, b2Vec2 position, float angle)
 	: Renderable(config), shellType(shellType), explosion(nullptr)

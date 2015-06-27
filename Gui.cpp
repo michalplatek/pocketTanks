@@ -1,4 +1,7 @@
+#include <GL/freeglut.h>
 #include "Gui.h"
+
+#include<SFML/Graphics/Text.hpp>
 
 
 Gui::Gui(Config* config, sf::Window *window) : Renderable(config), window(window)
@@ -12,11 +15,22 @@ Gui::~Gui()
 void Gui::setTank(Tank* tank){
 	this->tank = tank;
 }
+void Gui::render()
+{
 
-void Gui::render(){
-			
-	//Text *text = new Text(config);
-	//Shader shader("Vertex.shader", "Fragment.shader");
+	sf::Font myCharacter;
+	myCharacter.loadFromFile("arial.ttf");
+	sf::Text text;
+	
+	text.setFont(myCharacter); 
+	text.setString("Hello world");
+	text.setCharacterSize(24); // in pixels, not points!
+	text.setColor(sf::Color::Red);
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+	/*window->draw(text);*/
+
+	
 
 			glColor3f(1.0f, 1.0f, 0.5f);
 			glBegin(GL_QUADS);
@@ -61,18 +75,8 @@ void Gui::render(){
 			}
 
 			glEnd();
-
-			// Game loop
-			/*while (1)
-			{
-				// Clear the colorbuffer
-				glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-				glClear(GL_COLOR_BUFFER_BIT);
-
-				text->renderText(shader, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
-				text->renderText(shader, "(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
-			}*/
 }
+		
 	
 
 

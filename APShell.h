@@ -2,7 +2,7 @@
 #define _APSHELL_H_
 
 #include "Shell.h"
-#include "FreeGlutHelper.h"
+#include <GL/freeglut.h>
 
 	// Armour Piercing Shell
 

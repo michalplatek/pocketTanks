@@ -1,3 +1,4 @@
+#include <GL/freeglut.h>
 #include "World.h"
 using namespace boost::geometry;
 
