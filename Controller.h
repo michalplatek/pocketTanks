@@ -3,6 +3,9 @@
 
 #include <SFML\Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "FreeGlutHelper.h"
+#include <Box2D\Box2D.h>
+#include "Gui.h"
 #include "View.h"
 #include "Game.h"
 #include "Config.h"

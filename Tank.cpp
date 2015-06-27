@@ -1,5 +1,4 @@
 #include "Tank.h"
-#include "Renderable.h"
 
 Tank::Tank(b2World* world, Config* config, Config::Players player): 
 	Renderable(config),

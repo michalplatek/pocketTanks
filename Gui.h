@@ -4,10 +4,10 @@
 #include "Config.h"
 #include "Renderable.h"
 #include "Tank.h"
-//#include <SFML\Window.hpp>
-#include<SFML/Graphics/RenderWindow.hpp>
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include "Text.h"
+#include <SFML\Window.hpp>
+
+
 
 class Gui : public Renderable
 {

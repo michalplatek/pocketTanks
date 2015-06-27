@@ -5,6 +5,7 @@
 #include "Config.h"
 #include "Renderable.h"
 #include "ObjectData.h"
+#include "FreeGlutHelper.h"
 
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/geometries.hpp>

@@ -1,8 +1,8 @@
 #ifndef _TANK_H_
 #define _TANK_H_
-
 #include<Box2D\Box2D.h>
-#include<GL\freeglut.h>
+#include "FreeGlutHelper.h"
+#include "Renderable.h"
 #include<cmath>
 #include<vector>
 #include "World.h"

@@ -1,6 +1,6 @@
 #include "HEShell.h"
-#include <math.h>
-#include <GL\freeglut.h>
+
+
 
 // High Explosive Shell
 

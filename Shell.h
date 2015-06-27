@@ -3,6 +3,7 @@
 
 #include "Renderable.h"
 #include "World.h"
+#include "Tank.h"
 
 class Shell : public Renderable
 {

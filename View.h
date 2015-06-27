@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Context.hpp>
-#include <GL/freeglut.h>
+#include "FreeGlutHelper.h"
 #include "Config.h"
 #include "Game.h"
 #include "Gui.h"
