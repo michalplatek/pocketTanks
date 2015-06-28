@@ -24,6 +24,7 @@ public:
 	void renderTest();
 	void render(Game* game);
 	void render(Tank* tank);
+	void render(Barrel* barrel);
 	void render(World* world);
 	void render(Shell* shell);
 	void render(Gui* gui);

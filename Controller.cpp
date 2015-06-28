@@ -108,11 +108,11 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 
 		if (e.key.code == config->KEY_UP[Config::Players::PLAYER_2]) {
 			printf("w pressed\n");
-			tank->setVerticalDirection(Config::Direction::UP);
+			tank->setVerticalDirection(Config::Direction::DOWN);
 		}
 		if (e.key.code == config->KEY_DOWN[Config::Players::PLAYER_2]) {
 			printf("s pressed\n");
-			tank->setVerticalDirection(Config::Direction::DOWN);
+			tank->setVerticalDirection(Config::Direction::UP);
 		}
 		if (e.key.code == config->KEY_LEFT[Config::Players::PLAYER_2]) {
 			printf("a pressed\n");

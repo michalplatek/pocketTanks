@@ -13,13 +13,13 @@
 class Barrel : public Renderable
 {
 	float BarrelAngle;
+	Config::Direction HorizontalDirection;
 
-	void GenerateWheel(float radius, b2Vec2 position);
-	void GenerateBarrel(float radius, b2Vec2 pos);
+
 public:
 	//class member variables
 
-	Barrel(b2World* world, Config* config, Config::Players player);
+	Barrel(b2World* world, Config* config, Config::Players player, Config::Direction direction);
 
 	void rotate(float angle);
 

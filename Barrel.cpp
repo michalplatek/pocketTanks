@@ -3,14 +3,15 @@
 
 
 
-Barrel::Barrel(b2World* world, Config* config, Config::Players player) :
-	Renderable(config)
+Barrel::Barrel(b2World* world, Config* config, Config::Players player, Config::Direction direction) :
+Renderable(config), HorizontalDirection(direction)
 {
 	setWorld(world);
 
 	b2Body* body;
 	body = NULL;
 
+	int direct = direction == Config::Direction::LEFT ? -1 : 1;
 
 
 	b2Body* mbody;
@@ -27,10 +28,10 @@ Barrel::Barrel(b2World* world, Config* config, Config::Players player) :
 	mbody = world->CreateBody(&myBodyDef);
 
 	b2Vec2 vertices2[4];
-	vertices2[0].Set(0.0f, 0.5f);
-	vertices2[1].Set(4.0f, 0.5f);
-	vertices2[2].Set(4.0f, -0.5f);
-	vertices2[3].Set(0.0f, -0.5f);
+	vertices2[0].Set(direct * 0.0f, 0.5f);
+	vertices2[1].Set(direct * 4.0f, 0.5f);
+	vertices2[2].Set(direct * 4.0f, -0.5f);
+	vertices2[3].Set(direct * 0.0f, -0.5f);
 	int32 verticesCount2 = 4;
 	b2PolygonShape barrelShape;
 	barrelShape.Set(vertices2, verticesCount2);
@@ -57,10 +58,18 @@ Barrel::~Barrel()
 }
 
 void Barrel::rotate(float angle){
-	printf("angle: %f \n", body->GetAngle());
+	//printf("angle: %f \n", body->GetAngle());
 	
-	if (body->GetAngle() + angle*DEGTORAD <= 90 * DEGTORAD && body->GetAngle() + angle*DEGTORAD >= -0.1 * DEGTORAD)
-		body->SetTransform(body->GetPosition(), body->GetAngle() + angle*DEGTORAD);
+	if (HorizontalDirection == Config::Direction::RIGHT){
+		if (body->GetAngle() + angle*DEGTORAD <= 90 * DEGTORAD && body->GetAngle() + angle*DEGTORAD >= -0.1 * DEGTORAD)
+			body->SetTransform(body->GetPosition(), body->GetAngle() + angle*DEGTORAD);
+	}
+	else if (HorizontalDirection == Config::Direction::LEFT){
+		if (body->GetAngle() + angle*DEGTORAD <= 0 * DEGTORAD && body->GetAngle() + angle*DEGTORAD >= -90 * DEGTORAD)
+			body->SetTransform(body->GetPosition(), body->GetAngle() + angle*DEGTORAD);
+	}
+
+	
 
 }
 
@@ -108,12 +117,9 @@ void Barrel::render() {
 
 b2Vec2 Barrel::getBarrelEndPosition()
 {
-	b2Vec2 barrelPosition = getBodyPosition();
-	BodyData* userData = (BodyData*)getBody()->GetUserData();
-	Config::Players player = userData->owner;
-	float factor = player == Config::Players::PLAYER_1 ? 1.0f : -1.0f;
-	return b2Vec2(barrelPosition.x + factor * 3.0f, barrelPosition.y + 3.0f);
-
+	int direct = HorizontalDirection == Config::Direction::LEFT ? -1 : 1;
+	return b2Vec2(body->GetPosition().x + direct * 4.5 * cos(body->GetAngle()), body->GetPosition().y + direct * 4.5 * sin(body->GetAngle()));
+	
 	
 }
 
@@ -123,5 +129,9 @@ float Barrel::getBarrelAngle()
 	BodyData* userData = (BodyData*)getBody()->GetUserData();
 	Config::Players player = userData->owner;
 	float angle = player == Config::Players::PLAYER_1 ? 135.0f : 45.0f;*/
-	return BarrelAngle;
+
+	if (HorizontalDirection == Config::Direction::LEFT)
+		return (180 + body->GetAngle()*RADTODEG)*DEGTORAD;
+	else
+		return body->GetAngle();
 }

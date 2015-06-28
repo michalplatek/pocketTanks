@@ -25,11 +25,11 @@ Shell::Shell(b2World* world, Config* config, Config::Players player, Config::She
 
 	body = world->CreateBody(&myBodyDef);
 
-	float vectorX = cos(angle * DEGTORAD);
-	float vectorY = sin(angle * DEGTORAD);
+	float vectorX = cos(angle);
+	float vectorY = sin(angle);
 	printf("cos(%f)= %f, sin(%f)= %f\n", angle, vectorX, angle, vectorY);
 	//body->SetTransform(b2Vec2(position.x, position.y), angle);
-	body->ApplyLinearImpulse(b2Vec2(-vectorX * config->SHELL_VELOCITY, vectorY * config->SHELL_VELOCITY), b2Vec2(0.0f, 0.0f), true);
+	body->ApplyLinearImpulse(b2Vec2(vectorX * config->SHELL_VELOCITY, vectorY * config->SHELL_VELOCITY), b2Vec2(0.0f, 0.0f), true);
 
 	setBody(body);
 }
