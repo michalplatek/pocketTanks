@@ -11,7 +11,7 @@ View::View(Config* config) : config(config)
 	Settings.majorVersion = config->WINDOW_MAJOR_VERSION;
 	Settings.minorVersion = config->WINDOW_MINOR_VERSION;
 
-	window = new sf::Window(sf::VideoMode(config->WINDOW_W, config->WINDOW_H), config->WINDOW_TITLE, sf::Style::Default, Settings);
+	window = new sf::RenderWindow(sf::VideoMode(config->WINDOW_W, config->WINDOW_H), config->WINDOW_TITLE, sf::Style::Default, Settings);
 	window->setVerticalSyncEnabled(true);
 	window->setKeyRepeatEnabled(true);
 
@@ -25,7 +25,7 @@ View::~View()
 
 }
 
-sf::Window* View::getWindow() 
+sf::RenderWindow* View::getWindow() 
 {
 	return window;
 }

@@ -14,10 +14,12 @@ Controller::~Controller()
 
 void Controller::play(Game* game)
 {
-	sf::Window *window;
+	sf::RenderWindow *window;
 	sf::Event event;
 	window = view.getWindow();
 	Gui* gui = new Gui(config, window);
+
+
 
 	while (game->getStatus() != Config::Status::FINISHED)
 	{
@@ -34,6 +36,9 @@ void Controller::play(Game* game)
 		view.render(game);
 		gui->setTank(game->getTank(game->currentPlayer()));
 		view.render(gui);
+
+
+		
 
 
 		window->display();

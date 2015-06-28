@@ -4,7 +4,7 @@
 #include<SFML/Graphics/Text.hpp>
 
 
-Gui::Gui(Config* config, sf::Window *window) : Renderable(config), window(window)
+Gui::Gui(Config* config, sf::RenderWindow *window) : Renderable(config), window(window)
 {
 }
 
@@ -28,7 +28,11 @@ void Gui::render()
 	text.setColor(sf::Color::Red);
 	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
-	/*window->draw(text);*/
+	// wypisanie tekstu:
+
+	window->pushGLStates();
+	window->draw(text);
+	window->popGLStates();
 
 	
 
