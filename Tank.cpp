@@ -50,6 +50,10 @@ movementVertical(Config::Direction::NONE)
 	setBody(body);
 
 	GenerateBarrel(0.0f, pos, direction);
+	GenerateWheel(1.0, pos, b2Vec2(-3, -1));
+	GenerateWheel(1.0, pos, b2Vec2(-1, -1));
+	GenerateWheel(1.0, pos, b2Vec2( 1, -1));
+	GenerateWheel(1.0, pos, b2Vec2( 3, -1));
 
 
 }
@@ -74,55 +78,37 @@ void Tank::GenerateBarrel(float radius, b2Vec2 pos, int direction){
 	jointDef.localAnchorA.Set(direction * 1, 0.8f);
 	jointDef.bodyB = bar->getBody();
 	jointDef.localAnchorB.Set(0, 0);
+	jointDef.enableMotor = true;
+	jointDef.maxMotorTorque = 20;
+	jointDef.motorSpeed = 360 * DEGTORAD; //1 turn per second counter-clockwise
 	b2RevoluteJoint* joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
 	joints.push_back(joint);
 
 }
 
 
-void Tank::GenerateWheel(float radius, b2Vec2 pos){
+void Tank::GenerateWheel(float radius, b2Vec2 pos, b2Vec2 anchor){
 
 	// TO DO
 
-	/*b2Body* mbody;
-	mbody = NULL;
+	Wheel* wheel = new Wheel(world, config, player, radius);
 
-	BodyData* bodyData = new BodyData;
-	bodyData->bodyType = Config::BodyType::TANK;
-	bodyData->owner = player;
-	b2BodyDef myBodyDef;
-	myBodyDef.type = b2_dynamicBody;
-	myBodyDef.position.Set(pos.x, pos.y);
-	myBodyDef.userData = (void*)bodyData;
-	mbody = world->CreateBody(&myBodyDef);
-
-	b2CircleShape wheelShape;
-	wheelShape.m_p.Set(pos.x, pos.y);
-	wheelShape.m_radius = radius;
-
-	FixtureData* userData = new FixtureData;
-	userData->fixtureType = Config::FixtureType::TANK_WHEEL;
-	userData->owner = player;
-
-	b2FixtureDef myFixtureDef;
-	myFixtureDef.shape = &wheelShape;
-	myFixtureDef.density = 1;
-	myFixtureDef.userData = (void*)userData;
-	mbody->CreateFixture(&myFixtureDef);
-
-	wheels.push_back(mbody);
+	wheels.push_back(wheel);
 
 	b2RevoluteJointDef jointDef;
 	jointDef.bodyA = body;
-	jointDef.localAnchorA = b2Vec2(2, 2);
-	jointDef.bodyB = mbody;
+	jointDef.localAnchorA = anchor;
+	jointDef.bodyB = wheel->getBody();
+	jointDef.localAnchorB.Set(0, 0);
 	b2RevoluteJoint* joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
-	joints.push_back(joint);*/
+	joints.push_back(joint);
 }
 
 void Tank::render() {
 	b2Body* body = getBody();
 	b2Fixture* fixture;
+
+	
 
 	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
 	{
@@ -185,9 +171,28 @@ Config::Direction Tank::getHorizontalDorection(){
 	
 }
 
+
+
+
+
 void Tank::setHorizontalDirection(Config::Direction direction)
 {
+	float MAX_SPEED = 3.5;
+
 	movementHorizontal = direction == Config::Direction::LEFT || direction == Config::Direction::RIGHT ? direction : Config::Direction::NONE;
+	printf("v: %f", body->GetLinearVelocity().x);
+
+	if (direction == Config::Direction::LEFT){
+		if (body->GetLinearVelocity().x > -MAX_SPEED)
+			//body->ApplyForce(b2Vec2(-50.0f, 0.0f), body->GetWorldCenter(), true);
+			body->ApplyLinearImpulse(b2Vec2(-20.0f, 0.0f), body->GetWorldCenter(), true);
+	}
+	else if (direction == Config::Direction::RIGHT){
+		if (body->GetLinearVelocity().x < MAX_SPEED)
+			//body->ApplyForce(b2Vec2(50.0f, 0.0f), body->GetWorldCenter(), true);
+			body->ApplyLinearImpulse(b2Vec2(20.0f, 0.0f), body->GetWorldCenter(), true);
+	}
+
 }
 
 void Tank::setVerticalDirection(Config::Direction direction)

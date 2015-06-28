@@ -25,6 +25,7 @@ public:
 	void render(Game* game);
 	void render(Tank* tank);
 	void render(Barrel* barrel);
+	void render(std::vector<Wheel*> wheels);
 	void render(World* world);
 	void render(Shell* shell);
 	void render(Gui* gui);

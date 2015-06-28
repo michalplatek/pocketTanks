@@ -66,6 +66,7 @@ void View::render(Game* game)
 	for (int i = 0; i < config->NUM_TANKS; i++) {
 		render(game->getTank(i));
 		render(game->getTank(i)->barrel);
+		render(game->getTank(i)->wheels);
 	}
 	int shells = game->numberOfShells();
 	if (shells > 0)
@@ -111,6 +112,12 @@ void View::render(Tank* tank)
 void View::render(Barrel* barrel)
 {
 	renderAtBodyPosition(barrel);
+}
+
+void View::render( std::vector<Wheel*> wheels)
+{
+	for (int i = 0; i < (int)wheels.size(); i++)
+	renderAtBodyPosition(wheels[i]);
 }
 
 void View::render(Shell* shell)

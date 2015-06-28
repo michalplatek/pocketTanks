@@ -9,6 +9,7 @@
 #include "ObjectData.h"
 #include <cstdlib>
 #include "Barrel.h"
+#include "Wheel.h"
 
 class Tank : public Renderable
 {
@@ -16,17 +17,18 @@ class Tank : public Renderable
 	Config::ShellType loadedShellType;
 	Config::Direction movementHorizontal;
 	Config::Direction movementVertical;
-	std::vector<b2Body*> wheels;
 	std::vector<b2Joint*> joints;
 
 
 
-	void GenerateWheel(float radius, b2Vec2 position);
+
+	void GenerateWheel(float radius, b2Vec2 position, b2Vec2 anchor);
 	void GenerateBarrel(float radius, b2Vec2 pos, int direction);
 public:
 	//class member variables
 	float radius;
 	Barrel* barrel;
+	std::vector<Wheel*> wheels;
 	Tank(b2World* world, Config* config, Config::Players player);
 
 	/*b2Vec2 getPosition();
@@ -41,6 +43,7 @@ public:
 	b2Vec2 getBarrelEndPosition();
 	Config::Direction getHorizontalDorection();
 	float getBarrelAngle();
+
 	void setHorizontalDirection(Config::Direction direction);
 	void setVerticalDirection(Config::Direction direction);
 
