@@ -2,8 +2,6 @@
 #define _SHRAPNELSHELL_H_
 
 #include "Shell.h"
-#include "ObjectData.h"
-#include <GL\freeglut.h>
 
 	// Shrapnel Shell
 

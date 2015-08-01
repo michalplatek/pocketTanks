@@ -3,7 +3,6 @@
 
 #include "Shell.h"
 #include <GL/freeglut.h>
-#include "ObjectData.h"
 
 	// Armour Piercing Shell
 

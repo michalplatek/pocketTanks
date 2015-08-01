@@ -1,4 +1,5 @@
 #include "ShrapnelShell.h"
+#include <GL\freeglut.h>
 
 	// Shrapnel Shell
 

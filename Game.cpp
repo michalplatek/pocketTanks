@@ -63,7 +63,6 @@ void Game::resolveCollisions()
 			else
 			{
 				shells[i]->explode();
-				world->processExplosion(shells[i]);
 			}
 			removeShell(i);
 			nextTurn();

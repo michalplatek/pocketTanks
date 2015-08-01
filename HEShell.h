@@ -3,8 +3,6 @@
 
 #include "Shell.h"
 #include "GL\freeglut.h"
-#include "ObjectData.h"
-#include <math.h>
 
 	// High Explosive Shell
 
