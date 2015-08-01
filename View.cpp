@@ -101,7 +101,6 @@ void View::renderAtBodyPosition(Renderable* renderable) {
 	glRotatef(angle * 180 / 3.1415f, 0, 0, 1);//OpenGL uses degrees here
 	renderable->render();//normal render at (0,0)
 	glPopMatrix();
-	
 }
 
 void View::render(Tank* tank)

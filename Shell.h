@@ -2,7 +2,6 @@
 #define _SHELL_H_
 
 #include "Renderable.h"
-#include "World.h"
 
 class Shell : public Renderable
 {
