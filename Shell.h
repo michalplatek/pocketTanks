@@ -13,6 +13,7 @@ public:
 
 	b2Body* explosion;
 	bool collision();
+	Config::Players GetObjectCollision();
 	bool shouldBounce();
 	void bounce();
 	void explode();

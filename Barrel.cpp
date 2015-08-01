@@ -48,7 +48,7 @@ Renderable(config), HorizontalDirection(direction)
 
 	setBody(mbody);
 
-
+	color = config->PLAYERC_COLOR[player];
 }
 
 
@@ -93,7 +93,7 @@ void Barrel::render() {
 
 			b2Vec2 vertex, vertexPositionInWorld;
 
-			glColor3f(1, 1, 0);
+			glColor3f(color.x, color.y, color.z);
 			glBegin(GL_QUADS);
 			for (int i = 0; i < vertexCount; i++)
 			{

@@ -34,7 +34,7 @@ void Controller::play(Game* game)
 		game->step();
 		view.prepare();
 		view.render(game);
-		gui->setTank(game->getTank(game->currentPlayer()));
+		gui->passGame(game);
 		view.render(gui);
 
 

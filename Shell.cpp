@@ -41,11 +41,48 @@ bool Shell::collision()
 	{
 		if (edge->contact->IsTouching())
 		{
+
+			
 			return true;
 		}
 	}
 	return false;
 }
+
+
+Config::Players Shell::GetObjectCollision()
+{
+	b2Body* body = getBody();
+	for (b2ContactEdge* edge = body->GetContactList(); edge; edge = edge->next)
+	{
+		if (edge->contact->IsTouching())
+		{
+
+			b2Body* colBody = edge->contact->GetFixtureA()->GetBody();
+			if (colBody->GetUserData())
+			{
+
+				if (static_cast<_FixtureData*>(colBody->GetUserData())->owner == config->PLAYER_1)
+				{
+					return Config::Players::PLAYER_1;
+				}
+				else if (static_cast<_FixtureData*>(colBody->GetUserData())->owner == config->PLAYER_2)
+				{
+					return Config::Players::PLAYER_2;
+				}
+				else
+				{
+					return Config::Players::NONE;
+				}
+
+				//static_cast<Ball*>(bodyUserData)->startContact();
+			}
+			
+		}
+	}
+	
+}
+
 
 Shell::~Shell()
 {

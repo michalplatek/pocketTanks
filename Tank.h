@@ -31,6 +31,9 @@ public:
 	std::vector<Wheel*> wheels;
 	Tank(b2World* world, Config* config, Config::Players player);
 
+	int healthPoints;
+	b2Vec3 color;
+
 	/*b2Vec2 getPosition();
 	b2Vec2 getLinearVelocity();
 	float getAngle();*/
@@ -44,6 +47,7 @@ public:
 	Config::Direction getHorizontalDorection();
 	float getBarrelAngle();
 
+	void stop();
 	void setHorizontalDirection(Config::Direction direction);
 	void setVerticalDirection(Config::Direction direction);
 

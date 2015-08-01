@@ -30,10 +30,10 @@ movementVertical(Config::Direction::NONE)
 
 	//add polygon fixture
 	b2Vec2 vertices[4];
-	vertices[0].Set(direction * 2.0, 1.5f);
-	vertices[1].Set(direction * 3.0f, -1.0f);
-	vertices[2].Set(direction * -2.5f, -1.0f);
-	vertices[3].Set(direction * -2.5f, 1.5f);
+	vertices[0].Set(direction * 2.0, 2.0f);
+	vertices[1].Set(direction * 4.5f, -1.0f);
+	vertices[2].Set(direction * -4.5f, -1.0f);
+	vertices[3].Set(direction * -2.5f, 2.0f);
 	int32 verticesCount = 4;
 	b2PolygonShape tankShape;
 	tankShape.Set(vertices, verticesCount);
@@ -55,6 +55,8 @@ movementVertical(Config::Direction::NONE)
 	GenerateWheel(1.0, pos, b2Vec2( 1, -1));
 	GenerateWheel(1.0, pos, b2Vec2( 3, -1));
 
+	healthPoints = 100;
+	color = config->PLAYERC_COLOR[player];
 
 }
 
@@ -121,7 +123,7 @@ void Tank::render() {
 
 			b2Vec2 vertex, vertexPositionInWorld;
 
-			glColor3f(1, 0, 1);//pink
+			glColor3f(color.x,color.y,color.z);
 			glBegin(GL_QUADS);
 			for (int i = 0; i < vertexCount; i++)
 			{
@@ -172,7 +174,10 @@ Config::Direction Tank::getHorizontalDorection(){
 }
 
 
-
+void Tank::stop()
+{
+	body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+}
 
 
 void Tank::setHorizontalDirection(Config::Direction direction)

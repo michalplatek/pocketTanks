@@ -14,7 +14,7 @@ class Barrel : public Renderable
 {
 	float BarrelAngle;
 	Config::Direction HorizontalDirection;
-
+	b2Vec3 color;
 
 public:
 	//class member variables

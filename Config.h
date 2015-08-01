@@ -2,6 +2,7 @@
 #define _CONFIG_H_
 
 #include<SFML/Window.hpp>
+#include <Box2D/Box2D.h>
 /* unit conversion */
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
@@ -48,6 +49,8 @@ public:
 	int EXPLOSION_TIMEOUT;
 	bool SIMPLIFY_GEOMETRY;
 	Config::Players startingPlayer;
+
+	b2Vec3 PLAYERC_COLOR[2];
 
 	float EXPLOSION_RADIUS[3];
 	float PARTICLE_RANGE[3];

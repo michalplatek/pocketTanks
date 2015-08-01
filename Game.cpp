@@ -49,6 +49,13 @@ void Game::resolveCollisions()
 	{
 		if (shells[i]->collision())
 		{
+			Config::Players shooted = shells[i]->GetObjectCollision();
+
+			if (shooted != Config::Players::NONE)
+			{
+				tanks[shooted]->healthPoints -= 20;
+			}
+
 			if (shells[i]->shouldBounce())
 			{
 				shells[i]->bounce();
@@ -57,7 +64,7 @@ void Game::resolveCollisions()
 			{
 				shells[i]->explode();
 			}
-			//removeShell(i);
+			removeShell(i);
 			nextTurn();
 		}
 	}
@@ -158,9 +165,12 @@ void Game::shoot(Config::Players player)
 	Tank* tank = getTank(player);
 	if (tank != nullptr)
 	{
+		tank->stop();
+
 		if (numberOfShells() > 0)
 		{
-			removeShells();
+			return;
+			/*removeShells();*/
 		}
 		switch (tank->getLoadedShellType())
 		{

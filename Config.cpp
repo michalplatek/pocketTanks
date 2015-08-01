@@ -38,22 +38,23 @@ Config::Config(int argc, char** argv)
 	PARTICLE_VELOCITY = 100.0f;
 	SHELL_VELOCITY = 30.0f;
 
-	KEY_UP[Players::PLAYER_1] = sf::Keyboard::Up;
-	KEY_DOWN[Players::PLAYER_1] = sf::Keyboard::Down;
-	KEY_LEFT[Players::PLAYER_1] = sf::Keyboard::Left;
-	KEY_RIGHT[Players::PLAYER_1] = sf::Keyboard::Right;
-	KEY_FIRE[Players::PLAYER_1] = sf::Keyboard::Return;
-	KEY_AP[Players::PLAYER_1] = sf::Keyboard::Num8;
-	KEY_HE[Players::PLAYER_1] = sf::Keyboard::Num9;
-	KEY_SH[Players::PLAYER_1] = sf::Keyboard::Num0;
-	KEY_UP[Players::PLAYER_2] = sf::Keyboard::W;
-	KEY_DOWN[Players::PLAYER_2] = sf::Keyboard::S;
-	KEY_LEFT[Players::PLAYER_2] = sf::Keyboard::A;
-	KEY_RIGHT[Players::PLAYER_2] = sf::Keyboard::D;
-	KEY_FIRE[Players::PLAYER_2] = sf::Keyboard::Space;
-	KEY_AP[Players::PLAYER_2] = sf::Keyboard::Num1;
-	KEY_HE[Players::PLAYER_2] = sf::Keyboard::Num2;
-	KEY_SH[Players::PLAYER_2] = sf::Keyboard::Num3;
+	KEY_UP[Players::PLAYER_2] = sf::Keyboard::Up;
+	KEY_DOWN[Players::PLAYER_2] = sf::Keyboard::Down;
+	KEY_LEFT[Players::PLAYER_2] = sf::Keyboard::Left;
+	KEY_RIGHT[Players::PLAYER_2] = sf::Keyboard::Right;
+	KEY_FIRE[Players::PLAYER_2] = sf::Keyboard::Return;
+	KEY_AP[Players::PLAYER_2] = sf::Keyboard::Num8;
+	KEY_HE[Players::PLAYER_2] = sf::Keyboard::Num9;
+	KEY_SH[Players::PLAYER_2] = sf::Keyboard::Num0;
+
+	KEY_UP[Players::PLAYER_1] = sf::Keyboard::W;
+	KEY_DOWN[Players::PLAYER_1] = sf::Keyboard::S;
+	KEY_LEFT[Players::PLAYER_1] = sf::Keyboard::A;
+	KEY_RIGHT[Players::PLAYER_1] = sf::Keyboard::D;
+	KEY_FIRE[Players::PLAYER_1] = sf::Keyboard::Space;
+	KEY_AP[Players::PLAYER_1] = sf::Keyboard::Num1;
+	KEY_HE[Players::PLAYER_1] = sf::Keyboard::Num2;
+	KEY_SH[Players::PLAYER_1] = sf::Keyboard::Num3;
 
 
 	START_POSITION_X[Players::PLAYER_1] = 50.0f;
@@ -65,6 +66,9 @@ Config::Config(int argc, char** argv)
 	START_POSITION_Y[Players::PLAYER_2] = 50.0f;
 	START_ROTATION[Players::PLAYER_2] = 30.0f;
 	START_GUN_ANGLE[Players::PLAYER_2] = -45.0f;
+
+	PLAYERC_COLOR[Players::PLAYER_1] = b2Vec3(0, 0.2, 0.4);
+	PLAYERC_COLOR[Players::PLAYER_2] = b2Vec3(0.3, 0.6, 0);
 
 	KEY_QUIT = sf::Keyboard::Escape;
 }

@@ -11,13 +11,13 @@ class Gui : public Renderable
 {
 private:
 	Config* config;
-	Tank* tank;
+	Game* game;
 	sf::RenderWindow* window;
 public:
 	Gui(Config* config, sf::RenderWindow *window);
 	~Gui();
 
-	void setTank(Tank* tank);
+	void passGame(Game*);
 	void render();
 };
 

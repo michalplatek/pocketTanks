@@ -13,8 +13,8 @@ Gui::~Gui()
 {
 }
 
-void Gui::setTank(Tank* tank){
-	this->tank = tank;
+void Gui::passGame(Game* game){
+	this->game = game;
 }
 void Gui::render()
 {
@@ -34,8 +34,8 @@ void Gui::render()
 	playerString = std::to_string(player);
 	angleString = std::to_string(angle);
 	powerString = std::to_string(power);
-	lifeLeftString = std::to_string(lifeLeftFloat);
-	lifeRightString = std::to_string(lifeRightFloat);
+	lifeLeftString = std::to_string(game->getTank(0)->healthPoints);
+	lifeRightString = std::to_string(game->getTank(1)->healthPoints);
 
 
 	title.setFont(myCharacter);
