@@ -46,6 +46,7 @@ public:
 	float GRAVITY;
 	float LEVEL_SIZE_IN_METRES;
 	float MAX_HEALTH;
+	int EXPLOSION_VERTICIES;
 	int EXPLOSION_TIMEOUT;
 	bool SIMPLIFY_GEOMETRY;
 	Config::Players startingPlayer;

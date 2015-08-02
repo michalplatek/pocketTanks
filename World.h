@@ -5,15 +5,7 @@
 #include "Config.h"
 #include "Renderable.h"
 #include "ObjectData.h"
-
-#include <boost/geometry.hpp>
-#include <boost/geometry/geometries/geometries.hpp>
-#include <boost/geometry/geometries/point_xy.hpp>
-#include <boost/geometry/geometries/register/ring.hpp>
-#include <boost/geometry/geometries/register/point.hpp>
-
-BOOST_GEOMETRY_REGISTER_POINT_2D(b2Vec2, float, boost::geometry::cs::cartesian, x, y)
-typedef boost::geometry::model::ring<b2Vec2, false, true> ring_t;
+#include "Geometry.h"
 
 class World : public Renderable
 {
@@ -23,6 +15,7 @@ public:
 
 	std::unique_ptr<b2ChainShape> makeChain(b2Vec2* points, int count, bool closed);
 	void render();
+	unordered_set<b2Body*> getDestructibleBodies(b2Vec2 position, float radius);
 };
 
 #endif

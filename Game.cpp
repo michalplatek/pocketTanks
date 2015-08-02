@@ -45,29 +45,53 @@ void Game::step()
 
 void Game::resolveCollisions()
 {
-	for (unsigned int i = 0; i < shells.size(); i++)
+	for (unsigned int shell = 0; shell < shells.size(); shell++)
 	{
-		if (shells[i]->collision())
+		if (shells[shell]->collision())
 		{
-			Config::Players shooted = shells[i]->GetObjectCollision();
+			Config::Players tankHit = shells[shell]->GetObjectCollision();
 
-			if (shooted != Config::Players::NONE)
+			if (tankHit == Config::Players::NONE)
 			{
-				tanks[shooted]->healthPoints -= 20;
-			}
-
-			if (shells[i]->shouldBounce())
-			{
-				shells[i]->bounce();
+				// something was hit, but it wasn't a tank => the ground was hit!
+				boom(shell);
 			}
 			else
 			{
-				shells[i]->explode();
+				// a tank was hit
+				if (shells[shell]->shouldBounce())
+				{
+					shells[shell]->bounce();
+				}
+				else
+				{
+					boom(shell);
+					tanks[tankHit]->healthPoints -= 20;
+				}
 			}
-			removeShell(i);
 			nextTurn();
 		}
 	}
+}
+
+void Game::boom(int shellIndex)
+{
+	shells[shellIndex]->explode();
+	damageWorld(shells[shellIndex]);
+	removeShell(shellIndex);
+}
+
+void Game::damageWorld(Shell* shell)
+{
+	shell->interactWith(destructibleBodies(
+		shell->getBodyPosition(),
+		config->EXPLOSION_RADIUS[shell->getShellType()]
+	));
+}
+
+unordered_set<b2Body*> Game::destructibleBodies(b2Vec2 position, float radius)
+{
+	return world->getDestructibleBodies(position, radius);
 }
 
 Config::Status Game::getStatus() 

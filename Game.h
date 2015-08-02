@@ -11,6 +11,7 @@
 #include "ShrapnelShell.h"
 #include "Particle.h"
 #include <vector>
+#include "Geometry.h"
 
 class Game
 {
@@ -51,6 +52,9 @@ public:
 	void removeShell(int i);
 	void shoot(Config::Players player);
 	void resolveCollisions();
+	void damageWorld(Shell* shell);
+	void boom(int shellIndex);
+	unordered_set<b2Body*> destructibleBodies(b2Vec2 position, float radius);
 };
 
 #endif
