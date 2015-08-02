@@ -2,9 +2,10 @@
 #include "Renderable.h"
 #include "World.h"
 #include "Tank.h"
+#include "Geometry.h"
 
 Shell::Shell(b2World* world, Config* config, Config::Players player, Config::ShellType shellType, b2Vec2 position, float angle)
-	: Renderable(config), shellType(shellType), explosion(nullptr)
+	: Renderable(config), shellType(shellType)
 {
 	setWorld(world);
 
@@ -41,14 +42,30 @@ bool Shell::collision()
 	{
 		if (edge->contact->IsTouching())
 		{
-
-			
 			return true;
 		}
 	}
 	return false;
 }
 
+// goes through a set of bodies and returns a vector of pairs.
+// each pair in the vector consists of:
+//    - a body from the source set 
+//    - a corresponding ring shape
+template<typename It>
+vector<match_t> Shell::matchBodiesToRings(It begin, It end)
+{
+	std::vector<match_t> batch;
+
+	std::transform(begin, end, std::back_inserter(batch), [](b2Body* body)
+	{
+		auto f = body->GetFixtureList();
+		auto shape = static_cast<b2ChainShape*>(f->GetShape());
+		return std::make_pair(body, Geometry::convertShape(body->GetWorldCenter(), shape));
+	});
+
+	return batch;
+}
 
 Config::Players Shell::GetObjectCollision()
 {
@@ -80,16 +97,12 @@ Config::Players Shell::GetObjectCollision()
 			
 		}
 	}
-	
+	return Config::Players::NONE;
 }
 
 
 Shell::~Shell()
 {
-	if (explosion != nullptr)
-	{
-		getWorld()->DestroyBody(explosion);
-	}
 	if (getBody() != nullptr)
 	{
 		getWorld()->DestroyBody(getBody());
@@ -98,36 +111,87 @@ Shell::~Shell()
 
 void Shell::explode()
 {
-	b2Body* explosion = nullptr;
-	//set up dynamic body, store in class variable
-	b2BodyDef myBodyDef;
-	myBodyDef.type = b2_staticBody;
-	// last known position of the shell
-	myBodyDef.position = getBody()->GetPosition();
+	b2Vec2 shellPosition = this->getBodyPosition();
+	float explosionRadius = config->EXPLOSION_RADIUS[this->shellType];
+	int explosionVerticies = config->EXPLOSION_VERTICIES;
 
-	getWorld()->DestroyBody(getBody());
+	// create the explosion circle as ring_t and correct it
+	explosion = Geometry::makeConvexRing(shellPosition, explosionRadius, explosionVerticies);
+	bg::correct(explosion);
+}
 
-	explosion = getWorld()->CreateBody(&myBodyDef);
+void Shell::interactWith(unordered_set<b2Body*> destructibleBodies)
+{
+	// pair each destructible body with a ring
+	vector<match_t> shapes = matchBodiesToRings(destructibleBodies.begin(), destructibleBodies.end());
 
-	b2CircleShape explosionShape;
-	explosionShape.m_p.Set(0.0f, 0.0f);
-	explosionShape.m_radius = getConfig()->EXPLOSION_RADIUS[shellType];
+	// divide the set into 2 groups: larger and smaller
+	// large shapes will be processed
+	// small shapes will be destroyed
+	auto divider = partition(shapes.begin(), shapes.end(), [](const match_t& m) {
+		const double areaEpsilon = 0.02;
+		return bg::area(m.second) > areaEpsilon;
+	});
 
-	b2FixtureDef myFixtureDef;
-	myFixtureDef.shape = &explosionShape;
-	myFixtureDef.density = 0;
-	myFixtureDef.isSensor = true;
-	explosion->CreateFixture(&myFixtureDef);
+	// Remove small shapes
+	for_each(divider, shapes.end(), [&](const match_t& m) {
+		world->DestroyBody(m.first);
+	});
 
-	setBody(explosion);
+	// Subtract the explosion shape from each destructible shape
+	typedef pair<unique_ptr<b2ChainShape>, b2Filter> shape_property_t;
+	vector<shape_property_t> resultShapes;
+	for_each(shapes.begin(), divider, [&](const match_t& m) {
+		ring_collection_t subtractionResult = Geometry::subtract(m.second, explosion);
+		// Simplify the results
+		if (config->SIMPLIFY_GEOMETRY)
+		{
+			Geometry::simplify(subtractionResult);
+		}
+
+		// Convert the rings to b2ChainShapes
+		vector<unique_ptr<b2ChainShape>> converted = Geometry::convertGeometry(subtractionResult);
+
+		// add the converted subtraction results to the result set
+		auto moveBegin = make_move_iterator(converted.begin());
+		auto moveEnd = make_move_iterator(converted.end());
+		transform(moveBegin, moveEnd, back_inserter(resultShapes),
+			[&](unique_ptr<b2ChainShape> converted) {
+			const b2Filter& filter = m.first->GetFixtureList()->GetFilterData();
+			return make_pair(move(converted), filter);
+		});
+
+		// destroy the destructible body if empty
+		if (!subtractionResult.empty())
+		{
+			world->DestroyBody(m.first);
+		}
+	});
+
+	// create bodies from the result shapes
+	for (auto&& s : resultShapes)
+	{
+		b2BodyDef bodyDefinition;
+		b2Body* body = world->CreateBody(&bodyDefinition);
+		auto fixture = body->CreateFixture(s.first.get(), 0.0f);
+		fixture->SetFilterData(s.second);
+	}
 }
 
 bool Shell::shouldBounce()
 {
+	// shells never bounce at the moment
+	// TODO : check the angle between the shell and the surface (normal vector of the surface).
+	// IMPORANT: High Explosive (HE) Shells DO NOT bounce!
 	return false;
 }
 
 void Shell::bounce()
 {
+	// TODO: change the direction of the shell's movement
+}
 
+Config::ShellType Shell::getShellType()
+{
+	return shellType;
 }

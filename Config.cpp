@@ -25,6 +25,7 @@ Config::Config(int argc, char** argv)
 	NUM_TANKS = NUM_PLAYERS * TANKS_PER_PLAYER;
 	GRAVITY = -9.8f;
 	LEVEL_SIZE_IN_METRES = 200.0f;
+	EXPLOSION_VERTICIES = 16;
 	EXPLOSION_TIMEOUT = 40; // moze nie okazac sie przydatne
 	SIMPLIFY_GEOMETRY = false;
 	startingPlayer = Config::Players::PLAYER_1;

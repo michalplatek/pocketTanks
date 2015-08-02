@@ -28,7 +28,7 @@ World::World(Config* config) : Renderable(config)
 		b2Vec2{ -500.0f, 10.0f } 
 	};
 
-	auto worldShape = makeChain(vertices.data(), vertices.size(), true);
+	std::unique_ptr<b2ChainShape> worldShape = makeChain(vertices.data(), vertices.size(), true);
 
 	FixtureData* userData = new FixtureData;
 	userData->fixtureType = Config::FixtureType::WORLD;
@@ -64,6 +64,22 @@ World::~World()
 	world->DestroyBody(getBody());
 	//delete contactListener;
 	delete world;
+}
+
+// returns an unordered_set of bodies with chain shapes found in a specified region
+unordered_set<b2Body*> World::getDestructibleBodies(b2Vec2 position, float radius) {
+	WorldQueryCallback callback
+	{
+		b2Shape::e_chain
+	};
+	// define the area of search
+	b2AABB aabb;
+	aabb.lowerBound = { position.x - radius, position.y - radius };
+	aabb.upperBound = { position.x + radius, position.y + radius };
+
+	getWorld()->QueryAABB(&callback, aabb);
+
+	return callback.foundBodies;
 }
 
 void World::render()
