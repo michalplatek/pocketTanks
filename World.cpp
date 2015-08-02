@@ -130,7 +130,7 @@ void World::render()
 			b2Vec2 vertex, vertexPositionInWorld;
 
 			glColor3f(0.1f, 1.0f, 0.0f);//green
-			glBegin(GL_QUADS);
+			glBegin(GL_LINES);
 			for (int i = 0; i < edgeCount; i++)
 			{
 				b2EdgeShape edge;
