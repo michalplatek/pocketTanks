@@ -25,18 +25,25 @@ void Gui::render()
 	sf::Text playerTurn;
 	sf::Text angleOfTheShoot;
 	sf::Text powerOfTheShoot;
-	sf::Text lifeLeft;
-	sf::Text lifeRight;
-	std::string playerString, angleString, powerString, lifeLeftString, lifeRightString;
-	float angle = 0.0, player = 0.0, power = 0.0, lifeLeftFloat = 0.0, lifeRightFloat = 0.0;
+	sf::Text lifeLeft, controlLeft, upDownLeft, leftRightLeft, attackLeft;
+	sf::Text lifeRight, controlRight, upDownRight, leftRightRight, attackRight;;
+	std::string playerString, angleString, powerString;
+	std::string lifeLeftString, lifeRightString;
+	float angle = 0.0, power = 0.0, lifeLeftFloat = 0.0, lifeRightFloat = 0.0;
 
-	
-	playerString = std::to_string(player);
+	//if the turn is divided by 2, then player 2 is playing 
+	if (game->getTurn() % 2 == 0) {
+		playerString = " zielonego";
+	}
+	else {
+		playerString = " niebieskiego";
+	}
+
 	angleString = std::to_string(angle);
 	powerString = std::to_string(power);
 	lifeLeftString = std::to_string(game->getTank(0)->healthPoints);
 	lifeRightString = std::to_string(game->getTank(1)->healthPoints);
-
+	
 
 	title.setFont(myCharacter);
 	title.setString("Pocket Tanks");
@@ -70,12 +77,62 @@ void Gui::render()
 	lifeLeft.setColor(sf::Color::Black);
 	lifeLeft.setStyle(sf::Text::Bold);
 
+	controlLeft.setFont(myCharacter);
+	controlLeft.setString("Sterowanie: ");
+	controlLeft.setCharacterSize(16); // in pixels, not points!
+	controlLeft.setPosition(15.0, 630.0);
+	controlLeft.setColor(sf::Color::Black);
+	controlLeft.setStyle(sf::Text::Bold);
+
+	upDownLeft.setFont(myCharacter);
+	upDownLeft.setString("Gora / dol : W / S");
+	upDownLeft.setCharacterSize(16); // in pixels, not points!
+	upDownLeft.setPosition(15.0, 650.0);
+	upDownLeft.setColor(sf::Color::Black);
+
+	leftRightLeft.setFont(myCharacter);
+	leftRightLeft.setString("Lewo / prawo : A / D");
+	leftRightLeft.setCharacterSize(16); // in pixels, not points!
+	leftRightLeft.setPosition(15.0, 670.0);
+	leftRightLeft.setColor(sf::Color::Black);
+
+	attackLeft.setFont(myCharacter);
+	attackLeft.setString("Atak : Spacja");
+	attackLeft.setCharacterSize(16); // in pixels, not points!
+	attackLeft.setPosition(15.0, 690.0);
+	attackLeft.setColor(sf::Color::Black);
+
 	lifeRight.setFont(myCharacter);
 	lifeRight.setString("Zycie: " + lifeRightString);
 	lifeRight.setCharacterSize(16); // in pixels, not points!
 	lifeRight.setPosition(920.0, 600.0);
 	lifeRight.setColor(sf::Color::Black);
 	lifeRight.setStyle(sf::Text::Bold);
+
+	controlRight.setFont(myCharacter);
+	controlRight.setString("Sterowanie: ");
+	controlRight.setCharacterSize(16); // in pixels, not points!
+	controlRight.setPosition(920.0, 630.0);
+	controlRight.setColor(sf::Color::Black);
+	controlRight.setStyle(sf::Text::Bold);
+
+	upDownRight.setFont(myCharacter);
+	upDownRight.setString("Gora / dol : Up / Down");
+	upDownRight.setCharacterSize(16); // in pixels, not points!
+	upDownRight.setPosition(920.0, 650.0);
+	upDownRight.setColor(sf::Color::Black);
+
+	leftRightRight.setFont(myCharacter);
+	leftRightRight.setString("Lewo / prawo : Left / Right");
+	leftRightRight.setCharacterSize(16); // in pixels, not points!
+	leftRightRight.setPosition(920.0, 670.0);
+	leftRightRight.setColor(sf::Color::Black);
+
+	attackRight.setFont(myCharacter);
+	attackRight.setString("Atak : Enter");
+	attackRight.setCharacterSize(16); // in pixels, not points!
+	attackRight.setPosition(920.0, 690.0);
+	attackRight.setColor(sf::Color::Black);
 
 
 			glColor3f(1.0f, 1.0f, 0.5f);
@@ -128,7 +185,15 @@ void Gui::render()
 			window->draw(angleOfTheShoot);
 			window->draw(powerOfTheShoot);
 			window->draw(lifeLeft);
+			window->draw(controlLeft);
+			window->draw(upDownLeft);
+			window->draw(leftRightLeft);
+			window->draw(attackLeft);
 			window->draw(lifeRight);
+			window->draw(controlRight);
+			window->draw(upDownRight);
+			window->draw(leftRightRight);
+			window->draw(attackRight);
 			window->popGLStates();
 }
 		
