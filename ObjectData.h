@@ -6,6 +6,7 @@ typedef struct _BodyData
 {
 	Config::BodyType bodyType;
 	Config::Players owner;
+	int healthPoints;
 
 } BodyData;
 
@@ -13,6 +14,7 @@ typedef struct _FixtureData
 {
 	Config::FixtureType fixtureType;
 	Config::Players owner;
+	int healthPoints;
 
 } FixtureData;
 

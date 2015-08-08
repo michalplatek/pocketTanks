@@ -35,12 +35,12 @@ void Gui::render()
 	//if the turn is divided by 2, then player 2 is playing 
 	if (game->getTurn() % 2 == 0) {
 		playerString = " ZIELONEGO";
-		angle = (game->getTank(1)->getBarrelAngle() - 3.141593) * (-1);
+		angle = (game->getTank(1)->getBarrelAngle() - 3.141593) * (-1) * RADTODEG;
 		power = game->shellVelocity;
 	}
 	else {
 		playerString = " NIEBIESKIEGO";
-		angle = game->getTank(0)->getBarrelAngle();
+		angle = game->getTank(0)->getBarrelAngle() * RADTODEG;
 		power = game->shellVelocity;
 	}
 

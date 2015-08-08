@@ -84,8 +84,7 @@ unordered_set<b2Body*> World::getDestructibleBodies(b2Vec2 position, float radiu
 
 void World::render()
 {
-	b2Body* body = getBody();
-
+	
 	/*
 	Use GetVertexCount() and GetVertex() to get the vertices from a polygon shape.
 
@@ -98,55 +97,42 @@ void World::render()
 
 	b2Fixture* fixture;
 
-	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
-	{
-		b2Shape::Type shapeType = fixture->GetType();
-		if (shapeType == b2Shape::e_polygon)
+	b2Body* body; // = getWorld()->GetBodyList();
+
+	for (body = getWorld()->GetBodyList(); body; body = body->GetNext()){
+		for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
 		{
-			printf("a polygon\n");
-			b2PolygonShape* polygonShape = (b2PolygonShape*)fixture->GetShape();
-			int vertexCount = polygonShape->GetVertexCount();
-			b2Vec2 vertex, vertexPositionInWorld;
-
-			glColor3f(0.1f, 1.0f, 0.0f);//green
-			glBegin(GL_QUADS);
-			for (int i = 0; i < vertexCount; i++)
+			b2Shape::Type shapeType = fixture->GetType();
+			if (shapeType == b2Shape::e_chain)
 			{
-				vertex = polygonShape->GetVertex(i);
-				float posx = getConfig()->positionToPixel(vertex.x);
-				float posy = getConfig()->positionToPixel(vertex.y);
+				b2ChainShape* chainShape = (b2ChainShape*)fixture->GetShape();
+				int edgeCount = chainShape->GetChildCount();
+				b2Vec2 vertex, vertexPositionInWorld;
 
-				//if (i == 0) printf("%f %f\n", posx, posy);
+				// triangulation begins here!
 
-				glVertex2f(posx, posy);
 
+				glColor3f(0.1f, 1.0f, 0.0f);//green
+				glBegin(GL_LINE_LOOP);
+				for (int i = 0; i < edgeCount; i++)
+				{
+					b2EdgeShape edge;
+					chainShape->GetChildEdge(&edge, i);
+					vertex = edge.m_vertex1;
+					float posx = getConfig()->positionToPixel(vertex.x);
+					float posy = getConfig()->positionToPixel(vertex.y);
+
+					//if (i == 0) printf("%f %f\n", posx, posy);
+
+					glVertex2f(posx, posy);
+
+				}
+				glEnd();
 			}
-			glEnd();
-		}
-		else if (shapeType == b2Shape::e_chain)
-		{
-			b2ChainShape* chainShape = (b2ChainShape*)fixture->GetShape();
-			int edgeCount = chainShape->GetChildCount();
-			b2Vec2 vertex, vertexPositionInWorld;
-
-			glColor3f(0.1f, 1.0f, 0.0f);//green
-			glBegin(GL_LINE_LOOP);
-			for (int i = 0; i < edgeCount; i++)
-			{
-				b2EdgeShape edge;
-				chainShape->GetChildEdge(&edge, i);
-				vertex = edge.m_vertex1;
-				float posx = getConfig()->positionToPixel(vertex.x);
-				float posy = getConfig()->positionToPixel(vertex.y);
-
-				//if (i == 0) printf("%f %f\n", posx, posy);
-
-				glVertex2f(posx, posy);
-
-			}
-			glEnd();
 		}
 	}
+
+	
 }
 
 

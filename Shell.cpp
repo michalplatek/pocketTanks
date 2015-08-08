@@ -81,6 +81,9 @@ Config::Players Shell::GetObjectCollision()
 
 				if (static_cast<_FixtureData*>(colBody->GetUserData())->owner == config->PLAYER_1)
 				{
+					FixtureData* userData = static_cast<_FixtureData*>(colBody->GetUserData());
+					int life = userData->healthPoints;
+					life = 0;
 					return Config::Players::PLAYER_1;
 				}
 				else if (static_cast<_FixtureData*>(colBody->GetUserData())->owner == config->PLAYER_2)
