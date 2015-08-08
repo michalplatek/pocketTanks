@@ -62,11 +62,22 @@ void Game::resolveCollisions()
 				if (shells[shell]->shouldBounce())
 				{
 					shells[shell]->bounce();
+					tanks[tankHit]->healthPoints -= 10;
 				}
 				else
 				{
+					
+					if ((shells[shell]->getShellType()) == Config::ShellType::AP){
+						tanks[tankHit]->healthPoints -= 20;
+					}
+					else if ((shells[shell]->getShellType()) == Config::ShellType::HE){
+						tanks[tankHit]->healthPoints -= 30;
+					}
+					else {
+						tanks[tankHit]->healthPoints -= 10;
+					}
+
 					boom(shell);
-					tanks[tankHit]->healthPoints -= 20;
 				}
 			}
 			nextTurn();
