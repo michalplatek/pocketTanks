@@ -11,7 +11,7 @@ class Shell : public Renderable
 	ring_t explosion;
 
 public:
-	Shell(b2World* world, Config* config, Config::Players player, Config::ShellType shellType, b2Vec2 position, float angle);
+	Shell(b2World* world, Config* config, Config::Players player, Config::ShellType shellType, b2Vec2 position, float angle, int shellVelocity);
 	virtual ~Shell();
 
 	Config::ShellType getShellType();

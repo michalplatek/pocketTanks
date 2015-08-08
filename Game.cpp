@@ -1,7 +1,7 @@
 #include "Game.h"
 
 
-Game::Game(Config* config) : turnCounter(1), config(config), status(Config::Status::RUNNING)
+Game::Game(Config* config) : turnCounter(1), config(config), status(Config::Status::RUNNING), shellVelocity(0)
 {
 	world = new World(config);
 	/* creating tanks */
@@ -69,6 +69,7 @@ void Game::resolveCollisions()
 					
 					if ((shells[shell]->getShellType()) == Config::ShellType::AP){
 						tanks[tankHit]->healthPoints -= 20;
+						
 					}
 					else if ((shells[shell]->getShellType()) == Config::ShellType::HE){
 						tanks[tankHit]->healthPoints -= 30;
@@ -210,16 +211,16 @@ void Game::shoot(Config::Players player)
 		switch (tank->getLoadedShellType())
 		{
 		case Config::ShellType::AP:
-			shells.push_back(new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
+			shells.push_back(new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));
 			break;
 		case Config::ShellType::HE:
-			shells.push_back(new HEShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
+			shells.push_back(new HEShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));
 			break;
 		case Config::ShellType::SHRAPNEL:
-			shells.push_back(new ShrapnelShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
+			shells.push_back(new ShrapnelShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));
 			break;
 		default:
-			shells.push_back(new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle()));
+			shells.push_back(new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));
 			break;
 		}
 	}

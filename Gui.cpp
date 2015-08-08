@@ -30,15 +30,18 @@ void Gui::render()
 	std::string playerString, angleString, powerString, shellString;
 	std::string lifeLeftString, lifeRightString;
 	float angle = 0.0, power = 0.0;
+	sf::Event e;
 
 	//if the turn is divided by 2, then player 2 is playing 
 	if (game->getTurn() % 2 == 0) {
 		playerString = " ZIELONEGO";
 		angle = (game->getTank(1)->getBarrelAngle() - 3.141593) * (-1);
+		power = game->shellVelocity;
 	}
 	else {
 		playerString = " NIEBIESKIEGO";
 		angle = game->getTank(0)->getBarrelAngle();
+		power = game->shellVelocity;
 	}
 
 
@@ -46,7 +49,6 @@ void Gui::render()
 	powerString = std::to_string(power);
 	lifeLeftString = std::to_string(game->getTank(0)->healthPoints);
 	lifeRightString = std::to_string(game->getTank(1)->healthPoints);
-	
 
 	title.setFont(myCharacter);
 	title.setString("Pocket Tanks");

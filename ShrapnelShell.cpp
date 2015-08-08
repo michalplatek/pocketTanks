@@ -3,8 +3,8 @@
 
 	// Shrapnel Shell
 
-ShrapnelShell::ShrapnelShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle)
-	: Shell(world, config, player, Config::ShellType::SHRAPNEL, position, angle)
+ShrapnelShell::ShrapnelShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle, int shellVelocity)
+	: Shell(world, config, player, Config::ShellType::SHRAPNEL, position, angle, shellVelocity)
 {
 	b2Body* body = getBody();
 

@@ -4,8 +4,8 @@
 
 // High Explosive Shell
 
-HEShell::HEShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle)
-	: Shell(world, config, player, Config::ShellType::HE, position, angle)
+HEShell::HEShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle, int shellVelocity)
+	: Shell(world, config, player, Config::ShellType::HE, position, angle, shellVelocity)
 {
 	b2Body* body = getBody();
 

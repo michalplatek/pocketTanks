@@ -23,11 +23,13 @@ class Game
 	std::vector<Particle*> particles;
 	int turnCounter;
 	
+	
 	Config::Status status;
 
 public:
 	Game(Config* config);
 	~Game();
+	int shellVelocity;
 	// perform an iteration of the world
 	void step();
 	

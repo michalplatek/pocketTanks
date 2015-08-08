@@ -2,8 +2,8 @@
 
  // Armour Piercing Shell
 
-APShell::APShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle)
-	: Shell(world, config, player, Config::ShellType::AP, position, angle)
+APShell::APShell(b2World* world, Config* config, Config::Players player, b2Vec2 position, float angle, int shellVelocity)
+	: Shell(world, config, player, Config::ShellType::AP, position, angle, shellVelocity)
 {
 	b2Body* body = getBody();
 

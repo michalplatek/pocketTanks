@@ -4,7 +4,7 @@
 #include "Tank.h"
 #include "Geometry.h"
 
-Shell::Shell(b2World* world, Config* config, Config::Players player, Config::ShellType shellType, b2Vec2 position, float angle)
+Shell::Shell(b2World* world, Config* config, Config::Players player, Config::ShellType shellType, b2Vec2 position, float angle, int shellVelocity)
 	: Renderable(config), shellType(shellType)
 {
 	setWorld(world);
@@ -30,7 +30,7 @@ Shell::Shell(b2World* world, Config* config, Config::Players player, Config::She
 	float vectorY = sin(angle);
 	printf("cos(%f)= %f, sin(%f)= %f\n", angle, vectorX, angle, vectorY);
 	//body->SetTransform(b2Vec2(position.x, position.y), angle);
-	body->ApplyLinearImpulse(b2Vec2(vectorX * config->SHELL_VELOCITY, vectorY * config->SHELL_VELOCITY), b2Vec2(0.0f, 0.0f), true);
+	body->ApplyLinearImpulse(b2Vec2(vectorX * shellVelocity, vectorY * shellVelocity), b2Vec2(0.0f, 0.0f), true);
 
 	setBody(body);
 }

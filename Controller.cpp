@@ -3,7 +3,7 @@
 #include <Box2D\Box2D.h>
 #include "Gui.h"
 
-Controller::Controller(Config* config) : view(config), config(config)
+Controller::Controller(Config* config) : view(config), config(config), isShooting(false)
 {
 }
 
@@ -57,8 +57,10 @@ void Controller::manageEvent(sf::Event &e, Game* game)
 		config->WINDOW_H = e.size.height;
 		view.viewportSetup();
 		break;
-	case sf::Event::KeyPressed:
+	case sf::Event::KeyPressed: case sf::Event::KeyReleased: 
 		manageKeyEvent(e, game);
+		break;
+
 	default:
 		break;
 	}
@@ -88,9 +90,17 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 			printf("right pressed\n");
 			tank->setHorizontalDirection(Config::Direction::RIGHT);
 		}
-		if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_1]) {
-			printf("enter pressed\n");
+		if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_1] && e.type == sf::Event::KeyReleased) {
+			printf("enter released\n");
 			game->shoot(Config::Players::PLAYER_1);
+			this->isShooting = false;
+			game->shellVelocity = 0;
+		}
+		if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_1] && e.type == sf::Event::KeyPressed) {
+			printf("enter pressed\n");
+			this->isShooting = true;
+			if (game->shellVelocity < config->SHELL_VELOCITY)
+				game->shellVelocity += 1;
 		}
 		if (e.key.code == config->KEY_AP[Config::Players::PLAYER_1]) {
 			printf("num8 pressed\n");
@@ -131,9 +141,17 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 			printf("d pressed\n");
 			tank->setHorizontalDirection(Config::Direction::RIGHT);
 		}
-		if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_2]) {
-			printf("space pressed\n");
+		if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_2] && e.type == sf::Event::KeyReleased) {
+			printf("space released\n");
 			game->shoot(Config::Players::PLAYER_2);
+			this->isShooting = false;
+			game->shellVelocity = 0;
+		}
+		if (e.key.code == config->KEY_FIRE[Config::Players::PLAYER_2] && e.type == sf::Event::KeyPressed) {
+			printf("space pressed\n");
+			this->isShooting = true;
+			if (game->shellVelocity < config->SHELL_VELOCITY)
+				game->shellVelocity += 1;
 		}
 		if (e.key.code == config->KEY_AP[Config::Players::PLAYER_2]) {
 			printf("num1 pressed\n");
