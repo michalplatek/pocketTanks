@@ -104,6 +104,10 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 			printf("num0 pressed\n");
 			game->getTank(Config::Players::PLAYER_1)->setLoadedShellType(Config::ShellType::SHRAPNEL);
 		}
+		if (e.key.code == config->KEY_ADD_LIFE[Config::Players::PLAYER_1]) {
+			game->getTank(Config::Players::PLAYER_1)->healthPoints += 10;
+			game->nextTurn();
+		}
 	}
 	else
 	{
@@ -142,6 +146,10 @@ void Controller::manageKeyEvent(sf::Event &e, Game *game)
 		if (e.key.code == config->KEY_SH[Config::Players::PLAYER_2]) {
 			printf("num3 pressed\n");
 			game->getTank(Config::Players::PLAYER_2)->setLoadedShellType(Config::ShellType::SHRAPNEL);
+		}
+		if (e.key.code == config->KEY_ADD_LIFE[Config::Players::PLAYER_2]) {
+			game->getTank(Config::Players::PLAYER_2)->healthPoints += 10;
+			game->nextTurn();
 		}
 	}
 	

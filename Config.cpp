@@ -47,6 +47,7 @@ Config::Config(int argc, char** argv)
 	KEY_AP[Players::PLAYER_2] = sf::Keyboard::Num8;
 	KEY_HE[Players::PLAYER_2] = sf::Keyboard::Num9;
 	KEY_SH[Players::PLAYER_2] = sf::Keyboard::Num0;
+	KEY_ADD_LIFE[Players::PLAYER_2] = sf::Keyboard::Add;
 
 	KEY_UP[Players::PLAYER_1] = sf::Keyboard::W;
 	KEY_DOWN[Players::PLAYER_1] = sf::Keyboard::S;
@@ -56,6 +57,8 @@ Config::Config(int argc, char** argv)
 	KEY_AP[Players::PLAYER_1] = sf::Keyboard::Num1;
 	KEY_HE[Players::PLAYER_1] = sf::Keyboard::Num2;
 	KEY_SH[Players::PLAYER_1] = sf::Keyboard::Num3;
+	KEY_ADD_LIFE[Players::PLAYER_1] = sf::Keyboard::Tilde;
+
 
 
 	START_POSITION_X[Players::PLAYER_1] = 50.0f;

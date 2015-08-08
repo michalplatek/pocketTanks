@@ -67,8 +67,9 @@ public:
 	int KEY_HE[2];
 	int KEY_SH[2];
 	int KEY_AP[2];
+	int KEY_ADD_LIFE[2];
 	int KEY_QUIT;
-
+	
 	/* initial positions and angles */
 	float START_POSITION_X[2];
 	float START_POSITION_Y[2];
