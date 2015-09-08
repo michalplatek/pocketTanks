@@ -21,12 +21,30 @@ World::World(Config* config) : Renderable(config)
 	body = world->CreateBody(&bodyDef);
 
 	// Add a destructible polygon
-	std::vector<b2Vec2> vertices = {
-		b2Vec2{ -500.0f, 25.0f },
-		b2Vec2{ 500.0f, 25.0f },
-		b2Vec2{ 500.0f, 10.0f },
-		b2Vec2{ -500.0f, 10.0f } 
-	};
+	std::vector<b2Vec2> vertices;
+
+	vertices.push_back(b2Vec2(500.0f, 10.0f));
+	vertices.push_back(b2Vec2(-500.0f, 10.0f));
+
+	float mountainHeight = 1.0;
+
+	float pX, pY = 100.0;
+	float lastY = 100.0, lastLastY = 100.0;
+	for (float i = -1.0; i <= 1; i += 0.005) {
+
+		pX = i * 500;
+		pY = sin(i * 180 * 30 * DEGTORAD);
+		pY += 1;
+
+		if (lastLastY > lastY && pY > lastY) {
+			mountainHeight = rand() % 40 - 20;
+		}
+
+		lastLastY = lastY;
+		lastY = pY;
+
+		vertices.push_back(b2Vec2(pX, (pY * mountainHeight) + 50));
+	}
 
 	std::unique_ptr<b2ChainShape> worldShape = makeChain(vertices.data(), vertices.size(), true);
 

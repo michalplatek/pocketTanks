@@ -216,10 +216,7 @@ void Game::shoot(Config::Players player)
 			shells.push_back(new HEShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));
 			break;
 		case Config::ShellType::SHRAPNEL:
-			for (int i = 0; i < 10; i++) {
-				shells.push_back(new ShrapnelShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));
-			}
-			
+			shells.push_back(new ShrapnelShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));
 			break;
 		default:
 			shells.push_back(new APShell(world->getWorld(), config, player, tank->getBarrelEndPosition(), tank->getBarrelAngle(), shellVelocity));

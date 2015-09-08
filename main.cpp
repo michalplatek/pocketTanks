@@ -9,6 +9,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
+	srand(time(NULL));
 	Config config(argc, argv);
 	Controller controller(&config);
 	Game pocketTanks(&config);
