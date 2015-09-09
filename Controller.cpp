@@ -43,6 +43,25 @@ void Controller::play(Game* game)
 
 		window->display();
 	}
+	if (game->getTank(Config::Players::PLAYER_1)->healthPoints < 0 || game->getTank(Config::Players::PLAYER_2)->healthPoints < 0)
+	{
+		game->setStatus(Config::Status::PAUSED);
+		view.prepare();
+		view.render(game);
+		gui->passGame(game);
+		view.render(gui);
+
+		while (game->getStatus() != Config::Status::FINISHED)
+		{
+			while (window->pollEvent(event))
+			{
+				manageEvent(event, game);
+			}
+		}
+	}
+	
+
+	
 }
 
 void Controller::manageEvent(sf::Event &e, Game* game)

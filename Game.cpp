@@ -77,6 +77,9 @@ void Game::resolveCollisions()
 						tanks[tankHit]->healthPoints -= 10;
 					}
 
+					if (tanks[tankHit]->healthPoints <= 0)
+						this->setStatus(Config::Status::FINISHED);
+
 					boom(shell);
 				}
 			}

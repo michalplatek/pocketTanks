@@ -57,7 +57,7 @@ Barrel::~Barrel()
 	getWorld()->DestroyBody(getBody());
 }
 
-void Barrel::rotate(float angle){
+void Barrel::rotate(float angle,float tankAngle){
 	//printf("angle: %f \n", body->GetAngle());
 	
 	if (HorizontalDirection == Config::Direction::RIGHT){

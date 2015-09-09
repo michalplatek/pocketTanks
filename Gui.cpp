@@ -21,7 +21,7 @@ void Gui::render()
 
 	sf::Font myCharacter;
 	myCharacter.loadFromFile("arial.ttf");
-	sf::Text title;
+	sf::Text title, winner;
 	sf::Text playerTurn;
 	sf::Text angleOfTheShoot;
 	sf::Text powerOfTheShoot;
@@ -206,6 +206,46 @@ void Gui::render()
 			window->draw(attackRight);
 			window->draw(shellRight);
 			window->popGLStates();
+
+			if (game->getStatus() == Config::Status::FINISHED){
+
+				glColor4f(0.4f, 0.4f, 0.4f, 0.1f);
+
+				
+				string player;
+
+				if (game->getTank(Config::Players::PLAYER_1)->healthPoints < 0) 
+					player = "ZIELONY";
+				else if (game->getTank(Config::Players::PLAYER_2)->healthPoints < 0)
+					player = "NIEBIESKI";
+				else
+				{
+					return;
+				}
+
+				float points[8] = { -500.0, 70.0, 500.0, 70.0, 500.0, 50.0, -500.0, 50.0 };
+				glBegin(GL_QUADS);
+
+				for (int i = 0; i < 4; i++){
+					float posx = getConfig()->positionToPixel(points[i * 2]);
+					float posy = getConfig()->positionToPixel(points[(i * 2) + 1]);
+
+					glVertex2f(posx, posy);
+				}
+
+				glEnd();
+
+
+				winner.setFont(myCharacter);
+				winner.setString("Wygral GRACZ " + player);
+				winner.setCharacterSize(60); // in pixels, not points!
+				winner.setPosition(300.0, 300.0);
+				winner.setColor(sf::Color::White);
+
+				window->pushGLStates();
+				window->draw(winner);
+				window->popGLStates();
+			}
 }
 		
 	

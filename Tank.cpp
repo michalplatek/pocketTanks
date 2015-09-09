@@ -205,9 +205,9 @@ void Tank::setVerticalDirection(Config::Direction direction)
 	movementVertical = direction == Config::Direction::UP || direction == Config::Direction::DOWN ? direction : Config::Direction::NONE;
 
 	if (direction == Config::Direction::UP)
-		barrel->rotate(1);
+		barrel->rotate(1,this->body->GetAngle() );
 	else if (direction == Config::Direction::DOWN)
-		barrel->rotate(-1);
+		barrel->rotate(-1, this->body->GetAngle() );
 
 }
 
