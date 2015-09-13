@@ -16,6 +16,8 @@ Gui::~Gui()
 void Gui::passGame(Game* game){
 	this->game = game;
 }
+
+
 void Gui::render()
 {
 
