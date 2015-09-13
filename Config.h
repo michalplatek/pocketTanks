@@ -7,6 +7,9 @@
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
 
+/**
+Klasa: Konfiguracja rozgrywki
+*/
 class Config
 {
 public:
@@ -76,9 +79,22 @@ public:
 	float START_ROTATION[2];
 	float START_GUN_ANGLE[2];
 
+	/**
+	Konstruktor klasy Config
+	@param argc iloœæ parametrów przekazanych z konsoli
+	@param argv lista parametrów przekazanych z konsoli
+	*/
 	Config(int argc, char** argv);
+	/**
+	Konstruktor bezparametrowy klasy Config
+	*/
 	~Config();
 
+	/**
+	Przelicza pozycjê obiektu w œwiwcie gry na pozycjê obiektu w oknie programu. Pozycja wyliczana jest wzglêdem punktu (0,0) okna programu.
+	@param position odleg³oœæ w jednostkach œwiata gry
+	@return odleg³oœæ w pikselach
+	*/
 	float positionToPixel(float position);
 };
 

@@ -7,6 +7,12 @@
 #include "Config.h"
 using namespace std;
 
+/**
+G³ówna funkcja aplikacji
+@param argc iloœæ parametrów przekazanych z konsoli
+@param argv lista parametrów przekazanych z konsoli
+@return status koñcowy dzia³ania aplikacji
+*/
 int main(int argc, char** argv)
 {
 	srand(time(NULL));
