@@ -61,12 +61,13 @@ void Barrel::rotate(float angle,float tankAngle){
 	//printf("angle: %f \n", body->GetAngle());
 	
 	if (HorizontalDirection == Config::Direction::RIGHT){
-		if (body->GetAngle() + angle*DEGTORAD <= 90 * DEGTORAD && body->GetAngle() + angle*DEGTORAD >= -0.1 * DEGTORAD)
-			body->SetTransform(body->GetPosition(), body->GetAngle() + angle*DEGTORAD);
+		if (BarrelAngle + angle*DEGTORAD <= 90 * DEGTORAD && BarrelAngle + angle*DEGTORAD >= -0.1 * DEGTORAD)
+			BarrelAngle += angle*DEGTORAD;
+			//body->SetTransform(body->GetPosition(), body->GetAngle() + angle*DEGTORAD);
 	}
 	else if (HorizontalDirection == Config::Direction::LEFT){
-		if (body->GetAngle() + angle*DEGTORAD <= 0 * DEGTORAD && body->GetAngle() + angle*DEGTORAD >= -90 * DEGTORAD)
-			body->SetTransform(body->GetPosition(), body->GetAngle() + angle*DEGTORAD);
+		if (BarrelAngle + angle*DEGTORAD <= 0 * DEGTORAD && BarrelAngle + angle*DEGTORAD >= -90 * DEGTORAD)
+			BarrelAngle += angle*DEGTORAD;
 	}
 
 	
@@ -74,12 +75,17 @@ void Barrel::rotate(float angle,float tankAngle){
 }
 
 
+void Barrel::setTankRotate( float angle)
+{
+	TankRotate = angle;
+	
+}
 
 void Barrel::render() {
 	b2Body* mbody = getBody();
 	b2Fixture* fixture;
 
-	
+	body->SetTransform(body->GetPosition(), TankRotate + BarrelAngle);
 
 	for (fixture = mbody->GetFixtureList(); fixture; fixture = fixture->GetNext())
 	{

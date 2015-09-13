@@ -13,6 +13,7 @@
 
 class Barrel : public Renderable
 {
+	float TankRotate;
 	float BarrelAngle;
 	Config::Direction HorizontalDirection;
 	b2Vec3 color;
@@ -30,6 +31,7 @@ public:
 	void render();
 	b2Vec2 getBarrelEndPosition();
 	float getBarrelAngle();
+	void setTankRotate(float);
 
 
 };

@@ -110,6 +110,7 @@ void Tank::render() {
 	b2Body* body = getBody();
 	b2Fixture* fixture;
 
+	barrel->setTankRotate(body->GetAngle());
 	
 
 	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
