@@ -21,7 +21,7 @@ void Gui::render()
 
 	sf::Font myCharacter;
 	myCharacter.loadFromFile("arial.ttf");
-	sf::Text title, winner;
+	sf::Text title, winner, msg;
 	sf::Text playerTurn;
 	sf::Text angleOfTheShoot;
 	sf::Text powerOfTheShoot;
@@ -235,14 +235,23 @@ void Gui::render()
 
 				glEnd();
 
+				msg.setFont(myCharacter);
+				msg.setString("Wygral GRACZ");
+				msg.setCharacterSize(60); // in pixels, not points!
+				msg.setPosition(300.0, 300.0);
+				msg.setColor(sf::Color::White);
 
 				winner.setFont(myCharacter);
-				winner.setString("Wygral GRACZ " + player);
+				winner.setString(player);
 				winner.setCharacterSize(60); // in pixels, not points!
-				winner.setPosition(300.0, 300.0);
-				winner.setColor(sf::Color::White);
+				winner.setPosition(750.0, 300.0);
+				if (player == "ZIELONY")
+					winner.setColor(sf::Color::Green);
+				else
+					winner.setColor(sf::Color::Blue);
 
 				window->pushGLStates();
+				window->draw(msg);
 				window->draw(winner);
 				window->popGLStates();
 			}
