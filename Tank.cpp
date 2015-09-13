@@ -1,6 +1,8 @@
 #include "Tank.h"
 #include "Renderable.h"
 
+
+/// Konstruktor klasy Tank - tworzenie czo³gu - kad³uba, lufy i kó³.
 Tank::Tank(b2World* world, Config* config, Config::Players player) :
 Renderable(config),
 player(player),
@@ -60,13 +62,13 @@ movementVertical(Config::Direction::NONE)
 
 }
 
-
+// Destruktor klasy
 Tank::~Tank()
 {
 	getWorld()->DestroyBody(getBody());
 }
 
-
+// Funkcja tworz¹ca lufê czo³gu. Wygenerowanie kszta³tu i po³¹czenie go z cia³em czo³gu.
 void Tank::GenerateBarrel(float radius, b2Vec2 pos, int direction){
 
 
@@ -88,7 +90,7 @@ void Tank::GenerateBarrel(float radius, b2Vec2 pos, int direction){
 
 }
 
-
+// Funkcja tworz¹ca ko³a czo³gu. Wygenerowanie kó³ i po³¹czenie ich w odpowiednim miejscu z kad³ubem.
 void Tank::GenerateWheel(float radius, b2Vec2 pos, b2Vec2 anchor){
 
 	// TO DO
@@ -106,10 +108,12 @@ void Tank::GenerateWheel(float radius, b2Vec2 pos, b2Vec2 anchor){
 	joints.push_back(joint);
 }
 
+// Funkcja rysuj¹ca czo³g.
 void Tank::render() {
 	b2Body* body = getBody();
 	b2Fixture* fixture;
 
+	barrel->setTankRotate(body->GetAngle());
 	
 
 	for (fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext())
@@ -143,16 +147,19 @@ void Tank::render() {
 
 }
 
+// Funkcja zwracaj¹ca aktualny wybrany typ pocisku.
 Config::ShellType Tank::getLoadedShellType()
 {
 	return loadedShellType;
 }
 
+// Funkcja ustawiaj¹ca rodzaj pocisku
 void Tank::setLoadedShellType(Config::ShellType shellType)
 {
 	loadedShellType = shellType;
 }
 
+// Funkcja zwracaj¹ca pozycje konca lufy - potrzebna do wyliczenia wspó³rzêdnym wystrzelenia pocisku.
 b2Vec2 Tank::getBarrelEndPosition()
 {
 	
@@ -162,24 +169,26 @@ b2Vec2 Tank::getBarrelEndPosition()
 	return barrel->getBarrelEndPosition();
 }
 
+// Funkcja zwracaj¹ca k¹t lufy.
 float Tank::getBarrelAngle()
 {
 	return barrel->getBarrelAngle();
 }
 
+// Funkcja zwracajaca zwrot czo³gu.
 Config::Direction Tank::getHorizontalDorection(){
 
 	return movementHorizontal;
 	
 }
 
-
+// Funkcja zatrzymujaca czo³g.
 void Tank::stop()
 {
 	body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 }
 
-
+// Funkcja ustawiaj¹ca zwrot czo³gu oraz nadaj¹ca prêdkoœæ.
 void Tank::setHorizontalDirection(Config::Direction direction)
 {
 	float MAX_SPEED = 3.5;
@@ -200,14 +209,15 @@ void Tank::setHorizontalDirection(Config::Direction direction)
 
 }
 
+// Funkcja ustawiaj¹ca zwrot czo³gu oraz obracaj¹ca czo³g.
 void Tank::setVerticalDirection(Config::Direction direction)
 {
 	movementVertical = direction == Config::Direction::UP || direction == Config::Direction::DOWN ? direction : Config::Direction::NONE;
 
 	if (direction == Config::Direction::UP)
-		barrel->rotate(1);
+		barrel->rotate(1,this->body->GetAngle() );
 	else if (direction == Config::Direction::DOWN)
-		barrel->rotate(-1);
+		barrel->rotate(-1, this->body->GetAngle() );
 
 }
 

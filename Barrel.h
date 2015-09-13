@@ -6,28 +6,32 @@
 #include<cmath>
 #include<vector>
 #include "World.h"
+
 #include "ObjectData.h"
 #include <cstdlib>
 
 
 class Barrel : public Renderable
 {
+	float TankRotate;
 	float BarrelAngle;
 	Config::Direction HorizontalDirection;
 	b2Vec3 color;
+	
 
 public:
 	//class member variables
 
 	Barrel(b2World* world, Config* config, Config::Players player, Config::Direction direction);
 
-	void rotate(float angle);
+	void rotate(float angle, float tankAngle);
 
 	Barrel();
 	~Barrel();
 	void render();
 	b2Vec2 getBarrelEndPosition();
 	float getBarrelAngle();
+	void setTankRotate(float);
 
 
 };
